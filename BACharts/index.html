@@ -1,0 +1,29 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>d3 and Angular</title>
+  <meta name="description" content="d3 and Angular">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3"><hr></div>
+</div>
+<div class="row" ng-app="BALogins">
+  <div class="col-md-6 col-md-offset-3" ng-controller="LoginsCtrl" >
+    <ba-logins label="name" on-click="d3OnClick(item)" ng-if="d3Data" data="d3Data"></ba-logins>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3"><hr></div>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+<script src="js/app/baLoginsApp.js"></script>
+<script src="js/services/d3.js"></script>
+<script src="js/controllers/baLoginsCtrl.js"></script>
+<script src="js/directives/baLogins.js"></script>
+
+
+</body>
+</html>

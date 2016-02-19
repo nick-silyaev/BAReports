@@ -1,0 +1,8 @@
+# IntelliJ IDEA
+.idea
+
+# Eclipse PDT project setttings
+.buildpath
+.project
+.settings/
+*.DS_Store
