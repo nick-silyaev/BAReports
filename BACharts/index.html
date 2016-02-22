@@ -4,14 +4,30 @@
   <title>d3 and Angular</title>
   <meta name="description" content="d3 and Angular">
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <style>
+    svg { border: 1px solid #dedede; }
+    .axis path, .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+  </style>
 </head>
-<body>
+<body ng-app="Analytics">
 <div class="row">
   <div class="col-md-6 col-md-offset-3"><hr></div>
 </div>
-<div class="row" ng-app="BALogins">
+<div class="row">
   <div class="col-md-6 col-md-offset-3" ng-controller="LoginsCtrl" >
-    <ba-logins label="name" on-click="d3OnClick(item)" ng-if="d3Data" data="d3Data"></ba-logins>
+    <ba-logins ng-if="d3Data" data="d3Data"></ba-logins>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3"><hr></div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3" ng-controller="TimelineCtrl" >
+    <ba-timeline ng-if="timelineData" data="timelineData"></ba-timeline>
   </div>
 </div>
 <div class="row">
@@ -19,11 +35,17 @@
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+
 <script src="js/app/baLoginsApp.js"></script>
+<script src="js/app/baTimelineApp.js"></script>
+
 <script src="js/services/d3.js"></script>
+
 <script src="js/controllers/baLoginsCtrl.js"></script>
 <script src="js/directives/baLogins.js"></script>
 
+<script src="js/controllers/baTimelineCtrl.js"></script>
+<script src="js/directives/baTimeline.js"></script>
 
 </body>
 </html>

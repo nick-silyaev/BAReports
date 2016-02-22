@@ -2,14 +2,14 @@
   'use strict';
 
   // create the angular app
-  angular.module('BALogins', [
-    'BALogins.controllers',
-    'BALogins.directives'
+  angular.module('Analytics', [
+    'Analytics.controllers',
+    'Analytics.directives'
     ]);
 
   // setup dependency injection
   angular.module('d3', []);
-  angular.module('BALogins.controllers', []);
-  angular.module('BALogins.directives', ['d3']);
+  angular.module('Analytics.controllers', []);
+  angular.module('Analytics.directives', ['d3']);
 
 }());
