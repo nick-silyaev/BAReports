@@ -9,9 +9,9 @@
                 url: 'sample-data/timeline.json'
             }).then(function successCallback(response) {
                 $scope.timelineData = response.data;
-                console.log(response.data);
+                //console.log(response.data);
             }, function errorCallback(response) {
-                console.log(response.data);
+                //console.log(response.data);
             });
 
         }]);

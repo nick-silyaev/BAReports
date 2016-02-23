@@ -1,0 +1,40 @@
+svg {
+  border: 1px solid #dedede;
+}
+.analytics-logins .axis path,
+.analytics-logins .axis line {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0);
+  shape-rendering: crispEdges;
+}
+.analytics-logins .axis text {
+  fill: #445566;
+  font-size: 12px;
+}
+.analytics-logins line.y {
+  stroke: #ebebeb;
+}
+.analytics-timeline .axis path {
+  fill: none;
+  stroke: #d4d5d6;
+  shape-rendering: crispEdges;
+}
+.analytics-timeline .big-ticks line,
+.analytics-timeline .small-ticks line {
+  fill: none;
+  stroke: #d4d5d6;
+  shape-rendering: crispEdges;
+}
+.analytics-timeline .circle {
+  fill: #a2a2a2;
+  stroke: #a2a2a2;
+  opacity: .7;
+  cursor: pointer;
+}
+.analytics-timeline .circle.actions {
+  fill: #e1b356;
+  stroke: #e1b356;
+}
+.analytics-timeline .centers .circle {
+  opacity: 1;
+}
