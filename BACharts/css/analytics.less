@@ -1,6 +1,33 @@
 
 svg { border: 1px solid #dedede; }
 
+.d3-tip{
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-align: left;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  &:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 20px solid rgba(0,0,0,0.8);
+    position: absolute;
+  }
+  &.n:after {
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+  }
+}
+
 .analytics-logins{
   .axis path, .axis line {
     fill: none;
