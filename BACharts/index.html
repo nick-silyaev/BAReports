@@ -1,7 +1,7 @@
 <!doctype html>
 <head>
   <meta charset="utf-8">
-  <title>d3 and Angular</title>
+  <title>Breakthrough Analytics</title>
   <meta name="description" content="d3 and Angular">
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/analytics.css">
@@ -11,21 +11,107 @@
   <div class="col-md-6 col-md-offset-3"><hr></div>
 </div>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3" ng-controller="LoginsCtrl" >
-    <ba-logins ng-if="d3Data" data="d3Data"></ba-logins>
+  <div class="col-md-6 col-md-offset-3" ng-controller="blrsLoginsCtrl" >
+    <blrs-logins ng-if="d3Data" data="d3Data" settings="settings"></blrs-logins>
   </div>
 </div>
 <div class="row">
   <div class="col-md-6 col-md-offset-3"><hr></div>
 </div>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3" ng-controller="TimelineCtrl" >
-    <ba-timeline ng-if="timelineData" data="timelineData" settings="{height:60,months:7}"></ba-timeline>
+  <div class="col-md-6 col-md-offset-3" ng-controller="blrsTimelineCtrl" >
+    <blrs-timeline ng-if="d3Data" data="d3Data" settings="settings"></blrs-timeline>
   </div>
 </div>
 <div class="row">
   <div class="col-md-6 col-md-offset-3"><hr></div>
 </div>
+<div class="row">
+
+  <div class="col-md-3 col-md-offset-3" ng-controller="blrsCmnicationCtrl" >
+    <blrs-cmnication ng-if="d3Data" data="d3Data" settings="settings"></blrs-cmnication>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3"><hr></div>
+</div>
+
+<script type="text/javascript">
+
+  var loginsData = {
+    settings:{
+      heightRatio:.5, // height to width ration. default is 0.5
+      margin: {top: 20, right: 20, bottom: 30, left: 45},
+      colors: ["#3598dc", "#ea5d4b"],
+      duration: 1000, // transition duration
+      delay: 500, // transition delay between two areas
+      ease: "quad-out", // transition ease
+    },
+    data:{
+      reportId: "123asd123asd123",
+      values: [
+              // month label , students percentage, teachers percentage
+        ["JAN", getRandom(100), getRandom(100)],
+        ["FEB", getRandom(100), getRandom(100)],
+        ["MAR", getRandom(100), getRandom(100)],
+        ["APR", getRandom(100), getRandom(100)],
+        ["MAY", getRandom(100), getRandom(100)],
+        ["JUN", getRandom(100), getRandom(100)],
+        ["JUL", getRandom(100), getRandom(100)]
+      ]
+    }
+  }
+
+  var timelineData = {
+    settings:{
+      margin: {top: 10, right: 20, bottom: 10, left: 20}, // drawing margins
+      height:58, // timeline chart height
+      months: 7 // last x months to display
+    },
+    data:{
+      reportId: "123asd123asd123",
+      key: "Sara Sanderson",
+      values: [
+        //date , page views, activities
+        ["2015-10-01", getRandom(100), getRandom(1)],
+        ["2015-10-11", getRandom(100), getRandom(1)],
+        ["2015-11-08", getRandom(100), getRandom(1)],
+        ["2015-11-30", getRandom(100), getRandom(1)],
+        ["2015-12-23", getRandom(100), getRandom(1)],
+        ["2016-01-11", getRandom(100), getRandom(1)],
+        ["2016-02-05", getRandom(100), getRandom(1)],
+        ["2016-02-10", getRandom(100), getRandom(1)],
+        ["2016-02-22", getRandom(100), getRandom(1)]
+      ]
+    }
+  }
+
+  var cmnicationData = {
+    settings:{
+      margin: {top: 0, right: 0, bottom: 0, left: 0}, // drawing margins
+      colors: ["#efc164", "#4cd797"],
+      labels: ["Respond", "Did not respond"],
+      duration: 1000, // transition duration
+      ease: "cubic-in-out", // transition ease
+      titleHeight: 40, // 0 to make responsive
+      legendHeight: 40 // 0 to make responsive
+
+    },
+    data:{
+      reportId: "123asd123asd123",
+      key: "communication",
+      value: getRandom(100) // random data for demo. set percentage value here
+    }
+  }
+
+  function getRandom(multiplier){
+    return Math.round(Math.random() * multiplier);
+  }
+
+</script>
+
+
+
 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 <script src="js/app/analytics.js"></script>
@@ -33,11 +119,15 @@
 <script src="js/services/d3.js"></script>
 <script src="js/services/d3-tip.js"></script>
 
-<script src="js/controllers/baLoginsCtrl.js"></script>
-<script src="js/directives/baLogins.js"></script>
+<script src="js/controllers/blrs-logins-ctrl.js"></script>
+<script src="js/directives/blrs-logins.js"></script>
 
-<script src="js/controllers/baTimelineCtrl.js"></script>
-<script src="js/directives/baTimeline.js"></script>
+<script src="js/controllers/blrs-timeline-ctrl.js"></script>
+<script src="js/directives/blrs-timeline.js"></script>
+
+<script src="js/controllers/blrs-cmnication-ctrl.js"></script>
+<script src="js/directives/blrs-cmnication.js"></script>
+
 
 </body>
 </html>

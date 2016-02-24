@@ -15,7 +15,6 @@
                 function tip(vis) {
                     svg = getSVGNode(vis);
                     point = svg.createSVGPoint();
-                    console.log(point);
                     document.body.appendChild(node);
                 }
 

@@ -64,3 +64,15 @@ svg {
 .analytics-timeline .centers .circle {
   opacity: 1;
 }
+.analytics-cmnication .title {
+  text-transform: capitalize;
+}
+.analytics-cmnication text {
+  fill: #2f455b;
+  font-weight: 700;
+}
+.analytics-cmnication .donut-inner text {
+  text-transform: uppercase;
+  fill: #2f455b;
+  font-weight: 700;
+}

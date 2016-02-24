@@ -2,14 +2,13 @@
     'use strict';
 
     angular.module('Analytics.directives')
-        .directive('baTimeline', ['d3', 'tip', function(d3, tip) {
+        .directive('blrsTimeline', ['d3', 'tip', function(d3, tip) {
             return {
                 restrict: 'EA',
                 scope: {
                     data: "=",
                     settings: "=",
-                    label: "@",
-                    onClick: "&"
+                    label: "@"
                 },
                 link: function(scope, iElement, iAttrs) {
 
@@ -47,20 +46,19 @@
                         // remove all previous items before render
                         svg.selectAll("*").remove();
                         // setup variables
-                        var width, height, margin, innerHeight;
+
+                        //get settings or set defaults
+                        var margin = settings.margin || {top: 10, right: 20, bottom: 10, left: 20};
+                        var height = settings.height || 50;
+                        var months = settings.months || 6;
+
                         //containing element width
-                        width = d3.select(iElement[0])[0][0].offsetWidth;
-                        //svg height. default is 50
-                        height = typeof(settings.height) !== "undefined" ? settings.height : 50;
-                        //margins
-                        margin = {top: 10, right: 20, bottom: 10, left: 20};
-                        innerHeight = height - margin.top - margin.bottom
+                        var width = d3.select(iElement[0])[0][0].offsetWidth;
+                        var innerHeight = height - margin.top - margin.bottom;
                         // set the height based on the calculations above
                         svg.attr('height', height);
 
-                        // months to display on the timeline. default is 6
-                        var months = typeof(settings.months) !== "undefined" ? settings.months : 6;
-                        //now
+                        //get dates
                         var endDate = new Date();
                         // get last six months
                         var startDate = d3.time.month.offset(endDate, -months);
@@ -79,9 +77,7 @@
                         svg.append("g")
                             .attr("class", "x axis")
                             .attr("transform", "translate(0,"+height/2+")")
-                            .call(xAxis)
-                            .selectAll("path, line")
-                            .style("stroke","#d4d5d6");
+                            .call(xAxis);
 
                         // draw grid big vertical lines
                         svg.append("g")
