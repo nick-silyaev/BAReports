@@ -33,18 +33,20 @@
                         svg.selectAll("*").remove();
 
                         //get settings or set defaults
-                        var margin = settings.margin || {top: 50, right: 20, bottom: 50, left: 0};
+                        var margin = settings.margin || {top: 50, right: 0, bottom: 50, left: 0};
                         var duration = settings.duration || 1500;
                         var ease = settings.ease || "cubic-in-out";
                         var labels = settings.labels || [];
+                        var hRatio = settings.heightRatio || 1;
 
                         //containing element width
                         var width = d3.select(iElement[0])[0][0].offsetWidth;
                         //svg height to 1/2 of width
-                        var height = width;
+                        var height = width * hRatio;
                         var legendH = settings.legendHeight || height/8;
                         var titleH = settings.titleHeight || height/8;
                         var innerH = height - margin.top - margin.bottom - legendH - titleH;
+                        var innerW = width - margin.left - margin.right;
                         // set the height based on the calculations above
                         svg.attr('height', height);
 
@@ -54,7 +56,7 @@
                         var pieData = [respond, notRespond]
 
                         // prepare chart attributes
-                        var radius = Math.min(width, innerH)/2;
+                        var radius = Math.min(innerW, innerH)/2;
                         var innerRadius = radius * 0.7;
                         var centerX = width/2;
                         var centerY = innerH/2 + margin.top + titleH;

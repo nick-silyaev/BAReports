@@ -1,5 +1,5 @@
 
-svg { border: 1px solid #dedede; }
+svg { border: 0px solid #dedede; }
 
 .d3-tip{
   font-size: 12px;
@@ -60,8 +60,8 @@ svg { border: 1px solid #dedede; }
     stroke: #a2a2a2;
     opacity: .7;
     &.actions{
-      fill: #e1b356;
-      stroke: #e1b356;
+      fill: #efc164;
+      stroke: #efc164;
     }
     cursor: pointer;
   }
@@ -87,6 +87,71 @@ svg { border: 1px solid #dedede; }
     }
   }
 }
+
+
+@ontime: #3798dc;
+@late: #efc164;
+@missed:#ea5d4b;
+@bg: #fff;
+
+.analytics-submissions {
+  .axis path, .axis line {
+    fill: none;
+    stroke: rgba(0, 0, 0, 0);
+    shape-rendering: crispEdges;
+  }
+  .axis text {
+    fill: #445566;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  line.y {
+    stroke: #ebebeb;
+  }
+  .bar{
+    cursor: pointer;
+  }
+  .ontime {
+    fill: @ontime;
+    .rect {
+      fill: @ontime;
+    }
+    .circle {
+      fill: @bg;
+      stroke:@ontime;
+    }
+    .check{
+      fill: @ontime;
+    }
+  }
+  .late {
+    fill: @late;
+    .rect {
+      fill: @late;
+    }
+    .circle {
+      fill: @bg;
+      stroke:@late;
+    }
+    .check{
+      fill: @late;
+    }
+  }
+  .missing {
+    fill: @missed;
+    .rect {
+      fill: @missed;
+    }
+    .circle {
+      fill: @bg;
+      stroke:@missed;
+    }
+    .check{
+      fill: @missed;
+    }
+  }
+}
+
 
 
 

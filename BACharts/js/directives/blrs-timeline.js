@@ -13,7 +13,7 @@
                 link: function(scope, iElement, iAttrs) {
 
                     var tip = d3.tip()
-                        .attr('class', 'd3-tip')
+                        .attr('class', 'd3-tip timeline-tip')
                         .offset([-20, 0])
                         .html(function(d) {
                             return "<strong>Date: </strong><span>" +  d[0]+ "</span><br><strong>Page Views: </strong><span>" + d[1]+ "</span><br><strong>Activities: </strong><span>" + d[2]+ "</span>";
@@ -60,7 +60,7 @@
 
                         //get dates
                         var endDate = new Date();
-                        // get last six months
+                        // get last X months
                         var startDate = d3.time.month.offset(endDate, -months);
 
 

@@ -1,5 +1,5 @@
 svg {
-  border: 1px solid #dedede;
+  border: 0px solid #dedede;
 }
 .d3-tip {
   font-size: 12px;
@@ -58,8 +58,8 @@ svg {
   cursor: pointer;
 }
 .analytics-timeline .circle.actions {
-  fill: #e1b356;
-  stroke: #e1b356;
+  fill: #efc164;
+  stroke: #efc164;
 }
 .analytics-timeline .centers .circle {
   opacity: 1;
@@ -75,4 +75,60 @@ svg {
   text-transform: uppercase;
   fill: #2f455b;
   font-weight: 700;
+}
+.analytics-submissions .axis path,
+.analytics-submissions .axis line {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0);
+  shape-rendering: crispEdges;
+}
+.analytics-submissions .axis text {
+  fill: #445566;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.analytics-submissions line.y {
+  stroke: #ebebeb;
+}
+.analytics-submissions .bar {
+  cursor: pointer;
+}
+.analytics-submissions .ontime {
+  fill: #3798dc;
+}
+.analytics-submissions .ontime .rect {
+  fill: #3798dc;
+}
+.analytics-submissions .ontime .circle {
+  fill: #ffffff;
+  stroke: #3798dc;
+}
+.analytics-submissions .ontime .check {
+  fill: #3798dc;
+}
+.analytics-submissions .late {
+  fill: #efc164;
+}
+.analytics-submissions .late .rect {
+  fill: #efc164;
+}
+.analytics-submissions .late .circle {
+  fill: #ffffff;
+  stroke: #efc164;
+}
+.analytics-submissions .late .check {
+  fill: #efc164;
+}
+.analytics-submissions .missing {
+  fill: #ea5d4b;
+}
+.analytics-submissions .missing .rect {
+  fill: #ea5d4b;
+}
+.analytics-submissions .missing .circle {
+  fill: #ffffff;
+  stroke: #ea5d4b;
+}
+.analytics-submissions .missing .check {
+  fill: #ea5d4b;
 }
