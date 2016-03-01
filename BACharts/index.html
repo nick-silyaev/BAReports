@@ -40,6 +40,11 @@
   <div class="col-md-3 " ng-controller="blrsSubmissionsCtrl" >
     <blrs-submissions ng-if="d3Data" data="d3Data" settings="settings"></blrs-submissions>
   </div>
+
+  <!-- GRADES -->
+  <div class="col-md-3" ng-controller="blrsGradesCtrl" >
+    <blrs-grades ng-if="d3Data" data="d3Data" settings="settings"></blrs-grades>
+  </div>
   <!---->
 </div>
 
@@ -71,6 +76,9 @@
 
 <script src="js/controllers/blrs-submissions-ctrl.js"></script>
 <script src="js/directives/blrs-submissions.js"></script>
+
+<script src="js/controllers/blrs-grades-ctrl.js"></script>
+<script src="js/directives/blrs-grades.js"></script>
 
 </body>
 </html>

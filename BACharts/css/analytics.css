@@ -40,6 +40,16 @@ svg {
 .analytics-logins line.y {
   stroke: #ebebeb;
 }
+.analytics-logins .path {
+  fill: none;
+  stroke-width: 3;
+}
+.analytics-logins .path.students {
+  stroke: #3598dc;
+}
+.analytics-logins .path.teachers {
+  stroke: #ea5d4b;
+}
 .analytics-timeline .axis path {
   fill: none;
   stroke: #d4d5d6;
@@ -131,4 +141,29 @@ svg {
 }
 .analytics-submissions .missing .check {
   fill: #ea5d4b;
+}
+.analytics-grades .axis path,
+.analytics-grades .axis line {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0);
+  shape-rendering: crispEdges;
+}
+.analytics-grades .axis text {
+  fill: #445566;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.analytics-grades line.y {
+  stroke: #ebebeb;
+}
+.analytics-grades .median {
+  fill: none;
+  stroke: #4bd596;
+  stroke-width: 3;
+}
+.analytics-grades .rect {
+  fill: #3798dc;
+}
+.analytics-grades .rect.user {
+  fill: #efc164;
 }

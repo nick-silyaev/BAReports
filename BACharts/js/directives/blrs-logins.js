@@ -40,7 +40,6 @@
                         // get settings or set defaults
                         var margin = settings.margin || {top: 20, right: 30, bottom: 30, left: 50};
                         var heightRatio = settings.heightRatio || 0.5;
-                        var colors = settings.colors || ["#3598dc", "#ea5d4b"];
                         var duration = settings.duration || 1000;
                         var delay = settings.delay || 1000;
                         var ease  = settings.ease || "cubic-in-out";
@@ -71,29 +70,17 @@
                             .orient("left")
                             .ticks(5).tickFormat(function(d){return d+ "%"});
 
-                        // students area start animation data
-                        var studentsStart = d3.svg.area()
-                            .x(function(d, i) { return xScale(d[0]) })
-                            .y0(height-margin.bottom)
-                            .y1(height-margin.bottom);
+                        // prepare lines coordinates
+                        var students = d3.svg.line()
+                            .interpolate("monotone")
+                            .x(function(d){return xScale(d[0])})
+                            .y(function(d){return yScale(d[1])});
 
-                        //students area end animation data
-                        var studentsEnd = d3.svg.area()
-                            .x(function(d, i) { return xScale(d[0]) })
-                            .y0(height-margin.bottom)
-                            .y1(function(d) { return yScale(d[1])});
+                        var teachers =d3.svg.line()
+                            .interpolate("monotone")
+                                .x(function(d){return xScale(d[0])})
+                                .y(function(d){return yScale(d[2])});
 
-                        // teachers area start animation data
-                        var teachersStart = d3.svg.area()
-                            .x(function(d, i) { return xScale(d[0]) })
-                            .y0(height-margin.bottom)
-                            .y1(height-margin.bottom);
-
-                        // teachers area end animation data
-                        var teachersEnd = d3.svg.area()
-                            .x(function(d, i) { return xScale(d[0]) })
-                            .y0(height-margin.bottom)
-                            .y1(function(d) { return yScale(d[2]) });
 
                         //draw x axis
                         svg.append("g")
@@ -104,23 +91,7 @@
                         svg.append("g")
                             .attr("class", "y axis")
                             .attr("transform", "translate(" + margin.left + ", 0)")
-                            .call(yAxis)
-
-                        // create studeents area
-                        svg.append("path")
-                            .datum(data.values)
-                            .attr("class", "area")
-                            .attr("d", studentsStart)
-                            .style("fill", colors[0] )
-                            .transition().ease(ease).duration(duration).attr("d", studentsEnd);
-
-                        // create teachers area
-                        svg.append("path")
-                            .datum(data.values)
-                            .attr("class", "area")
-                            .attr("d", teachersStart)
-                            .style("fill", colors[1] )
-                            .transition().ease(ease).duration(duration).delay(delay).attr("d", teachersEnd);
+                            .call(yAxis);
 
 
                         //draw horisontal grid lines
@@ -132,6 +103,36 @@
                             .attr("x2", width-margin.right)
                             .attr("y1", yScale)
                             .attr("y2", yScale);
+
+                        // create studeents area
+                        var studPath = svg.append("path")
+                            .attr("d", students(data.values))
+                            .attr("class", "path students");
+
+                        //animate students path
+                        var studLength = studPath.node().getTotalLength();
+                        studPath.attr("stroke-dasharray", studLength + " " + studLength)
+                            .attr("stroke-dashoffset", studLength)
+                            .transition()
+                            .duration(duration)
+                            .ease(ease)
+                            .attr("stroke-dashoffset", 0);
+
+
+                        // create teachers area
+                        var teachPath = svg.append("path")
+                            .attr("d", teachers(data.values))
+                            .attr("class", "path teachers")
+
+                        //animate teachers path
+                        var teachLength = teachPath.node().getTotalLength();
+                        teachPath.attr("stroke-dasharray", teachLength + " " + teachLength)
+                            .attr("stroke-dashoffset", teachLength)
+                            .transition()
+                            .duration(duration).delay(delay)
+                            .ease(ease)
+                            .attr("stroke-dashoffset", 0);
+
 
                     };
                 }

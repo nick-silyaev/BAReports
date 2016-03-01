@@ -41,8 +41,18 @@ svg { border: 0px solid #dedede; }
   line.y{
     stroke: #ebebeb;
   }
-}
+  .path{
+    fill:none;
+    stroke-width: 3;
+    &.students{
+      stroke: #3598dc;
+    }
+    &.teachers{
+      stroke: #ea5d4b;
+    }
+  }
 
+}
 
 .analytics-timeline{
   .axis path {
@@ -88,11 +98,11 @@ svg { border: 0px solid #dedede; }
   }
 }
 
-
 @ontime: #3798dc;
 @late: #efc164;
 @missed:#ea5d4b;
 @bg: #fff;
+
 
 .analytics-submissions {
   .axis path, .axis line {
@@ -150,6 +160,38 @@ svg { border: 0px solid #dedede; }
       fill: @missed;
     }
   }
+}
+
+
+
+.analytics-grades {
+  .axis path, .axis line {
+    fill: none;
+    stroke: rgba(0, 0, 0, 0);
+    shape-rendering: crispEdges;
+  }
+  .axis text {
+    fill: #445566;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  line{
+    &.y {
+      stroke: #ebebeb;
+    }
+  }
+  .median{
+    fill: none;
+    stroke:#4bd596;
+    stroke-width: 3;
+  }
+  .rect{
+    fill: #3798dc;
+    &.user{
+      fill: #efc164;
+    }
+  }
+
 }
 
 

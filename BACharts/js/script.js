@@ -2,10 +2,9 @@
 var loginsSettings = {
     heightRatio:.5, // height to width ration. default is 0.5
     margin: {top: 20, right: 20, bottom: 30, left: 45},
-    colors: ["#3598dc", "#ea5d4b"],
-    duration: 1000, // transition duration
-    delay: 500, // transition delay between two areas
-    ease: "quad-out", // transition ease
+    duration: 1500, // transition duration
+    delay: 750, // transition delay between two areas
+    ease: "cubic-in-out" // transition ease
 };
 var loginsData = {
     reportId: "123asd123asd123",
@@ -95,6 +94,28 @@ var submissionsData = {
     ]
 
 };
+
+var gradesSettings = {
+    heightRatio:.6, // height to width ration. default is 0.5
+    margin: {top: 30, right: 20, bottom: 30, left: 30},
+    duration: 1500, // transition duration
+    ease: "cubic-out", // transition ease
+    barSpan: 6 // a gap between two bars
+}
+
+var gradesData = {
+    reportId: "223asd123asd123",
+    key: "grades",
+    values: {
+        name:"assignment1",  // assignment name
+        score: 25, 	//score of the current user,
+        scores:[52, 20, 25, 11, 93, 86, 43, 10, 44, 20, 75, 20, 25, 11, 93, 96, 43, 10, 44, 98, 75, 43, 10, 44, 98, 75, 65, 66, 64, 68] //other users' scores for the assignment
+        //scores:[2, 2, 1, 9, 8, 4, 1, 4, 2, 7, 2, 2, 11, 9, 9, 4, 10, 4, 9, 7, 4, 1, 4, 9, 7] //other users' scores for the assignment
+    }
+
+}
+
+
 
 
 function getRandom(multiplier){
