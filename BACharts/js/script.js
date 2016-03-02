@@ -101,7 +101,7 @@ var gradesSettings = {
     duration: 1500, // transition duration
     ease: "cubic-out", // transition ease
     barSpan: 6 // a gap between two bars
-}
+};
 
 var gradesData = {
     reportId: "223asd123asd123",
@@ -113,7 +113,52 @@ var gradesData = {
         //scores:[2, 2, 1, 9, 8, 4, 1, 4, 2, 7, 2, 2, 11, 9, 9, 4, 10, 4, 9, 7, 4, 1, 4, 9, 7] //other users' scores for the assignment
     }
 
-}
+};
+
+
+var distributionsSettings = {
+    heightRatio:.6, // height to width ration. default is 0.5
+    margin: {top: 30, right: 20, bottom: 30, left: 50},
+    duration: 1000, // transition duration
+    ease: "quad-in", // transition ease
+    barSpan: 6 // a gap between two bars
+};
+
+var distributionsData = {
+    reportId: "423asd123asd123",
+    values: [
+        {
+            name: "assignment1",
+            possible: 25,
+            scores: [23,3,3,20,5,5,15,10,10,5,10,5,25,10]
+        },
+        {
+            name: "assignment2",
+            possible: 10,
+            scores: [2,0,0,2,5,5,1,10,10,5,10,5,2,10]
+        },
+        {
+            name: "assignment3",
+            possible: 20,
+            scores: [10,15,3,2,15,15,5,4,5,5,10,5,15,10]
+        },
+        {
+            name: "assignment1",
+            possible: 30,
+            scores: [23,20,15,20,15,15,15,10,10,13,10,22,25,10]
+        },
+        {
+            name: "assignment2",
+            possible: 10,
+            scores: [8,10,10,9,8,8,10,10,10,10,10,10,9,10]
+        },
+        {
+            name: "assignment3",
+            possible: 25,
+            scores: [10,15,22,5,15,15,10,20,22,23,19,22,25,21]
+        }
+    ]
+};
 
 
 

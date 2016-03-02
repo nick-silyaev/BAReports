@@ -179,10 +179,10 @@
                             });
 
 
-                        var path = svg.append("path")
-                            .attr("d", median(grades))
-                            .attr("class", "line median")
-                            .attr("transform", "translate(" + (barW)/2 + ", 0)");
+                            var path = svg.append("path")
+                                .attr("d", median(grades))
+                                .attr("class", "line median")
+                                .attr("transform", "translate(" + (barW)/2 + ", 0)");
 
                         var totalLength = path.node().getTotalLength();
 

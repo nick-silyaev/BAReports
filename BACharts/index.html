@@ -31,8 +31,8 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2"><hr></div>
 </div>
-<!-- COMMUNICATIONS -->
 <div class="row">
+  <!-- COMMUNICATIONS -->
   <div class="col-md-2 col-md-offset-2" ng-controller="blrsCmnicationCtrl" >
     <blrs-cmnication ng-if="d3Data" data="d3Data" settings="settings"></blrs-cmnication>
   </div>
@@ -46,6 +46,12 @@
     <blrs-grades ng-if="d3Data" data="d3Data" settings="settings"></blrs-grades>
   </div>
   <!---->
+</div>
+<div class="row">
+  <!-- GRADES DISTRIBUTIONS -->
+  <div class="col-md-4 col-md-offset-2" ng-controller="blrsDistributionsCtrl" >
+    <blrs-distributions ng-if="d3Data" data="d3Data" settings="settings"></blrs-distributions>
+  </div>
 </div>
 
 
@@ -79,6 +85,9 @@
 
 <script src="js/controllers/blrs-grades-ctrl.js"></script>
 <script src="js/directives/blrs-grades.js"></script>
+
+<script src="js/controllers/blrs-distributions-ctrl.js"></script>
+<script src="js/directives/blrs-distributions.js"></script>
 
 </body>
 </html>

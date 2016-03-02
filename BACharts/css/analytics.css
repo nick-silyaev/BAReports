@@ -167,3 +167,35 @@ svg {
 .analytics-grades .rect.user {
   fill: #efc164;
 }
+.analytics-distributions .axis path,
+.analytics-distributions .axis line {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0);
+  shape-rendering: crispEdges;
+}
+.analytics-distributions .axis text {
+  fill: #445566;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.analytics-distributions .label {
+  fill: #445566;
+  font-size: 12px;
+}
+.analytics-distributions line.y {
+  stroke: #ebebeb;
+}
+.analytics-distributions .bar {
+  cursor: pointer;
+}
+.analytics-distributions .bar .rect {
+  fill: #3798dc;
+}
+.analytics-distributions .bar .whisker {
+  stroke: #3798dc;
+  stroke-width: 2;
+}
+.analytics-distributions .bar .median {
+  stroke: #445566;
+  stroke-width: 2;
+}
