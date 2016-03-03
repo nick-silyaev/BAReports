@@ -199,3 +199,29 @@ svg {
   stroke: #445566;
   stroke-width: 2;
 }
+.analytics-connections .axis path,
+.analytics-connections .axis line {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0);
+  shape-rendering: crispEdges;
+}
+.analytics-connections .axis text {
+  fill: #445566;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.analytics-connections .label {
+  fill: #445566;
+  font-size: 12px;
+}
+.analytics-connections line.y {
+  stroke: #ebebeb;
+}
+.analytics-connections line.median {
+  stroke: #4bd596;
+  stroke-width: 4;
+}
+.analytics-connections circle {
+  cursor: pointer;
+  fill: #3798dc;
+}

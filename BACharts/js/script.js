@@ -161,6 +161,92 @@ var distributionsData = {
 };
 
 
+var connectionsSettings = {
+    heightRatio:.6, // height to width ration. default is 0.5
+    margin: {top: 30, right: 20, bottom: 45, left: 55},
+    duration: 1000, // transition duration
+    ease: "quad-in", // transition ease
+    dotSize: 8 // a gap between two bars
+};
+
+var connectionsData = {
+    reportId: "423asd123asd123",
+    values: [
+        {
+            name: "Sara Sanderson", 		// student's name
+            activities: 10,  			// student's number of activities in the course
+            score: 25			// student's total score in the course
+        },
+        {
+            name: "Eric Hill",
+            activities: getRandom(100),
+            score: getRandom(100)
+        },
+        {
+            name: "Perry Mason",
+            activities: getRandom(100),
+            score: getRandom(100)
+        },
+        {
+            name: "Eric Hill",
+            activities: getRandom(100),
+            score: getRandom(100)
+        },
+        {
+            name: "Billy Dean",
+            activities: getRandom(100),
+            score: getRandom(100)
+        },
+        {
+            name: "Han Solo",
+            activities: getRandom(100),
+            score: getRandom(100)
+        },
+        {
+            name: "C3PO",
+            activities: getRandom(100),
+            score: getRandom(100)
+        },
+        {
+            name: "R2D2",
+            activities: getRandom(100),
+            score: getRandom(100)
+        },
+        {
+            name: "Jonny",
+            activities: getRandom(100),
+            score: getRandom(100)
+        },
+        {
+            name: "Yoda",
+            activities: getRandom(100),
+            score: getRandom(100)
+        },
+        {
+            name: "Chandler Bing",
+            activities: getRandom(100),
+            score: getRandom(100)
+        },
+        {
+            name: "Nick",
+            activities: getRandom(100),
+            score: getRandom(100)
+        },
+        {
+            name: "Joe",
+            activities: getRandom(100),
+            score: getRandom(100)
+        },
+        {
+            name: "Green",
+            activities: getRandom(100),
+            score: getRandom(100)
+        }
+    ]
+
+};
+
+
 
 
 function getRandom(multiplier){

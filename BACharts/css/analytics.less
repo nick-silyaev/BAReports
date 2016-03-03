@@ -235,6 +235,39 @@ svg { border: 0px solid #dedede; }
 
 
 
+.analytics-connections {
+  .axis path, .axis line {
+    fill: none;
+    stroke: rgba(0, 0, 0, 0);
+    shape-rendering: crispEdges;
+  }
+  .axis text {
+    fill: #445566;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  .label{
+    fill: #445566;
+    font-size: 12px;
+  }
+  line{
+    &.y {
+      stroke: #ebebeb;
+    }
+    &.median{
+      stroke: #4bd596;
+      stroke-width: 4;
+    }
+  }
+  circle{
+    cursor: pointer;
+    fill:#3798dc;
+  }
+
+
+}
+
+
 
 
 
