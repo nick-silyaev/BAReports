@@ -246,7 +246,25 @@ var connectionsData = {
 
 };
 
-
+var blrsActivitySettings = {
+    heightRatio:.5, // height to width ration. default is 0.5
+    margin: {top: 20, right: 40, bottom: 30, left: 45},
+    colors: ["#3598dc", "#ea5d4b"],
+    duration: 1000, // transition duration
+    delay: 500, // transition delay between two areas
+    ease: "quad-out" // transition ease
+};
+var blrsActivityData = {
+    reportId: "423asd123asd123",
+    values: [
+        ["JAN", 250, 300],
+        ["FEB", 130, 100],
+        ["MAR", 354, 100],
+        ["APR", 54, 100],
+        ["MAY", 56, 100],
+        ["JUN", 589, 200]
+    ]
+};
 
 
 function getRandom(multiplier){
