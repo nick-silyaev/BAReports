@@ -107,9 +107,16 @@
                             .attr("y2", yScale);
 
 
-                        var
-                            reacts = svg.selectAll('rect').data(data.values).enter(),
-                            ontime_height,
+                        var reacts = svg.selectAll('rect').
+                            data(data.values).enter()
+                            .append("g")
+                            .on('mouseover',  function(d) {tip.show(d)})
+                            .on('mouseout',  function(d) {tip.hide(d)})
+                            .attr("tooltip-append-to-body", true)
+                            .attr("tooltip", function(d){return d;});
+
+
+                        var ontime_height,
                             late_height,
                             missing_height;
 
@@ -118,10 +125,6 @@
                          */
                         reacts
                             .append("rect")
-                            .on('mouseover',  function(d) {tip.show(d)})
-                            .on('mouseout',  function(d) {tip.hide(d)})
-                            .attr("tooltip-append-to-body", true)
-                            .attr("tooltip", function(d){return d;})
                             .attr("x", function(d, i) {
                                 return xScale(i); })
                             .attr("y", yScale(0))
@@ -140,10 +143,6 @@
                          */
                         reacts
                             .append("rect")
-                            .on('mouseover',  function(d) {tip.show(d)})
-                            .on('mouseout',  function(d) {tip.hide(d)})
-                            .attr("tooltip-append-to-body", true)
-                            .attr("tooltip", function(d){return d;})
                             .attr("x", function(d, i) {
                                 return xScale(i); })
                             .attr("y", yScale(ontime_height))
@@ -162,10 +161,6 @@
                          */
                         reacts
                             .append("rect")
-                            .on('mouseover',  function(d) {tip.show(d)})
-                            .on('mouseout',  function(d) {tip.hide(d)})
-                            .attr("tooltip-append-to-body", true)
-                            .attr("tooltip", function(d){return d;})
                             .attr("x", function(d, i) {
                                 return xScale(i); })
                             .attr("y", yScale(late_height))

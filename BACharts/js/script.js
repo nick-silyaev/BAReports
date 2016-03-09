@@ -285,10 +285,24 @@ var blrsCourseSubmissionsData = {
         },
         {
             name: "assignment3",
-            duedate: "2012-0-28T",
+            duedate: "2012-0-28",
             ontime: 56,
             late: 0,
             missing: 44
+        },
+        {
+            name: "assignment4",
+            duedate: "2012-0-28",
+            ontime: 50,
+            late: 44,
+            missing: 6
+        },
+        {
+            name: "assignment5",
+            duedate: "2012-0-28",
+            ontime: 80,
+            late: 20,
+            missing: 0
         }
     ]
 };
