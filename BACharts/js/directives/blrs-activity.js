@@ -11,10 +11,23 @@
                     label: "@"
                 },
                 link: function(scope, iElement, iAttrs) {
+                    var tip = d3.tip()
+                        .attr('class', 'd3-tip distributions-tip')
+                        .direction("n")
+                        .offset([-20, 0])
+                        .html(function(d) {
+                            return "<strong>"+ d[0]+"</strong><br>" +
+                                "<span>Views: </span><strong>" + d[1]+ "</strong><br>" +
+                                "<span>Actions: </span><strong>" + d[2] + "</strong><br>";
+                        });
+
                     var svg = d3.select(iElement[0])
                         .append("svg")
                         .attr("class", "analytics-logins")
-                        .attr("width", "100%");
+                        .attr("width", "100%")
+                        .call(tip);
+
+
 
                     // on window resize, re-render d3 canvas
                     window.onresize = function() {
@@ -96,6 +109,10 @@
                         var reacts = svg.selectAll('rect').data(data.values).enter();
                         reacts
                             .append("rect")
+                            .on('mouseover',  function(d) {tip.show(d)})
+                            .on('mouseout',  function(d) {tip.hide(d)})
+                            .attr("tooltip-append-to-body", true)
+                            .attr("tooltip", function(d){return d;})
                             .attr("x", function(d, i) {
                                 return xScale(d[0]); })
                             .attr("y", yScale(0))
@@ -110,6 +127,10 @@
 
                         reacts
                             .append("rect")
+                            .on('mouseover',  function(d) {tip.show(d)})
+                            .on('mouseout',  function(d) {tip.hide(d)})
+                            .attr("tooltip-append-to-body", true)
+                            .attr("tooltip", function(d){return d;})
                             .attr("x", function(d, i) {
                                 return xScale(d[0]) + columnWidth + 2; })
                             .attr("y", function(d) { return  yScale(0); })
