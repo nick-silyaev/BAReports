@@ -266,6 +266,42 @@ var blrsActivityData = {
     ]
 };
 
+var blrsCourseSubmissionsData = {
+    reportId: '423asd123asd123',
+    values: [
+        {
+            name: "assignment1",
+            duedate: "2012-03-22",
+            ontime: 76,
+            late: 20,
+            missing: 4
+        },
+        {
+            name: "assignment2",
+            duedate: "2012-04-12",
+            ontime: 50,
+            late: 50,
+            missing: 0
+        },
+        {
+            name: "assignment3",
+            duedate: "2012-0-28T",
+            ontime: 56,
+            late: 0,
+            missing: 44
+        }
+    ]
+};
+
+var blrsCourseSubmissionsSettings = {
+    heightRatio:.5, // height to width ration. default is 0.5
+    margin: {top: 20, right: 20, bottom: 30, left: 45},
+    colors: ["#3598dc", "#ea5d4b", "#efc064"],
+    duration: 1000, // transition duration
+    delay: 500, // transition delay between two areas
+    ease: "quad-out" // transition ease
+};
+
 
 function getRandom(multiplier){
     return Math.round(Math.random() * multiplier);

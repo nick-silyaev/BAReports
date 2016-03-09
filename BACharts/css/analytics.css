@@ -225,3 +225,6 @@ svg {
   cursor: pointer;
   fill: #3798dc;
 }
+.brls-course-submission-x-axis > g text {
+  display: none;
+}

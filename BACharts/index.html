@@ -11,6 +11,13 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2"><hr></div>
 </div>
+<br><br><br>
+<!-- blrs-course-submissions -->
+<div class="row">
+  <div class="col-md-4 col-md-offset-2" ng-controller="blrsCourseSubmissionsCtrl" >
+    <blrs-course-submissions ng-if="d3Data" data="d3Data" settings="settings"></blrs-course-submissions>
+  </div>
+</div>
 <!--blrs-activity-->
 <div class="row">
   <div class="col-md-4 col-md-offset-2" ng-controller="blrsActivityCtrl" >
@@ -105,5 +112,8 @@
 
 <script src="js/controllers/blrs-activity-ctrl.js"></script>
 <script src="js/directives/blrs-activity.js"></script>
+
+<script src="js/controllers/blrs-course-submissions-ctrl.js"></script>
+<script src="js/directives/blrs-course-submissions.js"></script>
 </body>
 </html>
