@@ -247,7 +247,7 @@ var connectionsData = {
 };
 
 var blrsActivitySettings = {
-    heightRatio:.5, // height to width ration. default is 0.5
+    heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 20, right: 40, bottom: 30, left: 45},
     colors: ["#3598dc", "#ea5d4b"],
     duration: 1000, // transition duration
