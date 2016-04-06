@@ -51,7 +51,6 @@ svg { border: 0px solid #dedede; }
       stroke: #ea5d4b;
     }
   }
-
 }
 
 .analytics-timeline{
@@ -264,12 +263,55 @@ svg { border: 0px solid #dedede; }
     fill:#3798dc;
   }
 
-
 }
 
 
 
+// Learning locker
+
+.analytics-active-cat{
+  .axis path, .axis line {
+    fill: none;
+    stroke: rgba(0,0,0,0);
+    shape-rendering: crispEdges;
+  }
+  .axis text{
+    fill: #445566;
+    font-size: 12px;
+  }
+  line.y{
+    stroke: #ebebeb;
+  }
+  .path{
+    fill:none;
+    stroke-width: 3;
+    &.cat1{
+      stroke: #3598dc;
+    }
+    &.cat2{
+      stroke: #ea5d4b;
+    }
+    &.cat3{
+      stroke: #efc164;
+    }
+    &.cat4{
+      stroke: #4cd797;
+    }
+  }
+}
 
 
-
+.analytics-active-cat-pie{
+  .pie-labels{
+    fill: #fff;
+    font-weight: 700;
+    font-size: 10px;
+  }
+  .legend{
+    .legend-item{
+      fill: #445566;
+      font-size: 12px;
+    }
+  }
+}
 

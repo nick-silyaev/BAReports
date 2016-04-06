@@ -308,7 +308,7 @@ var blrsCourseSubmissionsData = {
 };
 
 var blrsCourseSubmissionsSettings = {
-    heightRatio:.5, // height to width ration. default is 0.5
+    heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 20, right: 20, bottom: 30, left: 45},
     colors: ["#3598dc", "#ea5d4b", "#efc064"],
     duration: 1000, // transition duration
@@ -317,6 +317,54 @@ var blrsCourseSubmissionsSettings = {
 };
 
 
+
+
+var activeCatSettings = {
+    heightRatio:.5, // height to width ration. default is 0.5
+    margin: {top: 20, right: 20, bottom: 30, left: 45},
+    duration: 1500, // transition duration
+    delay: 750, // transition delay between two areas
+    ease: "cubic-in-out" // transition ease
+};
+var activeCatData = {
+    reportId: "123asd123asd123",
+    values: [
+        // month label , students percentage, teachers percentage
+        ["JAN", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
+        ["FEB", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
+        ["MAR", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
+        ["APR", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
+        ["MAY", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
+        ["JUN", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
+        ["JUL", getRandom(100), getRandom(100), getRandom(100), getRandom(100)]
+    ]
+};
+
+
+var activeCatPieSettings = {
+    heightRatio:.6 , // height to width ration. default is 1
+    margin: {top: 0, right: 20, bottom: 0, left: 20}, // drawing margins
+    colors: ["#3598dc", "#ea5d4b", "#efc164", "#4cd797"],
+    duration: 1000, // transition duration
+    ease: "cubic-in-out", // transition ease
+    titleHeight: 0, // 0 to make responsive
+    legendHeight: 40 // 0 to make responsive
+
+};
+var activeCatPieData = {
+    reportId: "123asd123asd123",
+    labels: ["Introduction to Oceanography", "Astronomy", "Math", 'Chemistry'],
+    values: [ 48, 30, 10, 12] // random data for demo. set percentage value here
+};
+
+
+
+
+
+
+
+
 function getRandom(multiplier){
     return Math.round(Math.random() * multiplier);
 }
+

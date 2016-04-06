@@ -12,13 +12,29 @@
   <div class="col-md-8 col-md-offset-2"><hr></div>
 </div>
 <br><br><br>
-<!-- blrs-course-submissions -->
 <div class="row">
-  <div class="col-md-4 col-md-offset-2" ng-controller="blrsCourseSubmissionsCtrl" >
-    <blrs-course-submissions ng-if="d3Data" data="d3Data" settings="settings"></blrs-course-submissions>
+  <div class="col-md-12 text-center">
+    <h2> Learning Locker</h2>
   </div>
 </div>
+<div class="row">
+  <!-- Learning Locker Active categories dougnut chart-->
+  <div class="col-md-4 col-md-offset-2" ng-controller="llActiveCatPieCtrl" >
+    <ll-active-cat-pie ng-if="d3Data" data="d3Data" settings="settings"></ll-active-cat-pie>
+  </div>
+  <!-- Learning Locker Active categories-->
+  <div class="col-md-4" ng-controller="llActiveCatCtrl" >
+    <ll-active-cat ng-if="d3Data" data="d3Data" settings="settings"></ll-active-cat>
+  </div>
+</div>
+
+
 <!-- LOGINS  -->
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h2> Breakthrough Analytics</h2>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-4 col-md-offset-2" ng-controller="blrsLoginsCtrl" >
     <blrs-logins ng-if="d3Data" data="d3Data" settings="settings"></blrs-logins>
@@ -58,6 +74,10 @@
 <div class="row">
   <div class="col-md-4 col-md-offset-2" ng-controller="blrsActivityCtrl" >
     <blrs-activity ng-if="d3Data" data="d3Data" settings="settings"></blrs-activity>
+  </div>
+  <!-- blrs-course-submissions -->
+  <div class="col-md-4" ng-controller="blrsCourseSubmissionsCtrl" >
+    <blrs-course-submissions ng-if="d3Data" data="d3Data" settings="settings"></blrs-course-submissions>
   </div>
 </div>
 
@@ -116,5 +136,11 @@
 
 <script src="js/controllers/blrs-course-submissions-ctrl.js"></script>
 <script src="js/directives/blrs-course-submissions.js"></script>
+
+<script src="js/controllers/ll-active-cat-ctrl.js"></script>
+<script src="js/directives/ll-active-cat.js"></script>
+
+<script src="js/controllers/ll-active-cat-pie-ctrl.js"></script>
+<script src="js/directives/ll-active-cat-pie.js"></script>
 </body>
 </html>

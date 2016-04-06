@@ -50,7 +50,6 @@
             // remove all previous items before render
             svg.selectAll('*').remove();
             // setup variables
-
             //get settings or set defaults
             var margin = settings.margin || { top: 10, right: 20, bottom: 10, left: 20 };
             var height = settings.height || 50;
@@ -166,7 +165,7 @@
                 return Math.random() * 500;
               })
               .attr('r', function (d) {
-                return d[1] * valueScale / 2;
+                return d[1] * valueScale / 2 +1;
               })
               .attr('tooltip-append-to-body', true)
               .attr('tooltip', function (d) {

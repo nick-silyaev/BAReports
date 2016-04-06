@@ -225,6 +225,41 @@ svg {
   cursor: pointer;
   fill: #3798dc;
 }
-.brls-course-submission-x-axis > g text {
-  display: none;
+.analytics-active-cat .axis path,
+.analytics-active-cat .axis line {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0);
+  shape-rendering: crispEdges;
+}
+.analytics-active-cat .axis text {
+  fill: #445566;
+  font-size: 12px;
+}
+.analytics-active-cat line.y {
+  stroke: #ebebeb;
+}
+.analytics-active-cat .path {
+  fill: none;
+  stroke-width: 3;
+}
+.analytics-active-cat .path.cat1 {
+  stroke: #3598dc;
+}
+.analytics-active-cat .path.cat2 {
+  stroke: #ea5d4b;
+}
+.analytics-active-cat .path.cat3 {
+  stroke: #efc164;
+}
+.analytics-active-cat .path.cat4 {
+  stroke: #4cd797;
+}
+.analytics-active-cat-pie .pie-labels {
+  fill: #fff;
+  font-weight: 700;
+  font-size: 10px;
+}
+.analytics-active-cat-pie .legend .legend-item {
+  fill: #445566;
+  font-size: 12px;
 }
