@@ -70,6 +70,14 @@
                   return d + '%';
                 });
 
+            if (!data.values.length) {
+              svg.append("text")
+                  .attr("x", width / 2)
+                  .attr("y", height / 2)
+                  .attr('class', 'text-no-data text-no-data--text-center')
+                  .text("No data available.");
+            }
+
 
             // prepare lines coordinates
 
@@ -95,7 +103,6 @@
                 .attr('class', 'y axis')
                 .attr('transform', 'translate(' + margin.left + ', 0)')
                 .call(yAxis);
-
 
             //draw horisontal grid lines
             svg.selectAll('line.y')

@@ -53,6 +53,14 @@
             // set the height based on the calculations above
             svg.attr('height', height);
 
+            if (!data.values.length) {
+              svg.append("text")
+                  .attr("x", width / 2)
+                  .attr("y", height / 2)
+                  .attr('class', 'text-no-data text-no-data--text-center')
+                  .text("No data available.");
+            }
+
             var xScale = d3.scale.ordinal()
               .domain(data.values.map(function (d) {
                 return d[0];

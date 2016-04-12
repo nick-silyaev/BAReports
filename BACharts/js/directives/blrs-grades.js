@@ -84,6 +84,15 @@
               .domain([0, maxX])
               .range([margin.left, width - margin.right]);
 
+            if (!data.values.scores.length) {
+              svg.append("text")
+                  .attr("x", width / 2)
+                  .attr("y", height / 2)
+                  .attr('class', 'text-no-data text-no-data--text-center')
+                  .text("No data available.");
+              return false;
+            }
+
             // prepare data
             function prepareData(d) {
               var arr = [];

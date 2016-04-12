@@ -76,6 +76,14 @@
               .tickSize(0, 0)
               .tickFormat(d3.time.format(''));
 
+            if (!data.values.length) {
+              svg.append("text")
+                  .attr("x", width / 2)
+                  .attr("y", 10)
+                  .attr('class', 'text-no-data text-no-data--text-center')
+                  .text("No data available.");
+            }
+
             svg.append('g')
               .attr('class', 'x axis')
               .attr('transform', 'translate(0,' + height / 2 + ')')

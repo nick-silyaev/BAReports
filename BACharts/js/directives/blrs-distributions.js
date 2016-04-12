@@ -116,6 +116,14 @@
               .ticks(6)
               .tickSize(5, 0);
 
+            if (!data.values.length) {
+              svg.append("text")
+                  .attr("x", width / 2)
+                  .attr("y", height / 2)
+                  .attr('class', 'text-no-data text-no-data--text-center')
+                  .text("No data available.");
+            }
+
             //draw x axis
             svg.append('g')
               .attr('class', 'x axis')

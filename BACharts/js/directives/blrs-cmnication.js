@@ -71,6 +71,20 @@
             var color = d3.scale.ordinal()
               .range(colors);
 
+          if (!data.value) {
+              svg.append('svg:text')
+                  .attr('class', 'text-no-data text-no-data--text-center')
+                  .append('svg:tspan')
+                  .attr('x', width / 2)
+                  .attr('y', height / 2)
+                  .text('No data')
+                  .append('svg:tspan')
+                  .attr('x', width / 2)
+                  .attr('dy', "1.4em" )
+                  .text('available');
+              return false;
+          }
+
             // draw title
             svg.append('g')
               .attr('class', 'title').append('text')

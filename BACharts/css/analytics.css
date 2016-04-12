@@ -110,7 +110,7 @@ svg {
   fill: #3798dc;
 }
 .analytics-submissions .ontime .circle {
-  fill: #ffffff;
+  fill: #fff;
   stroke: #3798dc;
 }
 .analytics-submissions .ontime .check {
@@ -123,7 +123,7 @@ svg {
   fill: #efc164;
 }
 .analytics-submissions .late .circle {
-  fill: #ffffff;
+  fill: #fff;
   stroke: #efc164;
 }
 .analytics-submissions .late .check {
@@ -136,7 +136,7 @@ svg {
   fill: #ea5d4b;
 }
 .analytics-submissions .missing .circle {
-  fill: #ffffff;
+  fill: #fff;
   stroke: #ea5d4b;
 }
 .analytics-submissions .missing .check {
@@ -262,4 +262,13 @@ svg {
 .analytics-active-cat-pie .legend .legend-item {
   fill: #445566;
   font-size: 12px;
+}
+.text-no-data {
+  fill: #999;
+}
+.text-no-data tspan {
+  fill: #999;
+}
+.text-no-data---text-center {
+  text-anchor: middle;
 }
