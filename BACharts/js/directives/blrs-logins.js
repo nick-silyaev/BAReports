@@ -11,6 +11,17 @@
           label: "@"
         },
         link: function ($scope, iElement) {
+          $scope.filterData = function(values) {
+            var $this = this;
+            _.remove(values, function(item) {
+              return !$this.validationData(item);
+            });
+            return values;
+          };
+          $scope.validationData = function(item) {
+            return _.isString(item[0]) && _.isNumber(item[1]) && _.isNumber(item[2]);
+          };
+
           var svg = d3.select(iElement[0])
             .append('svg')
             .attr('class', 'analytics-logins')
@@ -38,8 +49,8 @@
             /**
              * Valid data
              */
-            if (settings.filterData) {
-              data.values = settings.filterData(data.values);
+            if ($scope.filterData) {
+              data.values = $scope.filterData(data.values);
             }
 
             // remove all previous items before render

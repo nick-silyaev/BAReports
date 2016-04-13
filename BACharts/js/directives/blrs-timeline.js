@@ -11,6 +11,17 @@
           label: "@"
         },
         link: function ($scope, iElement) {
+          $scope.filterData = function(values) {
+            var $this = this;
+            _.remove(values, function(item) {
+              return !$this.validationData(item);
+            });
+            return values;
+          };
+          $scope.validationData = function(item) {
+            return _.isDate( new Date(item[0]) ) && _.isNumber(item[1]) && _.isNumber(item[2]);
+          };
+
           var tip = d3.tip()
             .attr('class', 'd3-tip timeline-tip')
             .offset([-20, 0])
@@ -50,8 +61,8 @@
             /**
              * Valid data
              */
-            if (settings.filterData) {
-              data.values = settings.filterData(data.values);
+            if ($scope.filterData) {
+              data.values = $scope.filterData(data.values);
             }
 
             // remove all previous items before render

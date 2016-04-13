@@ -1,15 +1,5 @@
 
 var loginsSettings = {
-    filterData: function(values) {
-        var $this = this;
-        _.remove(values, function(item) {
-            return !$this.validationData(item);
-        });
-        return values;
-    },
-    validationData: function(item) {
-        return _.isString(item[0]) && _.isNumber(item[1]) && _.isNumber(item[2]);
-    },
     heightRatio:.5, // height to width ration. default is 0.5
     margin: {top: 20, right: 20, bottom: 30, left: 45},
     duration: 1500, // transition duration
@@ -32,16 +22,6 @@ var loginsData = {
 
 
 var timelineSettings = {
-    filterData: function(values) {
-        var $this = this;
-        _.remove(values, function(item) {
-            return !$this.validationData(item);
-        });
-        return values;
-    },
-    validationData: function(item) {
-        return _.isDate( new Date(item[0]) ) && _.isNumber(item[1]) && _.isNumber(item[2]);
-    },
     margin: {top: 10, right: 20, bottom: 10, left: 20}, // drawing margins
     height:58, // timeline chart height
     months: 10 // last x months to display
@@ -73,13 +53,6 @@ var timelineData = {
 
 
 var cmnicationSettings = {
-    filterData: function(value) {
-        var $this = this;
-        return $this.validationData(value) ? value : false;
-    },
-    validationData: function(value) {
-        return _.isNumber(value);
-    },
     heightRatio:1 , // height to width ration. default is 1
     margin: {top: 0, right: 20, bottom: 0, left: 20}, // drawing margins
     colors: ["#efc164", "#4cd797"],
@@ -98,18 +71,6 @@ var cmnicationData = {
 
 
 var submissionsSettings = {
-    filterData: function(values) {
-        var $this = this;
-        _.remove(values, function(item) {
-            return !$this.validationData(item);
-        });
-        return values;
-    },
-    validationData: function(item) {
-        return _.isString(item.name) && _.isNumber(item.score)
-            && _.isDate( new Date(item.due))
-            && ( _.isDate(new Date(item.submit)) || _.isEmpty(item.submit) );
-    },
     heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 30, right: 20, bottom: 30, left: 30},
     duration: 1000, // transition duration
@@ -135,23 +96,6 @@ var submissionsData = {
 };
 
 var gradesSettings = {
-    filterData: function(values) {
-        var $this = this;
-        if (
-            !_.isString(values.name)
-            || !_.isNumber(values.score)
-            || !_.isArray(values.scores)
-        ) {
-            return false;
-        }
-        _.remove(values, function(item) {
-            return !$this.validationData(item);
-        });
-        return values;
-    },
-    validationData: function(value) {
-        return _.isNumber(value);
-    },
     heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 30, right: 20, bottom: 30, left: 30},
     duration: 1500, // transition duration
@@ -173,16 +117,6 @@ var gradesData = {
 
 
 var distributionsSettings = {
-    filterData: function(values) {
-        var $this = this;
-        _.remove(values, function(item) {
-            return !$this.validationData(item);
-        });
-        return values;
-    },
-    validationData: function(item) {
-        return _.isString(item.name) && _.isNumber(item.possible) && _.isArray(item.scores);
-    },
     heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 30, right: 20, bottom: 30, left: 50},
     duration: 1000, // transition duration
@@ -228,16 +162,6 @@ var distributionsData = {
 
 
 var connectionsSettings = {
-    filterData: function(values) {
-        var $this = this;
-        _.remove(values, function(item) {
-            return !$this.validationData(item);
-        });
-        return values;
-    },
-    validationData: function(item) {
-        return _.isString(item.name) && _.isNumber(item.activities) && _.isNumber(item.score);
-    },
     heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 30, right: 20, bottom: 45, left: 55},
     duration: 1000, // transition duration
@@ -323,16 +247,6 @@ var connectionsData = {
 };
 
 var blrsActivitySettings = {
-    filterData: function(values) {
-        var $this = this;
-        _.remove(values, function(item) {
-            return !$this.validationData(item);
-        });
-        return values;
-    },
-    validationData: function(item) {
-        return _.isString(item[0]) && _.isNumber(item[1]) && _.isNumber(item[2]);
-    },
     heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 20, right: 40, bottom: 30, left: 45},
     colors: ["#3598dc", "#ea5d4b"],
@@ -353,17 +267,6 @@ var blrsActivityData = {
 };
 
 var blrsCourseSubmissionsSettings = {
-    filterData: function(values) {
-        var $this = this;
-        _.remove(values, function(item) {
-            return !$this.validationData(item);
-        });
-        return values;
-    },
-    validationData: function(item) {
-        return _.isString(item.name) && _.isDate( new Date(item.duedate) )
-            && _.isNumber(item.ontime) && _.isNumber(item.late) && _.isNumber(item.missing);
-    },
     heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 20, right: 20, bottom: 30, left: 45},
     colors: ["#3598dc", "#ea5d4b", "#efc064"],
@@ -414,17 +317,6 @@ var blrsCourseSubmissionsData = {
 };
 
 var activeCatSettings = {
-    filterData: function(values) {
-        var $this = this;
-        _.remove(values, function(item) {
-            return !$this.validationData(item);
-        });
-        return values;
-    },
-    validationData: function(item) {
-        return _.isString(item[0]) && _.isNumber(item[1]) && _.isNumber(item[2])
-            && _.isNumber(item[3]) && _.isNumber(item[4]);
-    },
     heightRatio:.5, // height to width ration. default is 0.5
     margin: {top: 20, right: 20, bottom: 30, left: 45},
     duration: 1500, // transition duration
@@ -447,16 +339,6 @@ var activeCatData = {
 
 
 var activeCatPieSettings = {
-    filterData: function(values) {
-        var $this = this;
-        _.remove(values, function(item) {
-            return !$this.validationData(item);
-        });
-        return values;
-    },
-    validationData: function(value) {
-        return _.isNumber(value);
-    },
     heightRatio:.6 , // height to width ration. default is 1
     margin: {top: 0, right: 20, bottom: 0, left: 20}, // drawing margins
     colors: ["#3598dc", "#ea5d4b", "#efc164", "#4cd797"],

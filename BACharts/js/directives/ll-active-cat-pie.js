@@ -11,6 +11,17 @@
             label: "@"
           },
           link: function ($scope, iElement) {
+              $scope.filterData = function (values) {
+                  var $this = this;
+                  _.remove(values, function (item) {
+                      return !$this.validationData(item);
+                  });
+                  return values;
+              };
+              $scope.validationData = function (value) {
+                  return _.isNumber(value);
+              };
+
             var svg = d3.select(iElement[0])
                 .append('svg')
                 .attr('class', 'analytics-active-cat-pie')
@@ -37,8 +48,8 @@
                 /**
                  * Valid data
                  */
-                if (settings.filterData) {
-                    data.values = settings.filterData(data.values);
+                if ($scope.filterData) {
+                    data.values = $scope.filterData(data.values);
                 }
 
               // remove all previous items before render

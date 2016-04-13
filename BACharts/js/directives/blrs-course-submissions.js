@@ -11,6 +11,17 @@
           label: "@"
         },
         link: function ($scope, iElement) {
+          $scope.filterData = function(values) {
+            var $this = this;
+            _.remove(values, function(item) {
+              return !$this.validationData(item);
+            });
+            return values;
+          };
+          $scope.validationData = function(item) {
+            return _.isString(item.name) && _.isDate( new Date(item.duedate) )
+                && _.isNumber(item.ontime) && _.isNumber(item.late) && _.isNumber(item.missing);
+          };
           // create tip
           var tip = d3.tip()
             .attr('class', 'd3-tip distributions-tip')
@@ -56,8 +67,8 @@
             /**
              * Valid data
              */
-            if (settings.filterData) {
-              data.values = settings.filterData(data.values);
+            if ($scope.filterData) {
+              data.values = $scope.filterData(data.values);
             }
 
             // remove all previous items before render

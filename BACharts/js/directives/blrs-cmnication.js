@@ -16,6 +16,14 @@
             .attr('class', 'analytics-cmnication')
             .attr('width', '100%');
 
+            $scope.filterData =  function(value) {
+                var $this = this;
+                return $this.validationData(value) ? value : false;
+            };
+            $scope.validationData = function(value) {
+                return _.isNumber(value);
+            };
+
           // on window resize, re-render d3 canvas
           window.onresize = function () {
             return $scope.$apply();
@@ -37,8 +45,8 @@
               /**
                * Valid data
                */
-              if (settings.filterData) {
-                  data.value = settings.filterData(data.value);
+              if ($scope.filterData) {
+                  data.value = $scope.filterData(data.value);
               }
 
             // remove all previous items before render

@@ -12,6 +12,24 @@
         },
         link: function ($scope, iElement) {
 
+          $scope.filterData = function(values) {
+            var $this = this;
+            if (
+                !_.isString(values.name)
+                || !_.isNumber(values.score)
+                || !_.isArray(values.scores)
+            ) {
+              return false;
+            }
+            _.remove(values, function(item) {
+              return !$this.validationData(item);
+            });
+            return values;
+          };
+          $scope.validationData = function(value) {
+            return _.isNumber(value);
+          };
+
           // create tip
           var tip = d3.tip()
             .attr('class', 'd3-tip grades-tip')
@@ -58,8 +76,8 @@
             /**
              * Valid data
              */
-            if (settings.filterData) {
-              data.values = settings.filterData(data.values);
+            if ($scope.filterData) {
+              data.values = $scope.filterData(data.values);
             }
 
             // remove all previous items before render
