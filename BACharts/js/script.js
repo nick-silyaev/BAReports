@@ -1,5 +1,15 @@
 
 var loginsSettings = {
+    filterData: function(values) {
+        var $this = this;
+        _.remove(values, function(item) {
+            return !$this.validationData(item);
+        });
+        return values;
+    },
+    validationData: function(item) {
+        return _.isString(item[0]) && _.isNumber(item[1]) && _.isNumber(item[2]);
+    },
     heightRatio:.5, // height to width ration. default is 0.5
     margin: {top: 20, right: 20, bottom: 30, left: 45},
     duration: 1500, // transition duration
@@ -10,18 +20,28 @@ var loginsData = {
     reportId: "123asd123asd123",
     values: [
         // month label , students percentage, teachers percentage
-        ["JAN", getRandom(100), getRandom(100)],
-        ["FEB", getRandom(100), getRandom(100)],
-        ["MAR", getRandom(100), getRandom(100)],
-        ["APR", getRandom(100), getRandom(100)],
-        ["MAY", getRandom(100), getRandom(100)],
-        ["JUN", getRandom(100), getRandom(100)],
-        ["JUL", getRandom(100), getRandom(100)]
+        ["JAN", _.random(100), _.random(100)],
+        ["FEB", _.random(100), _.random(100)],
+        ["MAR", _.random(100), _.random(100)],
+        ["APR", _.random(100), _.random(100)],
+        ["MAY", _.random(100), _.random(100)],
+        ["JUN", _.random(100), _.random(100)],
+        ["JUL", _.random(100), _.random(100)]
     ]
 };
 
 
 var timelineSettings = {
+    filterData: function(values) {
+        var $this = this;
+        _.remove(values, function(item) {
+            return !$this.validationData(item);
+        });
+        return values;
+    },
+    validationData: function(item) {
+        return _.isDate( new Date(item[0]) ) && _.isNumber(item[1]) && _.isNumber(item[2]);
+    },
     margin: {top: 10, right: 20, bottom: 10, left: 20}, // drawing margins
     height:58, // timeline chart height
     months: 10 // last x months to display
@@ -31,28 +51,35 @@ var timelineData = {
     key: "Sara Sanderson",
     values: [
         //date , page views, activities
-        ["2015-7-01", getRandom(100), getRandom(1)],
-        ["2015-7-11", getRandom(100), getRandom(1)],
-        ["2015-7-28", getRandom(100), getRandom(1)],
-        ["2015-8-02", getRandom(100), getRandom(1)],
-        ["2015-8-15", getRandom(100), getRandom(1)],
-        ["2015-8-22", getRandom(100), getRandom(1)],
-        ["2015-9-08", getRandom(100), getRandom(1)],
-        ["2015-9-30", getRandom(100), getRandom(1)],
-        ["2015-10-01", getRandom(100), getRandom(1)],
-        ["2015-10-11", getRandom(100), getRandom(1)],
-        ["2015-11-08", getRandom(100), getRandom(1)],
-        ["2015-11-30", getRandom(100), getRandom(1)],
-        ["2015-12-23", getRandom(100), getRandom(1)],
-        ["2016-01-11", getRandom(100), getRandom(1)],
-        ["2016-02-05", getRandom(100), getRandom(1)],
-        ["2016-02-10", getRandom(100), getRandom(1)],
-        ["2016-02-22", getRandom(100), getRandom(1)]
+        ["2015-7-01", _.random(100), _.random(1)],
+        ["2015-7-11", _.random(100), _.random(1)],
+        ["2015-7-28", _.random(100), _.random(1)],
+        ["2015-8-02", _.random(100), _.random(1)],
+        ["2015-8-15", _.random(100), _.random(1)],
+        ["2015-8-22", _.random(100), _.random(1)],
+        ["2015-9-08", _.random(100), _.random(1)],
+        ["2015-9-30", _.random(100), _.random(1)],
+        ["2015-10-01", _.random(100), _.random(1)],
+        ["2015-10-11", _.random(100), _.random(1)],
+        ["2015-11-08", _.random(100), _.random(1)],
+        ["2015-11-30", _.random(100), _.random(1)],
+        ["2015-12-23", _.random(100), _.random(1)],
+        ["2016-01-11", _.random(100), _.random(1)],
+        ["2016-02-05", _.random(100), _.random(1)],
+        ["2016-02-10", _.random(100), _.random(1)],
+        ["2016-02-22", _.random(100), _.random(1)]
     ]
 };
 
 
 var cmnicationSettings = {
+    filterData: function(value) {
+        var $this = this;
+        return $this.validationData(value) ? value : false;
+    },
+    validationData: function(value) {
+        return _.isNumber(value);
+    },
     heightRatio:1 , // height to width ration. default is 1
     margin: {top: 0, right: 20, bottom: 0, left: 20}, // drawing margins
     colors: ["#efc164", "#4cd797"],
@@ -66,11 +93,23 @@ var cmnicationSettings = {
 var cmnicationData = {
     reportId: "123asd123asd123",
     key: "communication",
-    value: getRandom(100) // random data for demo. set percentage value here
+    value: _.random(100) // random data for demo. set percentage value here
 };
 
 
 var submissionsSettings = {
+    filterData: function(values) {
+        var $this = this;
+        _.remove(values, function(item) {
+            return !$this.validationData(item);
+        });
+        return values;
+    },
+    validationData: function(item) {
+        return _.isString(item.name) && _.isNumber(item.score)
+            && _.isDate( new Date(item.due))
+            && ( _.isDate(new Date(item.submit)) || _.isEmpty(item.submit) );
+    },
     heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 30, right: 20, bottom: 30, left: 30},
     duration: 1000, // transition duration
@@ -83,10 +122,10 @@ var submissionsData = {
     key: "submission",
     values: [
         // assignment name, points earned, due date, submission date
-        { name:"assignment1", score:12, due:"2015-10-01", submit:"2015-09-25"},
-        { name:"assignment1", score:20, due:"2015-10-10", submit:"2015-11-01"},
-        { name:"assignment1", score:10, due:"2015-12-01", submit:"2015-12-10"},
-        {name: "assignment2",  score:5, due:"2016-01-01", submit:"2016-02-01"},
+        {name:"assignment1", score:12, due:"2015-10-01", submit:"2015-09-25"},
+        {name:"assignment1", score:20, due:"2015-10-10", submit:"2015-11-01"},
+        {name:"assignment1", score:10, due:"2015-12-01", submit:"2015-12-10"},
+        {name: "assignment2", score:5, due:"2016-01-01", submit:"2016-02-01"},
         {name: "assignment3", score:20, due:"2016-01-01", submit:""},
         {name:"assignment4",  score:35, due:"2016-02-01", submit:"2016-01-20"},
         {name: "assignment3", score:25, due:"2016-02-01", submit:""},
@@ -96,6 +135,23 @@ var submissionsData = {
 };
 
 var gradesSettings = {
+    filterData: function(values) {
+        var $this = this;
+        if (
+            !_.isString(values.name)
+            || !_.isNumber(values.score)
+            || !_.isArray(values.scores)
+        ) {
+            return false;
+        }
+        _.remove(values, function(item) {
+            return !$this.validationData(item);
+        });
+        return values;
+    },
+    validationData: function(value) {
+        return _.isNumber(value);
+    },
     heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 30, right: 20, bottom: 30, left: 30},
     duration: 1500, // transition duration
@@ -117,6 +173,16 @@ var gradesData = {
 
 
 var distributionsSettings = {
+    filterData: function(values) {
+        var $this = this;
+        _.remove(values, function(item) {
+            return !$this.validationData(item);
+        });
+        return values;
+    },
+    validationData: function(item) {
+        return _.isString(item.name) && _.isNumber(item.possible) && _.isArray(item.scores);
+    },
     heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 30, right: 20, bottom: 30, left: 50},
     duration: 1000, // transition duration
@@ -162,6 +228,16 @@ var distributionsData = {
 
 
 var connectionsSettings = {
+    filterData: function(values) {
+        var $this = this;
+        _.remove(values, function(item) {
+            return !$this.validationData(item);
+        });
+        return values;
+    },
+    validationData: function(item) {
+        return _.isString(item.name) && _.isNumber(item.activities) && _.isNumber(item.score);
+    },
     heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 30, right: 20, bottom: 45, left: 55},
     duration: 1000, // transition duration
@@ -179,74 +255,84 @@ var connectionsData = {
         },
         {
             name: "Eric Hill",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         },
         {
             name: "Perry Mason",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         },
         {
             name: "Eric Hill",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         },
         {
             name: "Billy Dean",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         },
         {
             name: "Han Solo",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         },
         {
             name: "C3PO",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         },
         {
             name: "R2D2",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         },
         {
             name: "Jonny",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         },
         {
             name: "Yoda",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         },
         {
             name: "Chandler Bing",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         },
         {
             name: "Nick",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         },
         {
             name: "Joe",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         },
         {
             name: "Green",
-            activities: getRandom(100),
-            score: getRandom(100)
+            activities: _.random(100),
+            score: _.random(100)
         }
     ]
 
 };
 
 var blrsActivitySettings = {
+    filterData: function(values) {
+        var $this = this;
+        _.remove(values, function(item) {
+            return !$this.validationData(item);
+        });
+        return values;
+    },
+    validationData: function(item) {
+        return _.isString(item[0]) && _.isNumber(item[1]) && _.isNumber(item[2]);
+    },
     heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 20, right: 40, bottom: 30, left: 45},
     colors: ["#3598dc", "#ea5d4b"],
@@ -264,6 +350,26 @@ var blrsActivityData = {
         ["MAY", 56, 100],
         ["JUN", 589, 200]
     ]
+};
+
+var blrsCourseSubmissionsSettings = {
+    filterData: function(values) {
+        var $this = this;
+        _.remove(values, function(item) {
+            return !$this.validationData(item);
+        });
+        return values;
+    },
+    validationData: function(item) {
+        return _.isString(item.name) && _.isDate( new Date(item.duedate) )
+            && _.isNumber(item.ontime) && _.isNumber(item.late) && _.isNumber(item.missing);
+    },
+    heightRatio:.6, // height to width ration. default is 0.5
+    margin: {top: 20, right: 20, bottom: 30, left: 45},
+    colors: ["#3598dc", "#ea5d4b", "#efc064"],
+    duration: 1000, // transition duration
+    delay: 500, // transition delay between two areas
+    ease: "quad-out" // transition ease
 };
 
 var blrsCourseSubmissionsData = {
@@ -307,19 +413,18 @@ var blrsCourseSubmissionsData = {
     ]
 };
 
-var blrsCourseSubmissionsSettings = {
-    heightRatio:.6, // height to width ration. default is 0.5
-    margin: {top: 20, right: 20, bottom: 30, left: 45},
-    colors: ["#3598dc", "#ea5d4b", "#efc064"],
-    duration: 1000, // transition duration
-    delay: 500, // transition delay between two areas
-    ease: "quad-out" // transition ease
-};
-
-
-
-
 var activeCatSettings = {
+    filterData: function(values) {
+        var $this = this;
+        _.remove(values, function(item) {
+            return !$this.validationData(item);
+        });
+        return values;
+    },
+    validationData: function(item) {
+        return _.isString(item[0]) && _.isNumber(item[1]) && _.isNumber(item[2])
+            && _.isNumber(item[3]) && _.isNumber(item[4]);
+    },
     heightRatio:.5, // height to width ration. default is 0.5
     margin: {top: 20, right: 20, bottom: 30, left: 45},
     duration: 1500, // transition duration
@@ -330,18 +435,28 @@ var activeCatData = {
     reportId: "123asd123asd123",
     values: [
         // month label , students percentage, teachers percentage
-        ["JAN", getRandom(100), 0, getRandom(100), getRandom(100)],
-        ["FEB", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
-        ["MAR", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
-        ["APR", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
-        ["MAY", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
-        ["JUN", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
-        ["JUL", getRandom(100), getRandom(100), getRandom(100), getRandom(100)]
+        ["JAN", _.random(100), _.random(100), _.random(100), _.random(100)],
+        ["FEB", _.random(100), _.random(100), _.random(100), _.random(100)],
+        ["MAR", _.random(100), _.random(100), _.random(100), _.random(100)],
+        ["APR", _.random(100), _.random(100), _.random(100), _.random(100)],
+        ["MAY", _.random(100), _.random(100), _.random(100), _.random(100)],
+        ["JUN", _.random(100), _.random(100), _.random(100), _.random(100)],
+        ["JUL", _.random(100), _.random(100), _.random(100), _.random(100)]
     ]
 };
 
 
 var activeCatPieSettings = {
+    filterData: function(values) {
+        var $this = this;
+        _.remove(values, function(item) {
+            return !$this.validationData(item);
+        });
+        return values;
+    },
+    validationData: function(value) {
+        return _.isNumber(value);
+    },
     heightRatio:.6 , // height to width ration. default is 1
     margin: {top: 0, right: 20, bottom: 0, left: 20}, // drawing margins
     colors: ["#3598dc", "#ea5d4b", "#efc164", "#4cd797"],
@@ -356,15 +471,4 @@ var activeCatPieData = {
     labels: ["Introduction to Oceanography", "Astronomy", "Math", 'Chemistry'],
     values: [ 48, 30, 10, 12] // random data for demo. set percentage value here
 };
-
-
-
-
-
-
-
-
-function getRandom(multiplier){
-    return Math.round(Math.random() * multiplier);
-}
 

@@ -50,6 +50,12 @@
 
           // define render function
           $scope.render = function (data, settings) {
+            /**
+             * Valid data
+             */
+            if (settings.filterData) {
+              data.values = settings.filterData(data.values);
+            }
             // remove all previous items before render
             svg.selectAll('*').remove();
 
@@ -90,6 +96,15 @@
               .scale(yScale)
               .orient('left')
               .ticks(maxValue / 100 ^ 0);
+
+              if (!data.values.length) {
+                  svg.append("text")
+                      .attr("x", width / 2)
+                      .attr("y", height / 2)
+                      .attr('class', 'text-no-data text-no-data--text-center')
+                      .text("No data available.");
+                  return false;
+              }
 
             //draw x axis
             svg.append('g')

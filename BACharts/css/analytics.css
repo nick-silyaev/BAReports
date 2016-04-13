@@ -263,3 +263,12 @@ svg {
   fill: #445566;
   font-size: 12px;
 }
+.text-no-data {
+  fill: #999;
+}
+.text-no-data tspan {
+  fill: #999;
+}
+.text-no-data--text-center {
+  text-anchor: middle;
+}

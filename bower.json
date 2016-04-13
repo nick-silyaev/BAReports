@@ -1,0 +1,23 @@
+{
+  "name": "BAReports",
+  "directory": "BACharts/bower_components",
+  "version": "0.0.0",
+  "homepage": "https://github.com/nick-silyaev/BAReports",
+  "authors": [
+    "Shtyrliaiev Ivan <ee923925@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "BACharts/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "~4.10.0"
+  }
+}

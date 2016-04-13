@@ -55,6 +55,13 @@
 
           // define render function
           $scope.render = function (data, settings) {
+            /**
+             * Valid data
+             */
+            if (settings.filterData) {
+              data.values = settings.filterData(data.values);
+            }
+
             // remove all previous items before render
             svg.selectAll('*').remove();
 
@@ -74,6 +81,16 @@
             svg.attr('height', height);
 
             // prepare x scale
+
+            if (!data.values || !data.values.scores.length) {
+              svg.append("text")
+                  .attr("x", width / 2)
+                  .attr("y", height / 2)
+                  .attr('class', 'text-no-data text-no-data--text-center')
+                  .text("No data available.");
+              return false;
+            }
+
             var maxScore = d3.max(data.values.scores, function (d) {
               return d;
             });
@@ -81,8 +98,8 @@
             var tickSpan = maxX / 10; // one tick value
 
             var xScale = d3.scale.linear()
-              .domain([0, maxX])
-              .range([margin.left, width - margin.right]);
+                .domain([0, maxX])
+                .range([margin.left, width - margin.right]);
 
             // prepare data
             function prepareData(d) {

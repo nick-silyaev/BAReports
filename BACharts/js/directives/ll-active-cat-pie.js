@@ -34,6 +34,13 @@
 
             // define render function
             $scope.render = function (data, settings) {
+                /**
+                 * Valid data
+                 */
+                if (settings.filterData) {
+                    data.values = settings.filterData(data.values);
+                }
+
               // remove all previous items before render
               svg.selectAll('*').remove();
 
@@ -68,6 +75,24 @@
               var colors = settings.colors || ['#efc164', '#4cd797'];
               var color = d3.scale.ordinal()
                   .range(colors);
+
+                if (!data.values.length) {
+                    /*svg.append("text")
+                        .attr("x", width / 2)
+                        .attr("y", height / 2)
+                        .attr('class', 'text-no-data')
+                        .text("No data available.");*/
+                    svg.append('svg:text')
+                        .attr('class', 'text-no-data')
+                        .append('svg:tspan')
+                        .attr('x', 0)
+                        .attr('y', height / 2)
+                        .text('No data')
+                        .append('svg:tspan')
+                        .attr('x', 0)
+                        .attr('dy', "1.4em" )
+                        .text('available');
+                }
 
               // prepare chart
               var arc = d3.svg.arc()
