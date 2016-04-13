@@ -34,6 +34,13 @@
 
           // define render function
           $scope.render = function (data, settings) {
+              /**
+               * Valid data
+               */
+              if (settings.filterData) {
+                  data.value = settings.filterData(data.value);
+              }
+
             // remove all previous items before render
             svg.selectAll('*').remove();
 
