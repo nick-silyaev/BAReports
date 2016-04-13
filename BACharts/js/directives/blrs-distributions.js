@@ -176,10 +176,10 @@
               .attr('x1', 0)
               .attr('x2', 0)
               .attr('y1', function (d) {
-                return yScale(d3.min(d.scores));
+                return isNaN(d.scores) ? 0 : yScale(d3.min(d.scores));
               })
               .attr('y2', function (d) {
-                return yScale(d3.max(d.scores));
+                return isNaN(d.scores) ? 0 : yScale(d3.max(d.scores));
               });
 
             var getQtile = function (d, i) {

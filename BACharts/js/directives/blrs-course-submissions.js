@@ -148,11 +148,11 @@
               .attr('fill', colors[0])
               .transition().ease(ease).duration(duration)
               .attr('height', function (d) {
-                ontime_height = height - yScale(d.ontime) - margin.bottom;
+                ontime_height = isNaN(d.ontime) ? 0 : height - yScale(d.ontime) - margin.bottom;
                 return ontime_height;
               })
               .attr('y', function (d) {
-                return yScale(d.ontime);
+                return isNaN(d.ontime) ? 0 : yScale(d.ontime);
               });
 
             /**
@@ -169,11 +169,11 @@
               .attr('fill', colors[2])
               .transition().ease(ease).duration(duration)
               .attr('height', function (d) {
-                late_height = height - yScale(d.late) - margin.bottom;
+                late_height = isNaN(d.late) ? 0 :height - yScale(d.late) - margin.bottom;
                 return late_height;
               })
               .attr('y', function (d) {
-                return yScale(d.late + d.ontime);
+                return (isNaN(d.late) || isNaN(d.ontime)) ? 0 : yScale(d.late + d.ontime);
               });
 
             /**
@@ -190,11 +190,11 @@
               .attr('fill', colors[1])
               .transition().ease(ease).duration(duration)
               .attr('height', function (d) {
-                missing_height = height - yScale(d.missing) - margin.bottom;
+                missing_height = isNaN(d.missing) ? 0 : height - yScale(d.missing) - margin.bottom;
                 return missing_height;
               })
               .attr('y', function (d) {
-                return yScale(d.missing + d.ontime + d.late);
+                return (isNaN(d.late) || isNaN(d.ontime) || isNaN(d.missing)) ? 0 : yScale(d.missing + d.ontime + d.late);
               });
           };
         }

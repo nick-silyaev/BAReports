@@ -330,7 +330,7 @@ var activeCatData = {
     reportId: "123asd123asd123",
     values: [
         // month label , students percentage, teachers percentage
-        ["JAN", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
+        ["JAN", getRandom(100), 0, getRandom(100), getRandom(100)],
         ["FEB", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
         ["MAR", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
         ["APR", getRandom(100), getRandom(100), getRandom(100), getRandom(100)],
