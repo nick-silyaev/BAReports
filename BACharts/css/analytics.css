@@ -110,7 +110,7 @@ svg {
   fill: #3798dc;
 }
 .analytics-submissions .ontime .circle {
-  fill: #fff;
+  fill: #ffffff;
   stroke: #3798dc;
 }
 .analytics-submissions .ontime .check {
@@ -123,7 +123,7 @@ svg {
   fill: #efc164;
 }
 .analytics-submissions .late .circle {
-  fill: #fff;
+  fill: #ffffff;
   stroke: #efc164;
 }
 .analytics-submissions .late .check {
@@ -136,7 +136,7 @@ svg {
   fill: #ea5d4b;
 }
 .analytics-submissions .missing .circle {
-  fill: #fff;
+  fill: #ffffff;
   stroke: #ea5d4b;
 }
 .analytics-submissions .missing .check {
