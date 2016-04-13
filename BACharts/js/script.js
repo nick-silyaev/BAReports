@@ -125,7 +125,7 @@ var submissionsData = {
         {name:"assignment1", score:12, due:"2015-10-01", submit:"2015-09-25"},
         {name:"assignment1", score:20, due:"2015-10-10", submit:"2015-11-01"},
         {name:"assignment1", score:10, due:"2015-12-01", submit:"2015-12-10"},
-        {name: "assignment2",  score:5, due:"2016-01-01", submit:"2016-02-01"},
+        {name: "assignment2", score:5, due:"2016-01-01", submit:"2016-02-01"},
         {name: "assignment3", score:20, due:"2016-01-01", submit:""},
         {name:"assignment4",  score:35, due:"2016-02-01", submit:"2016-01-20"},
         {name: "assignment3", score:25, due:"2016-02-01", submit:""},

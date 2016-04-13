@@ -59,7 +59,7 @@
              * Valid data
              */
             if (settings.filterData) {
-              data.values = settings.filterData(data.values);
+              data.values.scores = settings.filterData(data.values.scores);
             }
 
             // remove all previous items before render
