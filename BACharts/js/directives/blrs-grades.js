@@ -59,7 +59,7 @@
              * Valid data
              */
             if (settings.filterData) {
-              data.values.scores = settings.filterData(data.values.scores);
+              data.values = settings.filterData(data.values);
             }
 
             // remove all previous items before render
@@ -81,17 +81,8 @@
             svg.attr('height', height);
 
             // prepare x scale
-            var maxScore = d3.max(data.values.scores, function (d) {
-              return d;
-            });
-            var maxX = Math.ceil(maxScore / 10) * 10;
-            var tickSpan = maxX / 10; // one tick value
 
-            var xScale = d3.scale.linear()
-              .domain([0, maxX])
-              .range([margin.left, width - margin.right]);
-
-            if (!data.values.scores.length) {
+            if (!data.values || !data.values.scores.length) {
               svg.append("text")
                   .attr("x", width / 2)
                   .attr("y", height / 2)
@@ -99,6 +90,16 @@
                   .text("No data available.");
               return false;
             }
+
+            var maxScore = d3.max(data.values.scores, function (d) {
+              return d;
+            });
+            var maxX = Math.ceil(maxScore / 10) * 10;
+            var tickSpan = maxX / 10; // one tick value
+
+            var xScale = d3.scale.linear()
+                .domain([0, maxX])
+                .range([margin.left, width - margin.right]);
 
             // prepare data
             function prepareData(d) {

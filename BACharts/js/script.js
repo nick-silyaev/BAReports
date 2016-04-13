@@ -137,6 +137,13 @@ var submissionsData = {
 var gradesSettings = {
     filterData: function(values) {
         var $this = this;
+        if (
+            !_.isString(values.name)
+            || !_.isNumber(values.score)
+            || !_.isArray(values.scores)
+        ) {
+            return false;
+        }
         _.remove(values, function(item) {
             return !$this.validationData(item);
         });
