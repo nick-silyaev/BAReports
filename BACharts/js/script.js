@@ -270,7 +270,7 @@ var blrsCourseSubmissionsSettings = {
     heightRatio:.6, // height to width ration. default is 0.5
     margin: {top: 20, right: 20, bottom: 30, left: 45},
     colors: ["#3598dc", "#ea5d4b", "#efc064"],
-    duration: 1000, // transition duration
+    duration: 700, // transition duration
     delay: 500, // transition delay between two areas
     ease: "quad-out" // transition ease
 };

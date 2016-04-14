@@ -142,8 +142,8 @@
               .attr('y2', yScale);
 
 
-            var reacts = svg.selectAll('rect').
-              data(data.values).enter()
+            var reacts = svg.selectAll('rect')
+              .data(data.values).enter()
               .append('g')
               .on('mouseover', function (d) {
                 tip.show(d);
@@ -178,7 +178,8 @@
                 return ontime_height;
               })
               .attr('y', function (d) {
-                return isNaN(d.ontime) ? 0 : yScale(d.ontime);
+                d.ontime_height =  isNaN(d.ontime) ? 0 : yScale(d.ontime);
+                return d.ontime_height;
               });
 
             /**
@@ -189,11 +190,13 @@
               .attr('x', function (d, i) {
                 return xScale(i);
               })
-              .attr('y', yScale(ontime_height))
+              .attr('y', function(d, i) {
+                return isNaN(d.ontime) ? 0 : yScale(d.ontime);
+              })
               .attr('width', columnWidth)
               .attr('height', 0)
               .attr('fill', colors[2])
-              .transition().ease(ease).duration(duration)
+              .transition().delay(duration).ease(ease).duration(duration)
               .attr('height', function (d) {
                 late_height = isNaN(d.late) ? 0 :height - yScale(d.late) - margin.bottom;
                 return late_height;
@@ -210,11 +213,13 @@
               .attr('x', function (d, i) {
                 return xScale(i);
               })
-              .attr('y', yScale(late_height))
+              .attr('y', function(d) {
+                return (isNaN(d.late) || isNaN(d.ontime)) ? 0 : yScale(d.late + d.ontime);
+              })
               .attr('width', columnWidth)
               .attr('height', 0)
               .attr('fill', colors[1])
-              .transition().ease(ease).duration(duration)
+              .transition().delay(duration * 2).ease(ease).duration(duration)
               .attr('height', function (d) {
                 missing_height = isNaN(d.missing) ? 0 : height - yScale(d.missing) - margin.bottom;
                 return missing_height;
