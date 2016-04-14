@@ -39,6 +39,7 @@
             .append('svg')
             .attr('class', 'analytics-logins')
             .attr('width', '100%')
+            .attr('height', d3.select(iElement[0])[0][0].offsetWidth / 2)
             .call(tip);
 
           // on window resize, re-render d3 canvas
@@ -64,6 +65,15 @@
 
           // define render function
           $scope.render = function (data, settings) {
+            if (!data || !data.values || !settings || !data.values.length) {
+              svg.append("text")
+                  .attr("x", d3.select(iElement[0])[0][0].offsetWidth / 2)
+                  .attr("y", d3.select(iElement[0])[0][0].offsetWidth / 3)
+                  .attr('class', 'text-no-data text-no-data--text-center')
+                  .text("No data available.");
+              return false;
+            }
+
             /**
              * Valid data
              */
@@ -110,14 +120,6 @@
               .ticks(5).tickFormat(function (d) {
                 return d + '%';
               });
-
-            if (!data.values.length) {
-              svg.append("text")
-                  .attr("x", width / 2)
-                  .attr("y", height / 2)
-                  .attr('class', 'text-no-data text-no-data--text-center')
-                  .text("No data available.");
-            }
 
             //draw x axis
             svg.append('g')

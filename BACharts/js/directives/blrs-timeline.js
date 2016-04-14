@@ -33,6 +33,7 @@
             .append('svg')
             .attr('class', 'analytics-timeline')
             .attr('width', '100%')
+            .attr('height', 50)
             .call(tip);
 
           // on window resize, re-render d3 canvas
@@ -58,6 +59,15 @@
 
           // define render function
           $scope.render = function (data, settings) {
+            if (!data || !data.values || !settings || !data.values.length) {
+              svg.append("text")
+                  .attr("x", d3.select(iElement[0])[0][0].offsetWidth / 2)
+                  .attr("y", 25)
+                  .attr('class', 'text-no-data text-no-data--text-center')
+                  .text("No data available.");
+              return false;
+            }
+
             /**
              * Valid data
              */
@@ -93,14 +103,6 @@
               .ticks(d3.time.months)
               .tickSize(0, 0)
               .tickFormat(d3.time.format(''));
-
-            if (!data.values.length) {
-              svg.append("text")
-                  .attr("x", width / 2)
-                  .attr("y", 10)
-                  .attr('class', 'text-no-data text-no-data--text-center')
-                  .text("No data available.");
-            }
 
             svg.append('g')
               .attr('class', 'x axis')

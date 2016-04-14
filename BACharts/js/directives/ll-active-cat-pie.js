@@ -25,6 +25,7 @@
             var svg = d3.select(iElement[0])
                 .append('svg')
                 .attr('class', 'analytics-active-cat-pie')
+                .attr('height', d3.select(iElement[0])[0][0].offsetWidth / 2)
                 .attr('width', '100%');
 
             // on window resize, re-render d3 canvas
@@ -45,6 +46,19 @@
 
             // define render function
             $scope.render = function (data, settings) {
+                if (!data || !data.values || !settings || !data.values.length) {
+                    svg.append('svg:text')
+                        .attr('class', 'text-no-data')
+                        .append('svg:tspan')
+                        .attr('x', d3.select(iElement[0])[0][0].offsetWidth / 2)
+                        .attr('y', d3.select(iElement[0])[0][0].offsetWidth / 4)
+                        .text('No data')
+                        .append('svg:tspan')
+                        .attr('x', d3.select(iElement[0])[0][0].offsetWidth / 2)
+                        .attr('dy', "1.4em" )
+                        .text('available');
+                    return false;
+                }
                 /**
                  * Valid data
                  */
@@ -86,24 +100,6 @@
               var colors = settings.colors || ['#efc164', '#4cd797'];
               var color = d3.scale.ordinal()
                   .range(colors);
-
-                if (!data.values.length) {
-                    /*svg.append("text")
-                        .attr("x", width / 2)
-                        .attr("y", height / 2)
-                        .attr('class', 'text-no-data')
-                        .text("No data available.");*/
-                    svg.append('svg:text')
-                        .attr('class', 'text-no-data')
-                        .append('svg:tspan')
-                        .attr('x', 0)
-                        .attr('y', height / 2)
-                        .text('No data')
-                        .append('svg:tspan')
-                        .attr('x', 0)
-                        .attr('dy', "1.4em" )
-                        .text('available');
-                }
 
               // prepare chart
               var arc = d3.svg.arc()
