@@ -4,10 +4,11 @@
   // create the angular app
   angular.module('Analytics', [
     'Analytics.controllers',
-    'Analytics.directives'
-    ]);
+    'Analytics.directives',
+  ]);
 
-  // setup dependency injection
+
+// setup dependency injection
   angular.module('d3', []);
   angular.module('tip', ['d3']);
   angular.module('Analytics.controllers', []);

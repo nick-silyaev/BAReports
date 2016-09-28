@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/analytics.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.min.css">
+    <link href="css/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+</head>
+<body ng-app="Analytics">
+<div class="container"
+     id="breakthrough-analytics"
+     ng-controller="courseBreakthroughAnalyticsCtrl as $ctrl"
+     ng-init="init('analytics');">
+
+    <div class="ba-analytics row">
+        <div class="col-md-12">
+
+            <div class="panel panel-primary course-panel">
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="panel">
+                                <div class="an-panel-body">
+                                    <div class="row">
+                                        <div class="col-md-7 report-left-div">
+                                            <img src="nui/images/cba-tn-an-quiz-success.png">
+                                            <strong class="capitalized">Quiz Success</strong>
+                                        </div>
+
+                                        <div class="col-md-3 text-align-right">
+                                            <div class="report-gr-div">
+                                                <a class="clickable dropdown-toggle"
+                                                   data-toggle="dropdown"
+                                                   aria-haspopup="true"
+                                                   aria-expanded="false">2</a>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li>Group</li>
+                                                </ul>
+
+                                                <span> groups</span>
+                                            </div>
+                                            <div class="report-gr-div">
+                                                <a class="clickable dropdown-toggle"
+                                                   data-toggle="dropdown"
+                                                   aria-haspopup="true"
+                                                   aria-expanded="false">45</a>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li>User</li>
+                                                </ul>
+
+                                                <span> people</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 text-align-right">
+                                            <a class="dropdown-toggle report-settings-link clickable"
+                                               data-toggle="dropdown"
+                                               aria-haspopup="true"
+                                               aria-expanded="false">
+                                                <img src="nui/images/settings.png">
+                                            </a>
+
+                                            <ul class="dropdown-menu">
+                                                <li><a class="clickable">Edit</a></li>
+                                                <li><a class="clickable">Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <img src="nui/images/cba-tn-quiz-graph.png">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <span>Failed</span>
+                                                <img src="nui/images/cba-red-circle.png"/>
+
+                                                <span style="margin-left: 10px">Passed</span>
+                                                <img src="nui/images/cba-yellow-circle.png"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="bottom-report-block text-center">
+                                            <h3>Are Students Passing Quizes?</h3>
+
+                                            <div>This group will show us if students are
+                                                actually passing tests at this level.
+                                                From this we can determine a plan of action
+                                                to better help students more forward and learn.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="panel">
+                                <div class="an-panel-body">
+                                    <div class="row">
+                                        <div class="col-md-7 report-left-div">
+                                            <img src="nui/images/cba-tn-an-assign-compl.png">
+                                            <strong class="capitalized">Assignments Completed</strong>
+                                        </div>
+
+                                        <div class="col-md-3 text-align-right">
+                                            <div class="report-gr-div">
+                                                <a class="clickable dropdown-toggle"
+                                                   data-toggle="dropdown"
+                                                   aria-haspopup="true"
+                                                   aria-expanded="false">2</a>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li>Group</li>
+                                                </ul>
+
+                                                <span> groups</span>
+                                            </div>
+                                            <div class="report-gr-div">
+                                                <a class="clickable dropdown-toggle"
+                                                   data-toggle="dropdown"
+                                                   aria-haspopup="true"
+                                                   aria-expanded="false">45</a>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li>User</li>
+                                                </ul>
+
+                                                <span> people</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 text-align-right">
+                                            <a class="dropdown-toggle report-settings-link clickable"
+                                               data-toggle="dropdown"
+                                               aria-haspopup="true"
+                                               aria-expanded="false">
+                                                <img src="nui/images/settings.png">
+                                            </a>
+
+                                            <ul class="dropdown-menu">
+                                                <li><a class="clickable">Edit</a></li>
+                                                <li><a class="clickable">Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <img src="nui/images/cba-tn-assign-graph.png">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <span>Started</span>
+                                                <img src="nui/images/cba-blue-circle.png"/>
+
+                                                <span style="margin-left: 10px">Passed</span>
+                                                <img src="nui/images/cba-green-circle.png"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="bottom-report-block text-center">
+                                            <h3>Are Students Passing Quizes?</h3>
+
+                                            <div>This group will show us if students are
+                                                actually passing tests at this level.
+                                                From this we can determine a plan of action
+                                                to better help students more forward and learn.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="panel new-report-block clickable">
+                                <div class="panel-body text-center">
+                                    <div title="New Report" class="new-report-sign-block">
+                                        <div ng-include="$ctrl.templateUrl"></div>
+
+                                        <strong ng-click="open('lg');" class="glyphicon glyphicon-plus-sign">
+
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="panel">
+                                <div class="an-panel-body">
+                                    <div class="row">
+                                        <div class="col-md-7 report-left-div">
+                                            <img src="nui/images/cba-tn-an-assign-compl.png">
+                                            <strong class="capitalized">Assignments Completed</strong>
+                                        </div>
+
+                                        <div class="col-md-3 text-align-right">
+                                            <div class="report-gr-div">
+                                                <a class="clickable dropdown-toggle"
+                                                   data-toggle="dropdown"
+                                                   aria-haspopup="true"
+                                                   aria-expanded="false">2</a>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li>Group</li>
+                                                </ul>
+
+                                                <span> groups</span>
+                                            </div>
+                                            <div class="report-gr-div">
+                                                <a class="clickable dropdown-toggle"
+                                                   data-toggle="dropdown"
+                                                   aria-haspopup="true"
+                                                   aria-expanded="false">45</a>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li>User</li>
+                                                </ul>
+
+                                                <span> people</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 text-align-right">
+                                            <a class="dropdown-toggle report-settings-link clickable"
+                                               data-toggle="dropdown"
+                                               aria-haspopup="true"
+                                               aria-expanded="false">
+                                                <img src="nui/images/settings.png">
+                                            </a>
+
+                                            <ul class="dropdown-menu">
+                                                <li><a class="clickable">Edit</a></li>
+                                                <li><a class="clickable">Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <img src="nui/images/cba-tn-assign-graph.png">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12">
+                                                <span>Started</span>
+                                                <img src="nui/images/cba-blue-circle.png"/>
+
+                                                <span style="margin-left: 10px">Passed</span>
+                                                <img src="nui/images/cba-green-circle.png"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="bottom-report-block text-center">
+                                            <h3>Are Students Passing Quizes?</h3>
+
+                                            <div>This group will show us if students are
+                                                actually passing tests at this level.
+                                                From this we can determine a plan of action
+                                                to better help students more forward and learn.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="panel">
+                                <div class="an-panel-body">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-3">
+                                                <img style="margin-right: 5px" src="nui/images/cba-activity-sctream.png"/>
+
+                                                <strong class="capitalized">Activity Stream For</strong>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <select class="form-control as-select">
+                                                    <option value="-1">
+                                                        All Users
+                                                    </option>
+                                                </select>
+
+                        <span>
+                          IN
+                        </span>
+
+                                                <select class="form-control as-select">
+                                                    <option value="-1">
+                                                        Sub Account / Course
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3 text-align-right no-padding">
+                                                <a class="dropdown-toggle report-settings-link-as clickable"
+                                                   data-toggle="dropdown"
+                                                   aria-haspopup="true"
+                                                   aria-expanded="false">
+                                                    <img src="nui/images/settings.png">
+                                                </a>
+
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li><a class="clickable">Edit</a></li>
+                                                    <li><a class="clickable">Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row as-top-block">
+                                        <div ng-repeat="activityStream in activityStreams"
+                                             class="col-md-12 as-block"
+                                             ng-class="{'as-block-grey': ($index % 2 === 0) }">
+                                            <div class="col-md-1">
+                                                <img src="nui/images/cba-avatar.png"/>
+                                            </div>
+                                            <div class="col-md-2 no-padding">
+                                                <div>
+                                                    <a class="clickable">
+                                                        {{ activityStream[0] }}
+                                                    </a>
+                                                </div>
+
+                                                <div>
+                                                    <small>
+                                                        10 minutes ago
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <strong class="{{ activityStream[1] }}_action">
+                                                    {{ activityStream[1] }}
+                                                </strong>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <a class="clickable">{{ activityStream[2] ? activityStream[2] : 'Item' }}</a> in
+                                                <a class="clickable">{{ activityStream[3] }}</a> as
+                                                <a class="clickable">{{ activityStream[4] }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<script src="bower_components/lodash/dist/lodash.min.js"></script>-->
+<!--<script src="js/script.js"></script>-->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+<script src="js/app/Analytics.js"></script>
+
+<script src="js/services/d3.js"></script>
+<script src="js/services/d3-tip.js"></script>
+<script src="js/services/ui-bootstrap-tpls-2.1.4.min.js"></script>
+<script src="js/services/bootstrap-datepicker.min.js"></script>
+
+<script src="js/controllers/course-breakthrough-analytics-ctrl.js"></script>
+
+<script src="bower_components/lodash/dist/lodash.min.js"></script>
+<script src="js/controllers/course-analytics-chart-ctrl.js"></script>
+<script src="js/directives/course-analytics-chart.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.min.js"></script>
+
+</body>
+</html>
