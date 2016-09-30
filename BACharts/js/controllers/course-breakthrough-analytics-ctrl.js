@@ -156,7 +156,7 @@
                 ],
 
             }
-            if($scope.model.chart == 'line'){
+            if($scope.model.chart == 'line' || $scope.model.chart == 'table' ){
                 sharedChartData.setData(lineTestData);
             }else {
                 sharedChartData.setData(testData);

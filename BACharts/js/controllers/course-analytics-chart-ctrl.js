@@ -45,4 +45,10 @@
             $scope.d3Data = sharedChartData.getData();
 
         }]);
+
+    // line chart controller
+    angular.module('Analytics.controllers')
+        .controller('analyticstableCtrl', ['$scope', 'sharedChartData', function($scope, sharedChartData){
+            $scope.d3Data = sharedChartData.getData();
+        }]);
 }());

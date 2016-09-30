@@ -541,4 +541,30 @@
                 }
             };
         }]);
+
+    angular.module('Analytics.directives')
+        .directive('analyticsTable', [ function () {
+            return {
+                restrict: 'EA',
+                scope: {
+                    data: "=",
+                    label: "@"
+                },
+                templateUrl: "templates/table-report.html",
+                link: function ($scope, element) {
+                    $scope.labels = $scope.data.labels;
+                    $scope.labels.unshift("Date");
+
+                    $scope.rows = [];
+                    for(var i = 0; i < $scope.data.values.length; i++ ){
+                        var row = $scope.data.values[i].scores
+                        row.unshift($scope.data.values[i].date);
+                        $scope.rows.push(row);
+                    }
+
+
+                }
+            };
+        }]);
+
 }());
