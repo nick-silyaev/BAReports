@@ -263,6 +263,16 @@ svg {
   fill: #445566;
   font-size: 12px;
 }
+.analytics-line .axis path,
+.analytics-bar .axis path {
+  fill: none;
+  stroke-width: 1;
+  stroke: #445566;
+}
+.analytics-line .axis text,
+.analytics-bar .axis text {
+  fill: #445566;
+}
 .text-no-data {
   fill: #999;
 }

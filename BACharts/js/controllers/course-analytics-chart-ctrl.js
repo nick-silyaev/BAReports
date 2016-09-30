@@ -30,4 +30,19 @@
             $scope.d3Data = sharedChartData.getData();
 
         }]);
+
+    // line chart controller
+    angular.module('Analytics.controllers')
+        .controller('analyticslineCtrl', ['$scope', 'sharedChartData', function($scope, sharedChartData){
+            $scope.settings = {
+                heightRatio:.8, // height to width ration. default is 0.5
+                margin: {top: 20, right: 20, bottom: 60, left: 45},
+                colors: ["#3598dc", "#ea5d4b", "#efc164", "#4cd797", "#ed7d31", "#ffc000"],
+                duration: 1500, // transition duration
+                delay: 750, // transition delay between two areas
+                ease: "cubic-in-out" // transition ease
+            };
+            $scope.d3Data = sharedChartData.getData();
+
+        }]);
 }());

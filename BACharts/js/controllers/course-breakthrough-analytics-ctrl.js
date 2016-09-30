@@ -139,7 +139,28 @@
                     { label: "Completed", value: 141 }
                 ],
             };
-            sharedChartData.setData(testData);
+            var lineTestData = {
+                reportId: "123asd123asd123",
+                name: "Report Name",
+                description: "Report description",
+                groups: [],
+                people: [],
+                labels: ["Launched", "Waived", "Passed", "Initialized", "completed"],
+                values: [
+                    { date: "2016-09-01", scores: [10, 5, 25, 12, 2] },
+                    { date: "2016-09-03", scores: [0, 10, 20, 58, 8] },
+                    { date: "2016-09-04", scores: [2, 0, 33, 41, 12] },
+                    { date: "2016-09-07", scores: [22, 0, 45, 22, 22] },
+                    { date: "2016-09-08", scores: [42, 8, 20, 5, 10] },
+                    { date: "2016-09-09", scores: [40, 1, 38, 44, 14] }
+                ],
+
+            }
+            if($scope.model.chart == 'line'){
+                sharedChartData.setData(lineTestData);
+            }else {
+                sharedChartData.setData(testData);
+            }
 
             var elem = angular.element(document.querySelector("#chart"));
 
