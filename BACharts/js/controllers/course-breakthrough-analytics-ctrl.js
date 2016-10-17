@@ -178,7 +178,9 @@
         //$timeout(function () { $scope.init(); }, 1000);
 
         $scope.ok = function() {
-            $uibModalInstance.close($scope.model);
+            //$uibModalInstance.close($scope.model);
+            console.log($scope.model);
+
         };
 
         $scope.cancel = function() {

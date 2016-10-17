@@ -83,9 +83,7 @@
                         var centerY = innerH / 2 + margin.top + titleH;
 
                         // set colors
-                        var colors = settings.colors || ['#efc164', '#4cd797'];
-                        var color = d3.scale.ordinal()
-                            .range(colors);
+                        var c20 = d3.scale.category20();
 
                         if (!data.values.length) {
                             svg.append('svg:text')
@@ -113,10 +111,14 @@
                             .enter().append('g');
 
                         //draw chart
-                        path.append('path').attr('class', 'path')
+                        path.append('path').attr('class', function(d, i) {
+                            return "slice" + " " + labels[i].toLowerCase().replace(/\s+/g, '') //Remove spaces from label name string to make one valid class name
+                        })
                             .attr('fill', function (d, i) {
-                                return color(i);
+                                return c20(i);
                             })
+                            .attr('stroke', '#ffffff')
+                            .attr('stroke-width', 1)
                             .transition()
                             .duration(duration).ease(ease)
                             .attrTween('d', tweenPie);
@@ -146,14 +148,31 @@
                                 var x = 0;
                                 var y = i * height + legendH/4;
                                 return 'translate(' + x + ',' + y + ')';
+                            })
+                            .on("mouseover", function(d, i){
+                                svg.selectAll('.slice')
+                                    .transition().duration(300)
+                                    .attr('fill-opacity', 0.3);
+
+                                svg.select("." + labels[i].toLowerCase().replace(/\s+/g, ''))
+                                    .transition().duration(300)
+                                    .attr('fill-opacity', 1)
+
+                            })
+                            .on("mouseout", function(d, i){
+                                svg.selectAll('.slice')
+                                    .transition().duration(200)
+                                    .attr('fill-opacity', 1);
+
                             });
 
                         legend.append('rect')
                             .attr('width', 10)
                             .attr('height', 10)
                             .style('fill', function (d, i) {
-                                return colors[i];
-                            });
+                                return c20(i);
+                            })
+                            .attr('cursor', 'pointer');
 
                         legend.append('text')
                             .attr('x', legendH / 3)
@@ -162,7 +181,8 @@
                             .style('font-size', legendH / 3)
                             .text(function (d, i) {
                                 return labels[i];
-                            });
+                            })
+                            .attr('cursor', 'pointer');
 
                         // add labels
                         var slice_labels = path.append('text')
@@ -175,7 +195,8 @@
                             })
                             .text(function (d, i) {
                                 return pieData[i];
-                            });
+                            })
+                            .attr('fill', '#ffffff');
                         slice_labels.style('opacity', 0).transition().delay(duration).duration(300).style('opacity', 1);
 
                     };
@@ -242,7 +263,6 @@
                         // get settings or set defaults
                         var margin = settings.margin || { top: 20, right: 50, bottom: 50, left: 50 };
                         var heightRatio = settings.heightRatio || 0.5;
-                        var colors = settings.colors || ['#3598dc', '#ea5d4b'];
                         var duration = settings.duration || 1000;
                         var ease = settings.ease || 'cubic-in-out';
 
@@ -252,6 +272,9 @@
                         var columnWidth = (width - margin.left - margin.right) / (data.values.length) - 5;
                         var labelWidth = 0;
                         var labelAngle = 0;
+
+                        //colors
+                        var c20 = d3.scale.category20();
 
                         var maxY = d3.max(data.values.map(function(d){
                             return d.value;
@@ -296,7 +319,7 @@
 
                         //draw x axis
                         var gx = svg.append('g')
-                            .attr('class', 'x axis brls-course-submission-x-axis')
+                            .attr('class', 'x axis')
                             .attr('transform', 'translate( 0 ,' + (height - margin.bottom) + ')')
                             .attr('fill', 'none')
                             .call(xAxis);
@@ -370,7 +393,7 @@
                             .attr('width', columnWidth)
                             .attr('height', 0)
                             .attr('fill', function(d, i){
-                                return colors[i];
+                                return c20(i);
                             })
                             .transition().ease(ease).duration(duration)
                             .attr('height', function (d) {
@@ -436,7 +459,10 @@
                         var duration = settings.duration || 1000;
                         var delay = settings.delay || 1000;
                         var ease = settings.ease || 'cubic-in-out';
-                        var colors = settings.colors || ['#3598dc', '#ea5d4b'];
+                        var labels = data.labels;
+
+                        //colors
+                        var c20 = d3.scale.category20();
 
                         var dateFormat = d3.time.format('%Y-%m-%d');
 
@@ -517,14 +543,14 @@
                             .attr('y1', yScale)
                             .attr('y2', yScale);
 
-                        // create studeents area
+                        // create areas
                         for (var i = 1; i < data.labels.length; i++) {
 
                             window['path' + i] = svg.append('path')
                                 .attr('d', window['cat' + i](data.values))
                                 .attr('class', 'path cat'+i)
                                 .attr('fill', 'none')
-                                .attr('stroke', colors[i])
+                                .attr('stroke', c20(i))
                                 .attr('stroke-width', 3);
 
                             //animate students path
@@ -536,6 +562,7 @@
                                 .ease(ease)
                                 .attr('stroke-dashoffset', 0);
                         }
+                        
 
                     };
                 }
