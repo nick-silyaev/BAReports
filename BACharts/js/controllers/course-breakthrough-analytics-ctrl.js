@@ -145,14 +145,14 @@
                 description: "Report description",
                 groups: [],
                 people: [],
-                labels: ["Launched", "Waived", "Passed", "Initialized", "completed"],
+                labels: ["Launched", "Waived", "Passed", "Initialized", "Completed", "Satisfied", "Terminated", "Failed", "Abandoned", "Earned", "Submitted"],
                 values: [
-                    { date: "2016-09-01", scores: [10, 5, 25, 12, 2] },
-                    { date: "2016-09-03", scores: [0, 10, 20, 58, 8] },
-                    { date: "2016-09-04", scores: [2, 0, 33, 41, 12] },
-                    { date: "2016-09-07", scores: [22, 0, 45, 22, 22] },
-                    { date: "2016-09-08", scores: [42, 8, 20, 5, 10] },
-                    { date: "2016-09-09", scores: [40, 1, 38, 44, 14] }
+                    { date: "2016-09-01", scores: [12, 6, 5, 18, 2, 10, 5, 25, 12, 2, 33] },
+                    { date: "2016-09-03", scores: [11, 15, 10, 28, 11, 0, 10, 20, 58, 8, 37 ] },
+                    { date: "2016-09-04", scores: [55, 5, 38, 45, 12, 2, 0, 33, 41, 12, 22] },
+                    { date: "2016-09-07", scores: [24, 8, 25, 23, 29, 22, 0, 45, 22, 22, 7] },
+                    { date: "2016-09-08", scores: [29, 70, 30, 8, 15, 42, 8, 20, 5, 10, 54] },
+                    { date: "2016-09-09", scores: [41, 1, 28, 40, 11, 40, 1, 38, 44, 14, 2] }
                 ],
 
             }
