@@ -81,6 +81,8 @@
                         var innerRadius = 0;
                         var centerX = width / 2;
                         var centerY = innerH / 2 + margin.top + titleH;
+                        var labelRadius = radius + 10;
+                        var visibleAngle = 15;
 
                         // set colors
                         var c20 = d3.scale.category20();
@@ -152,9 +154,18 @@
                             .on("mouseover", function(d, i){
                                 svg.selectAll('.slice')
                                     .transition().duration(300)
-                                    .attr('fill-opacity', 0.3);
+                                    .attr('fill-opacity', 0.2);
+
+                                svg.selectAll('.pie-label')
+                                    .transition().duration(300)
+                                    .attr('fill-opacity', 0);
+
 
                                 svg.select("." + labels[i].toLowerCase().replace(/\s+/g, ''))
+                                    .transition().duration(300)
+                                    .attr('fill-opacity', 1);
+
+                                svg.select('.pie-label'+i)
                                     .transition().duration(300)
                                     .attr('fill-opacity', 1)
 
@@ -163,6 +174,12 @@
                                 svg.selectAll('.slice')
                                     .transition().duration(200)
                                     .attr('fill-opacity', 1);
+
+                                svg.selectAll('.pie-label')
+                                    .transition().duration(200)
+                                    .attr('fill-opacity', function(d){
+                                        return getAngle(d) < visibleAngle ? 0 : 1;
+                                    });
 
                             });
 
@@ -185,21 +202,54 @@
                             .attr('cursor', 'pointer');
 
                         // add labels
+
+                        var getAngle = function(d){
+                            var startAngle = arc.startAngle()(d);
+                            var endAngle = arc.endAngle()(d);
+                            var degree = (endAngle - startAngle)*180/Math.PI;
+                            return degree;
+                        }
+
+                        var total = 0;
                         var slice_labels = path.append('text')
+                            .attr('class', function(d, i){
+                                return 'pie-label pie-label'+i;
+                            })
+                            .attr('font-family', 'Arial, sans-serif')
+                            .attr('font-size', '12px')
                             .attr({
-                                'class': 'pie-labels',
                                 'text-anchor': 'middle',
-                                'transform': function (d) {
-                                    return 'translate(' + (arc.centroid(d)) + ')';
+                                'fill': '#333',
+                                'font-weight':'bold'
+                            })
+                            .attr('transform', function(d, i) {
+                                if(getAngle(d) < visibleAngle){
+                                    var centroid = arc.centroid(d);
+                                    var midAngle = Math.atan2(centroid[1], centroid[0]);
+                                    //
+                                    var labelX  = Math.cos(midAngle) * labelRadius;
+                                    //var sign = (x > 0) ? 1 : -1;
+                                    //var labelX = x + (5 * sign);
+                                    //
+                                    var labelY = Math.sin(midAngle) * labelRadius;
+                                    return 'translate(' +labelX+ ',' +labelY+ ')';
+                                }else{
+                                    return 'translate(' + arc.centroid(d) + ')';
                                 }
+
                             })
                             .text(function (d, i) {
                                 return pieData[i];
-                            })
-                            .attr('fill', '#ffffff');
+                            });
 
-                        slice_labels.style('opacity', 0).transition().delay(duration).duration(300).style('opacity', 1);
+                        slice_labels.attr('fill-opacity', 0)
+                            .transition().delay(duration)
+                            .duration(300)
+                            .attr('fill-opacity', function(d){
+                                return getAngle(d) < visibleAngle ? 0 : 1;
+                            });
 
+                        console.log(total);
                     };
                 }
             };
@@ -485,11 +535,11 @@
 
                         var maxY = function(){
                             var max = d3.max(data.values.map(function(d, i) {
-                                    return d3.max(d.scores.map(function(t, n){
-                                        if(!$scope.data.disabled[n]){
-                                            return t;
-                                        }
-                                    }));
+                                return d3.max(d.scores.map(function(t, n){
+                                    if(!$scope.data.disabled[n]){
+                                        return t;
+                                    }
+                                }));
                             }));
                             return max * 1.2 // addin 20% to Y axis
                         }
@@ -542,6 +592,17 @@
                         var draw_lines = function(data, duration) {
                             svg.selectAll(".line").remove();
                             svg.selectAll('line.y').remove();
+                            //draw horisontal grid lines
+                            svg.selectAll('line.y')
+                                .data(yScale.ticks(5))
+                                .enter().append('line')
+                                .attr('class', 'y')
+                                .attr('stroke', '#cccccc')
+                                .attr('stroke-width', '1')
+                                .attr('x1', margin.left)
+                                .attr('x2', width - margin.right)
+                                .attr('y1', yScale)
+                                .attr('y2', yScale);
 
                             for (var i = 0; i < data.labels.length; i++) {
                                 if(data.disabled[i])continue;
@@ -577,17 +638,7 @@
                                     .attr('stroke-dashoffset', 0);
                             }
 
-                            //draw horisontal grid lines
-                            svg.selectAll('line.y')
-                                .data(yScale.ticks(5))
-                                .enter().append('line')
-                                .attr('class', 'y')
-                                .attr('stroke', '#cccccc')
-                                .attr('stroke-width', '1')
-                                .attr('x1', margin.left)
-                                .attr('x2', width - margin.right)
-                                .attr('y1', yScale)
-                                .attr('y2', yScale);
+
                         }
                         draw_lines($scope.data, duration);
                         /*
@@ -679,7 +730,7 @@
 
                                 $scope.data.disabled[i] = !$scope.data.disabled[i];
                                 if($scope.data.disabled[i]){
-                                    d3.select(this).attr('opacity', 0.3);
+                                    d3.select(this).attr('opacity', 0.4);
                                 }else{
                                     d3.select(this).attr('opacity', 1);
                                 }

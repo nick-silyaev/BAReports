@@ -133,10 +133,18 @@
                 people: [],
                 values: [
                     { label: "Launched", value: 55},
+                    { label: "Failed", value: 20 },
                     { label: "Waived", value: 45},
+                    { label: "Satisfied", value: 1 },
                     { label: "Passed", value: 49 },
                     { label: "Initialized", value: 201 },
-                    { label: "Completed", value: 141 }
+                    { label: "Completed", value: 141 },
+                    { label: "Terminated", value: 2 },
+                    { label: "Failed1", value: 15 },
+                    { label: "Waived1", value: 25},
+                    { label: "Satisfied1", value: 2 },
+                    { label: "Passed1", value: 19 }
+
                 ],
             };
             var lineTestData = {
