@@ -354,3 +354,39 @@ var activeCatPieData = {
     values: [ 48, 30, 10, 12] // random data for demo. set percentage value here
 };
 
+
+var blrsHbarSettings = {
+    heightRatio:.6, // height to width ration. default is 0.5
+    margin: {top: 20, right: 180, bottom: 30, left: 70},
+    colors: ["#3598dc", "#ea5d4b", "#efc164"], // bar colors
+    duration: 1000, // transition duration
+    delay: 500, // transition delay between two areas
+    ease: "quad-out" // transition ease
+};
+var blrsHbarData = {
+    reportId: "423asd123asd123",
+    labels: ["Math: Masurement & Data", "Math: The number system"],
+    groups: [
+        {
+            name: "%Passed",
+            values: [ 30, 60, 10]
+        },
+        {
+            name: "% 1st Try",
+            values: [ 85, 15]
+        },
+        //{
+        //    name: "% 2nd Try",
+        //    values: [ 30, 70]
+        //},
+        //{
+        //    name: "% 3rd Try",
+        //    values: [ 20, 50, 10]
+        //},
+        //{
+        //    name: "% 4th Try",
+        //    values: [ 35, 80]
+        //}
+
+    ]
+};
