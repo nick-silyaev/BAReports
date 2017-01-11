@@ -182,8 +182,44 @@
                                 .transition().duration(duration * 2)
                                 .attr('opacity', '1')
 
+
                         });
 
+                        data.labels.forEach(function(d, i) {
+                            var legend = svg.append('g')
+                                .attr('class', 'legend'+i)
+                                .attr('class', 'legend');
+
+                            legend.append('rect')
+                                .attr('x', 0)
+                                .attr('y', 2)
+                                .attr('width', 10)
+                                .attr('height', 10)
+                                .attr('fill', function(){
+                                    return colors[i];
+                                });
+
+                            legend.append("foreignObject")
+                                .attr("x", 15)
+                                .attr("y", 0)
+                                .attr('font-size', '12px')
+                                .attr("width", margin.right - 20)
+                                .append("xhtml:div")
+                                .append("p")
+                                .text(d);
+
+                        });
+
+                        // position legend
+                        var legendX = width - margin.right + 20;
+                        var legendY = margin.top + 20;
+                        svg.selectAll('.legend div').forEach(function(d, i){
+                            d.forEach(function(dd, i){
+                                var y = legendY;
+                                legendY += dd.scrollHeight;
+                                d3.select(dd.parentNode.parentNode).attr('transform', 'translate(' + legendX + ',' + y + ')');
+                            });
+                        });
                     };
                 }
             };

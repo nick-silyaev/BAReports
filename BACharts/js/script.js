@@ -357,7 +357,7 @@ var activeCatPieData = {
 
 var blrsHbarSettings = {
     heightRatio:.6, // height to width ration. default is 0.5
-    margin: {top: 20, right: 180, bottom: 30, left: 70},
+    margin: {top: 20, right: 150, bottom: 30, left: 70},
     colors: ["#3598dc", "#ea5d4b", "#efc164"], // bar colors
     duration: 1000, // transition duration
     delay: 500, // transition delay between two areas
