@@ -334,12 +334,13 @@
 
                         // set the height based on the calculations above
                         svg.attr('height', height);
-
+                        var xData = data.values.slice();
+                        xData.push(0);
                         var xScale = d3.scale.ordinal()
-                            .domain(data.values.map(function (d, i) {
+                            .domain(xData.map(function (d, i) {
                                 return i;
                             }))
-                            .rangePoints([margin.left, width - margin.right - columnWidth]);
+                            .rangePoints([margin.left, width - margin.right]);
 
                         var yScale = d3.scale.linear()
                             .domain([0, maxY])
@@ -349,7 +350,7 @@
                         var xAxis = d3.svg.axis()
                             .scale(xScale)
                             .tickFormat(function(d){
-                                return data.values[d].label;
+                                return data.values[d] ? data.values[d].label : '';
                             });
 
                         //prepare y axis
