@@ -131,6 +131,7 @@
                 description: "Report description",
                 groups: [],
                 people: [],
+                scalYLabel: "Average Number of Attemts",
                 values: [
                     { label: "Launched", value: 55},
                     { label: "Failed", value: 20 },

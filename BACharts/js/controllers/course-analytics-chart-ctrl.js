@@ -20,7 +20,7 @@
         .controller('analyticsbarCtrl', ['$scope', 'sharedChartData', function($scope, sharedChartData){
             $scope.settings = {
                 heightRatio:.8, // height to width ration. default is 0.5
-                margin: {top: 20, right: 20, bottom: 60, left: 45},
+                margin: {top: 20, right: 20, bottom: 60, left: 55},
                 duration: 1500, // transition duration
                 delay: 750, // transition delay between two areas
                 ease: "cubic-in-out" // transition ease

@@ -279,12 +279,12 @@
                     };
 
                     var tip = d3.tip()
-                      .attr('class', 'd3-tip distributions-tip')
-                      .direction('n')
-                      .offset([20, 0])
-                      .html(function (val) {
-                          return '<strong>' + val + '</strong>';
-                      });
+                        .attr('class', 'd3-tip distributions-tip')
+                        .direction('n')
+                        .offset([20, 0])
+                        .html(function (val) {
+                            return '<strong>' + val + '</strong>';
+                        });
 
                     var svg = d3.select(iElement[0])
                         .append('svg')
@@ -347,57 +347,57 @@
                         var xData = data.values.slice();
                         xData.push(0);
                         var xScale = d3.scale.ordinal()
-                          .domain(xData.map(function (d, i) {
-                              return i;
-                          }))
-                          .rangePoints([margin.left, width - margin.right]);
+                            .domain(xData.map(function (d, i) {
+                                return i;
+                            }))
+                            .rangePoints([margin.left, width - margin.right]);
 
                         var yScale = d3.scale.linear()
-                          .domain([0, maxY])
-                          .range([height - margin.bottom, margin.top]);
+                            .domain([0, maxY])
+                            .range([height - margin.bottom, margin.top]);
 
                         // prepare x axis
                         var xAxis = d3.svg.axis()
-                          .scale(xScale)
-                          .tickFormat(function (d) {
-                              return data.values[d] ? data.values[d].label : '';
-                          }).tickPadding(15);
+                            .scale(xScale)
+                            .tickFormat(function (d) {
+                                return data.values[d] ? data.values[d].label : '';
+                            }).tickPadding(15);
 
                         //prepare y axis
                         var yAxis = d3.svg.axis()
-                          .scale(yScale)
-                          .orient('left')
-                          .ticks(5).tickFormat(function (d) {
-                              return d;
-                          });
+                            .scale(yScale)
+                            .orient('left')
+                            .ticks(5).tickFormat(function (d) {
+                                return d;
+                            });
 
                         if (!data.values.length) {
                             svg.append("text")
-                              .attr("x", width / 2)
-                              .attr("y", height / 2)
-                              .attr('class', 'text-no-data text-no-data--text-center')
-                              .text('No data available.');
+                                .attr("x", width / 2)
+                                .attr("y", height / 2)
+                                .attr('class', 'text-no-data text-no-data--text-center')
+                                .text('No data available.');
                         }
 
                         //draw x axis
                         var gx = svg.append('g')
-                          .attr('class', 'x axis')
-                          .attr('transform', 'translate( 0 ,' + (height - margin.bottom) + ')')
-                          .attr('fill', 'none')
-                          .call(xAxis);
+                            .attr('class', 'x axis')
+                            .attr('transform', 'translate( 0 ,' + (height - margin.bottom) + ')')
+                            .attr('fill', 'none')
+                            .call(xAxis);
 
                         // draw yAxis
                         var gy = svg.append('g')
-                          .attr('class', 'y axis')
-                          .attr('transform', 'translate(' + margin.left + ', 0)')
-                          .attr('fill', 'none')
-                          .call(yAxis);
+                            .attr('class', 'y axis')
+                            .attr('transform', 'translate(' + margin.left + ', 0)')
+                            .attr('fill', 'none')
+                            .call(yAxis);
 
                         gx.selectAll("text")
-                          .each(function () {
-                              var w = this.getBBox().width;
-                              labelWidth = labelWidth < w ? w : labelWidth;
-                          });
+                            .each(function () {
+                                var w = this.getBBox().width;
+                                labelWidth = labelWidth < w ? w : labelWidth;
+                            });
 
                         if (labelWidth > columnWidth) {
                             var r = Math.acos(columnWidth / labelWidth);
@@ -405,98 +405,112 @@
                             //var h = Math.sqrt( Math.pow(labelWidth, 2) - Math.pow(columnWidth,2));
                             //svg.attr('height', height + h);
                             gx.selectAll("text")
-                              .attr('fill', "#115577")
-                              .attr('font-size', "12px")
-                              .style("text-anchor", "end")
-                              .attr('font-family', 'Arial, sans-serif')
-                              .attr('transform', 'translate( ' + (columnWidth / 2 - 12 ) + ' , 0) rotate(' + (-labelAngle) + ')');
+                                .attr('fill', "#115577")
+                                .attr('font-size', "12px")
+                                .style("text-anchor", "end")
+                                .attr('font-family', 'Arial, sans-serif')
+                                .attr('transform', 'translate( ' + (columnWidth / 2 - 12 ) + ' , 0) rotate(' + (-labelAngle) + ')');
                         } else {
                             gx.selectAll("text")
-                              .attr('fill', "#115577")
-                              .style("text-anchor", "middle")
-                              .attr('font-family', 'Arial, sans-serif')
-                              .attr('transform', 'translate( ' + (columnWidth / 2) + ' , 0)');
+                                .attr('fill', "#115577")
+                                .style("text-anchor", "middle")
+                                .attr('font-family', 'Arial, sans-serif')
+                                .attr('transform', 'translate( ' + (columnWidth / 2) + ' , 0)');
                         }
 
                         gy.selectAll('text')
-                          .attr('fill', '#939598');
+                            .attr('fill', '#939598');
 
                         //draw horisontal grid lines
                         svg.selectAll('line.y')
-                          .data(yScale.ticks(5))
-                          .enter().append('line')
-                          .attr('class', 'y')
-                          .attr('x1', margin.left)
-                          .attr('x2', (width - margin.right))
-                          .attr('y1', yScale)
-                          .attr('y2', yScale);
+                            .data(yScale.ticks(5))
+                            .enter().append('line')
+                            .attr('class', 'y')
+                            .attr('x1', margin.left)
+                            .attr('x2', (width - margin.right))
+                            .attr('y1', yScale)
+                            .attr('y2', yScale);
 
                         var reacts = svg.selectAll('rect')
-                          .data(data.values).enter()
-                          .append('g')
-                          .on('mouseover', function (d) {
-                              tip.show(d.value);
-                          })
-                          .on('mouseout', function (d) {
-                              tip.hide(d.value);
-                          })
-                          .attr('tooltip-append-to-body', true)
-                          .attr('tooltip', function (d) {
-                              return d;
-                          });
+                            .data(data.values).enter()
+                            .append('g')
+                            .on('mouseover', function (d) {
+                                tip.show(d.value);
+                            })
+                            .on('mouseout', function (d) {
+                                tip.hide(d.value);
+                            })
+                            .attr('tooltip-append-to-body', true)
+                            .attr('tooltip', function (d) {
+                                return d;
+                            });
 
                         reacts
-                          .append('rect')
-                          .attr('x', function (d, i) {
-                              return xScale(i);
-                          })
-                          .attr('y', yScale(0))
-                          .attr('width', columnWidth)
-                          .attr('height', 0)
-                          .attr('fill', function (d, i) {
-                              return c20(i);
-                          })
-                          .transition().ease(ease).duration(duration)
-                          .attr('height', function (d) {
-                              return height - yScale(d.value) - margin.bottom;
-                          })
-                          .attr('y', function (d) {
-                              return yScale(d.value);
-                          });
+                            .append('rect')
+                            .attr('x', function (d, i) {
+                                return xScale(i);
+                            })
+                            .attr('y', yScale(0))
+                            .attr('width', columnWidth)
+                            .attr('height', 0)
+                            .attr('fill', function (d, i) {
+                                return c20(i);
+                            })
+                            .transition().ease(ease).duration(duration)
+                            .attr('height', function (d) {
+                                return height - yScale(d.value) - margin.bottom;
+                            })
+                            .attr('y', function (d) {
+                                return yScale(d.value);
+                            });
 
                         reacts.append('text')
-                          .attr('fill', '#115577')
-                          .attr('x', function (d, i) {
-                              return xScale(i) + (columnWidth / 2.5);
-                          })
-                          .attr('y', function (d) {
-                              return yScale(d.value) - 5;
-                          })
-                          .text(function (d) {
-                              return d.value ? parseFloat(d.value).toFixed(1) : 0;
-                          });
+                            .attr('fill', '#115577')
+                            .style("text-anchor", "middle")
+                            .attr('x', function (d, i) {
+                                return xScale(i) + (columnWidth / 2.5) + 2.5;
+                            })
+                            .attr('y', function (d) {
+                                return yScale(d.value) - 5;
+                            })
+                            .text(function (d) {
+                                return d.value ? parseFloat(d.value).toFixed(1) : 0;
+                            });
+
+
+                        // adding Y scale label
+                        svg.append('text')
+                            .attr('class', 'scale-y-label')
+                            .attr('font-size', "12px")
+                            .attr('fill', "#115577")
+                            .style("text-anchor", "middle")
+                            .attr('font-family', 'Arial, sans-serif')
+                            .attr("transform", "translate(15,"+(height/2)+")rotate(-90)")
+                            .text(data.scalYLabel);
+
 
                         if (showResults) {
                             reacts.append('text')
-                              .attr('fill', '#115577')
-                              .attr('x', function (d, i) {
-                                  return xScale(i) + (columnWidth / 3);
-                              })
-                              .attr('y', function () {
-                                  return height - 15;
-                              })
-                              .text(function (d) {
-                                  var dV = d.results;
-                                  return dV ? parseFloat(dV).toFixed(1) + ' Results' : 'No Results';
-                              });
+                                .attr('fill', '#115577')
+                                .attr('x', function (d, i) {
+                                    return xScale(i) + (columnWidth / 3);
+                                })
+                                .attr('y', function () {
+                                    return height - 15;
+                                })
+                                .text(function (d) {
+                                    var dV = d.results;
+                                    return dV ? parseFloat(dV).toFixed(1) + ' Results' : 'No Results';
+                                });
 
                             svg.append('text')
-                              .attr('x', width / 2 + 5)
-                              .attr('y', height - 45)
-                              .attr('fill', '#115577')
-                              .style('text-anchor', 'middle')
-                              .text('User(s) / Group(s)');
+                                .attr('x', width / 2 + 5)
+                                .attr('y', height - 45)
+                                .attr('fill', '#115577')
+                                .style('text-anchor', 'middle')
+                                .text('User(s) / Group(s)');
                         }
+
                     };
                 }
             };
