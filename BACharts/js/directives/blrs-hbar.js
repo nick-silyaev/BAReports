@@ -125,6 +125,15 @@
                             .attr('y2', height - margin.top)
                             .attr('stroke', "#ebebeb");
 
+                        if ($scope.showTitleDescr) {
+                            svg.append('text')
+                              .attr('x', width / 2 + 5)
+                              .attr('y', 20)
+                              .attr('fill', '#115577')
+                              .style('text-anchor', 'middle')
+                              .style('font-size', '24px')
+                              .text(data.name);
+                        }
 
                         function adjustYLabels(selection){
                             var labels = selection.selectAll('.tick');
