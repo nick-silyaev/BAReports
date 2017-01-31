@@ -340,6 +340,7 @@
                         var maxY = d3.max(data.values.map(function (d) {
                             return d.value;
                         }));
+
                         maxY = maxY * 1.2; // add 20% to the Y axis.
 
                         // set the height based on the calculations above
@@ -360,6 +361,9 @@
                         var xAxis = d3.svg.axis()
                             .scale(xScale)
                             .tickFormat(function (d) {
+                                if(!maxY){
+                                    return "";
+                                }
                                 return data.values[d] ? data.values[d].label : '';
                             }).tickPadding(15);
 
@@ -370,14 +374,6 @@
                             .ticks(5).tickFormat(function (d) {
                                 return d;
                             });
-
-                        if (!data.values.length) {
-                            svg.append("text")
-                                .attr("x", width / 2)
-                                .attr("y", height / 2)
-                                .attr('class', 'text-no-data text-no-data--text-center')
-                                .text('No data available.');
-                        }
 
                         //draw x axis
                         var gx = svg.append('g')
@@ -392,6 +388,26 @@
                             .attr('transform', 'translate(' + margin.left + ', 0)')
                             .attr('fill', 'none')
                             .call(yAxis);
+
+
+                        if(!maxY) {
+                            var txtNoData = svg.append("text")
+                                .attr("x", width / 2)
+                                .attr("y", height / 2)
+                                .attr('class', 'text-no-data text-no-data--text-center')
+                                .style("text-anchor", "middle")
+
+                            txtNoData.append("tspan")
+                                .text('No results found.')
+                                .attr("x",  width / 2)
+                                .attr("dy", ".6em");
+                            txtNoData.append("tspan")
+                                .text('Please change the criteria and run the report again.')
+                                .attr("x",  width / 2)
+                                .attr("dy", "1.2em");
+                            return;
+                        }
+
 
                         gx.selectAll("text")
                             .each(function () {
@@ -468,7 +484,7 @@
                             .attr('fill', '#115577')
                             .style("text-anchor", "middle")
                             .attr('x', function (d, i) {
-                                return xScale(i) + (columnWidth / 2.5) + 2.5;
+                                return xScale(i) + (columnWidth / 2) ;
                             })
                             .attr('y', function (d) {
                                 return yScale(d.value) - 5;

@@ -126,28 +126,43 @@
         {
 
             var testData = {
-                reportId: "123asd123asd123",
-                name: "Report Name",
-                description: "Report description",
-                groups: [],
-                people: [],
-                scaleYLabel: "Average Number of Attemts",
-                values: [
-                    { label: "Launched", value: 55},
-                    { label: "Failed", value: 20 },
-                    { label: "Waived", value: 45},
-                    { label: "Satisfied", value: 1 },
-                    { label: "Passed", value: 49 },
-                    { label: "Initialized", value: 201 },
-                    { label: "Completed", value: 141 },
-                    { label: "Terminated", value: 2 },
-                    { label: "Failed1", value: 15 },
-                    { label: "Waived1", value: 25},
-                    { label: "Satisfied1", value: 2 },
-                    { label: "Passed1", value: 19 }
+                "values":[
+                    {"label":"Admins", "value":0.0,"count":0},
+                    {"label":"Users", "value":0.0,"count":0},
 
-                ],
-            };
+                    ],
+                    "reportId":198,
+                    "name":"Time Spent By Slide",
+                    "description":null,
+                    "chartType":"TimeSpentPerSlideAvg",
+                    "courseId":7,
+                    "useSlideVerbs":true,
+                    "statementCount":1
+                };
+
+            // var testData = {
+            //     reportId: "123asd123asd123",
+            //     name: "Report Name",
+            //     description: "Report description",
+            //     groups: [],
+            //     people: [],
+            //     scaleYLabel: "Average Number of Attemts",
+            //     values: [
+            //         { label: "Launched", value: 55},
+            //         { label: "Failed", value: 20 },
+            //         { label: "Waived", value: 45},
+            //         { label: "Satisfied", value: 1 },
+            //         { label: "Passed", value: 49 },
+            //         { label: "Initialized", value: 201 },
+            //         { label: "Completed", value: 141 },
+            //         { label: "Terminated", value: 2 },
+            //         { label: "Failed1", value: 15 },
+            //         { label: "Waived1", value: 25},
+            //         { label: "Satisfied1", value: 2 },
+            //         { label: "Passed1", value: 19 }
+            //
+            //     ],
+            // };
             var lineTestData = {
                 reportId: "123asd123asd123",
                 name: "Report Name",
