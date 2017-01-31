@@ -8,6 +8,7 @@
                 scope: {
                     data: "=",
                     settings: "=",
+                    showTitleDescr: '=',
                     label: "@"
                 },
                 link: function ($scope, iElement) {
@@ -98,6 +99,16 @@
                                 .attr('x', 0)
                                 .attr('dy', "1.4em" )
                                 .text('available');
+                        }
+
+                        if ($scope.showTitleDescr) {
+                            svg.append('text')
+                              .attr('x', width / 2 + 5)
+                              .attr('y', 20)
+                              .attr('fill', '#115577')
+                              .style('text-anchor', 'middle')
+                              .style('font-size', '24px')
+                              .text(data.name);
                         }
 
                         // prepare chart
@@ -540,7 +551,8 @@
                 scope: {
                     data: "=",
                     settings: "=",
-                    label: "@"
+                    label: "@",
+                    showTitleDescr: '='
                 },
                 link: function ($scope, iElement) {
 
@@ -659,6 +671,16 @@
                             .attr('class', 'y axis')
                             .attr('transform', 'translate(' + margin.left + ', 0)')
                             .call(yAxis);
+
+                        if ($scope.showTitleDescr) {
+                            svg.append('text')
+                              .attr('x', width / 2 + 5)
+                              .attr('y', 20)
+                              .attr('fill', '#115577')
+                              .style('text-anchor', 'middle')
+                              .style('font-size', '24px')
+                              .text(data.name);
+                        }
 
                         // create areas
                         var draw_lines = function(data, duration) {
