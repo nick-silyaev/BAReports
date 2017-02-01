@@ -526,7 +526,6 @@
                             .attr("transform", "translate(15,"+(height/2)+")rotate(-90)")
                             .text(data.scalYLabel);
 
-
                         if (showResults) {
                             reacts.append('text')
                                 .attr('fill', '#115577')
@@ -538,7 +537,7 @@
                                 })
                                 .text(function (d) {
                                     var dV = d.results;
-                                    return dV ? parseFloat(dV).toFixed(1) + ' Results' : 'No Results';
+                                    return dV ? parseInt(dV) + ' Results' : 'No Results';
                                 });
 
                             svg.append('text')
