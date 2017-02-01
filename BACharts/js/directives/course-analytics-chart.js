@@ -536,8 +536,8 @@
                                     return height - 15;
                                 })
                                 .text(function (d) {
-                                    var dV = d.results;
-                                    return dV ? parseInt(dV) + ' Results' : 'No Results';
+                                    var dC = d.count;
+                                    return (dC && d.value) ? parseInt(dC) + ' Results' : '';
                                 });
 
                             svg.append('text')
