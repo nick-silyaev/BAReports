@@ -127,8 +127,8 @@
 
             var testData = {
                 "values":[
-                    {"label":"Admins", "value":0.0,"count":0},
-                    {"label":"Users", "value":0.0,"count":0},
+                    {"label":"Admins", "value":1.0,"count":1},
+                    {"label":"Users", "value":2.0,"count":1}
 
                     ],
                     "reportId":198,

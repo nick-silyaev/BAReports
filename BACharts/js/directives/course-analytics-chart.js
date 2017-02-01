@@ -275,6 +275,7 @@
                     data: "=",
                     settings: "=",
                     showResults: '=',
+                    showTitleDescr: '=',
                     label: "@"
                 },
                 link: function ($scope, iElement) {
@@ -385,6 +386,16 @@
                             .ticks(5).tickFormat(function (d) {
                                 return d;
                             });
+
+                        if ($scope.showTitleDescr) {
+                            svg.append('text')
+                              .attr('x', width / 2 + 5)
+                              .attr('y', 20)
+                              .attr('fill', '#115577')
+                              .style('text-anchor', 'middle')
+                              .style('font-size', '24px')
+                              .text(data.name);
+                        }
 
                         //draw x axis
                         var gx = svg.append('g')
