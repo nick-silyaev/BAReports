@@ -60,7 +60,9 @@
                         var margin = settings.margin || { top: 50, right: 0, bottom: 50, left: 0 };
                         var duration = settings.duration || 1500;
                         var ease = settings.ease || 'cubic-in-out';
-                        var labels = data.values.map(function(d){ return d.label });
+                        var labels = data.values.map(function (d) {
+                            return d.label
+                        });
                         var hRatio = settings.heightRatio || 1;
 
                         //containing element width
@@ -75,7 +77,9 @@
                         svg.attr('height', height);
 
                         // prepare data
-                        var pieData = data.values.map(function(d){ return d.value });
+                        var pieData = data.values.map(function (d) {
+                            return d.value
+                        });
 
                         // prepare chart attributes
                         var radius = Math.min(innerW, innerH) / 2;
@@ -97,18 +101,18 @@
                                 .text('No data')
                                 .append('svg:tspan')
                                 .attr('x', 0)
-                                .attr('dy', "1.4em" )
+                                .attr('dy', "1.4em")
                                 .text('available');
                         }
 
                         if ($scope.showTitleDescr) {
                             svg.append('text')
-                              .attr('x', width / 2 + 5)
-                              .attr('y', 20)
-                              .attr('fill', '#115577')
-                              .style('text-anchor', 'middle')
-                              .style('font-size', '24px')
-                              .text(data.name);
+                                .attr('x', width / 2 + 5)
+                                .attr('y', 20)
+                                .attr('fill', '#115577')
+                                .style('text-anchor', 'middle')
+                                .style('font-size', '24px')
+                                .text(data.name);
                         }
 
                         // prepare chart
@@ -118,14 +122,14 @@
                         var pie = d3.layout.pie()
                             .sort(null);
                         var slices = svg.append('g')
-                            .attr('transform', 'translate(' +  centerX + ',' + centerY + ')');
+                            .attr('transform', 'translate(' + centerX + ',' + centerY + ')');
                         var path = slices.selectAll('path')
                             .data(pie(pieData))
                             .enter().append('g');
 
                         //draw chart
-                        path.append('path').attr('class', function(d, i) {
-                            return "slice" + " " + labels[i].toLowerCase().replace(/\s+/g, '') //Remove spaces from label name string to make one valid class name
+                        path.append('path').attr('class', function (d, i) {
+                            return "slice" + " " + labels[i].toLowerCase().replace(/\s+/g, ''); //Remove spaces from label name string to make one valid class name
                         })
                             .attr('fill', function (d, i) {
                                 return c20(i);
@@ -150,7 +154,7 @@
 
                         var legend = svg
                             .append('g')
-                            .attr('transform', 'translate(' + margin.left  + ',' + margin.top + ')')
+                            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
                             .selectAll('g')
                             .data(labels)
                             .enter()
@@ -159,10 +163,10 @@
                             .attr('transform', function (d, i) {
                                 var height = legendH / 2;
                                 var x = 0;
-                                var y = i * height + legendH/4;
+                                var y = i * height + legendH / 4;
                                 return 'translate(' + x + ',' + y + ')';
                             })
-                            .on("mouseover", function(d, i){
+                            .on("mouseover", function (d, i) {
                                 svg.selectAll('.slice')
                                     .transition().duration(300)
                                     .attr('fill-opacity', 0.2);
@@ -176,19 +180,19 @@
                                     .transition().duration(300)
                                     .attr('fill-opacity', 1);
 
-                                svg.select('.pie-label'+i)
+                                svg.select('.pie-label' + i)
                                     .transition().duration(300)
                                     .attr('fill-opacity', 1)
 
                             })
-                            .on("mouseout", function(d, i){
+                            .on("mouseout", function (d, i) {
                                 svg.selectAll('.slice')
                                     .transition().duration(200)
                                     .attr('fill-opacity', 1);
 
                                 svg.selectAll('.pie-label')
                                     .transition().duration(200)
-                                    .attr('fill-opacity', function(d){
+                                    .attr('fill-opacity', function (d) {
                                         return getAngle(d) < visibleAngle ? 0 : 1;
                                     });
 
@@ -214,37 +218,37 @@
 
                         // add labels
 
-                        var getAngle = function(d){
+                        var getAngle = function (d) {
                             var startAngle = arc.startAngle()(d);
                             var endAngle = arc.endAngle()(d);
-                            var degree = (endAngle - startAngle)*180/Math.PI;
+                            var degree = (endAngle - startAngle) * 180 / Math.PI;
                             return degree;
-                        }
+                        };
 
                         var total = 0;
                         var slice_labels = path.append('text')
-                            .attr('class', function(d, i){
-                                return 'pie-label pie-label'+i;
+                            .attr('class', function (d, i) {
+                                return 'pie-label pie-label' + i;
                             })
                             .attr('font-family', 'Arial, sans-serif')
                             .attr('font-size', '12px')
                             .attr({
                                 'text-anchor': 'middle',
                                 'fill': '#333',
-                                'font-weight':'bold'
+                                'font-weight': 'bold'
                             })
-                            .attr('transform', function(d, i) {
-                                if(getAngle(d) < visibleAngle){
+                            .attr('transform', function (d, i) {
+                                if (getAngle(d) < visibleAngle) {
                                     var centroid = arc.centroid(d);
                                     var midAngle = Math.atan2(centroid[1], centroid[0]);
                                     //
-                                    var labelX  = Math.cos(midAngle) * labelRadius;
+                                    var labelX = Math.cos(midAngle) * labelRadius;
                                     //var sign = (x > 0) ? 1 : -1;
                                     //var labelX = x + (5 * sign);
                                     //
                                     var labelY = Math.sin(midAngle) * labelRadius;
-                                    return 'translate(' +labelX+ ',' +labelY+ ')';
-                                }else{
+                                    return 'translate(' + labelX + ',' + labelY + ')';
+                                } else {
                                     return 'translate(' + arc.centroid(d) + ')';
                                 }
 
@@ -256,7 +260,7 @@
                         slice_labels.attr('fill-opacity', 0)
                             .transition().delay(duration)
                             .duration(300)
-                            .attr('fill-opacity', function(d){
+                            .attr('fill-opacity', function (d) {
                                 return getAngle(d) < visibleAngle ? 0 : 1;
                             });
 
@@ -279,14 +283,14 @@
                     label: "@"
                 },
                 link: function ($scope, iElement) {
-                    $scope.filterData = function(values) {
+                    $scope.filterData = function (values) {
                         var $this = this;
-                        _.remove(values, function(item) {
+                        _.remove(values, function (item) {
                             return !$this.validationData(item);
                         });
                         return values;
                     };
-                    $scope.validationData = function(item) {
+                    $scope.validationData = function (item) {
                         return _.isString(item.label) && _.isNumber(item.value);
                     };
 
@@ -373,7 +377,7 @@
                         var xAxis = d3.svg.axis()
                             .scale(xScale)
                             .tickFormat(function (d) {
-                                if(!maxY){
+                                if (!maxY) {
                                     return "";
                                 }
                                 return data.values[d] ? data.values[d].label : '';
@@ -389,12 +393,12 @@
 
                         if ($scope.showTitleDescr) {
                             svg.append('text')
-                              .attr('x', width / 2 + 5)
-                              .attr('y', 20)
-                              .attr('fill', '#115577')
-                              .style('text-anchor', 'middle')
-                              .style('font-size', '24px')
-                              .text(data.name);
+                                .attr('x', width / 2 + 5)
+                                .attr('y', 20)
+                                .attr('fill', '#115577')
+                                .style('text-anchor', 'middle')
+                                .style('font-size', '24px')
+                                .text(data.name);
                         }
 
                         //draw x axis
@@ -412,20 +416,20 @@
                             .call(yAxis);
 
 
-                        if(!maxY) {
+                        if (!maxY) {
                             var txtNoData = svg.append("text")
                                 .attr("x", width / 2)
                                 .attr("y", height / 2)
                                 .attr('class', 'text-no-data text-no-data--text-center')
-                                .style("text-anchor", "middle")
+                                .style("text-anchor", "middle");
 
                             txtNoData.append("tspan")
                                 .text('No results found.')
-                                .attr("x",  width / 2)
+                                .attr("x", width / 2)
                                 .attr("dy", ".6em");
                             txtNoData.append("tspan")
                                 .text('Please change the criteria and run the report again.')
-                                .attr("x",  width / 2)
+                                .attr("x", width / 2)
                                 .attr("dy", "1.2em");
                             return;
                         }
@@ -506,7 +510,7 @@
                             .attr('fill', '#115577')
                             .style("text-anchor", "middle")
                             .attr('x', function (d, i) {
-                                return xScale(i) + (columnWidth / 2) ;
+                                return xScale(i) + (columnWidth / 2);
                             })
                             .attr('y', function (d) {
                                 return yScale(d.value) - 5;
@@ -523,7 +527,7 @@
                             .attr('fill', "#115577")
                             .style("text-anchor", "middle")
                             .attr('font-family', 'Arial, sans-serif')
-                            .attr("transform", "translate(15,"+(height/2)+")rotate(-90)")
+                            .attr("transform", "translate(15," + (height / 2) + ")rotate(-90)")
                             .text(data.scalYLabel);
 
                         if (showResults) {
@@ -566,7 +570,7 @@
                 },
                 link: function ($scope, iElement) {
 
-                    $scope.data.disabled = $scope.data.labels.map(function(d){
+                    $scope.data.disabled = $scope.data.labels.map(function (d) {
                         return false;
                     });
 
@@ -606,7 +610,7 @@
 
 
                         // get settings or set defaults
-                        var margin = settings.margin || {top: 20, right: 30, bottom: 30, left: 50};
+                        var margin = settings.margin || { top: 20, right: 30, bottom: 30, left: 50 };
                         var heightRatio = settings.heightRatio || 0.5;
                         var duration = settings.duration || 1000;
                         var delay = settings.delay || 1000;
@@ -619,24 +623,24 @@
                         var dateFormat = d3.time.format('%Y-%m-%d');
 
                         // get time frame
-                        var startDate = d3.min(data.values.map(function(d){
+                        var startDate = d3.min(data.values.map(function (d) {
                             return dateFormat.parse(d.date);
                         }));
 
-                        var endDate = d3.max(data.values.map(function(d){
+                        var endDate = d3.max(data.values.map(function (d) {
                             return dateFormat.parse(d.date);
                         }));
 
-                        var maxY = function(){
-                            var max = d3.max(data.values.map(function(d, i) {
-                                return d3.max(d.scores.map(function(t, n){
-                                    if(!$scope.data.disabled[n]){
+                        var maxY = function () {
+                            var max = d3.max(data.values.map(function (d, i) {
+                                return d3.max(d.scores.map(function (t, n) {
+                                    if (!$scope.data.disabled[n]) {
                                         return t;
                                     }
                                 }));
                             }));
-                            return max * 1.2 // addin 20% to Y axis
-                        }
+                            return max * 1.2; // addin 20% to Y axis
+                        };
 
 
                         //containing element width
@@ -668,13 +672,11 @@
                             });
 
 
-
-
                         //draw x axis
                         svg.append('g')
                             .attr('class', 'x axis')
                             .attr('transform', 'translate(0,' + (height - margin.bottom) + ')')
-                            .call(xAxis)
+                            .call(xAxis);
 
                         // draw yAxis
                         svg.append('g')
@@ -684,16 +686,19 @@
 
                         if ($scope.showTitleDescr) {
                             svg.append('text')
-                              .attr('x', width / 2 + 5)
-                              .attr('y', 20)
-                              .attr('fill', '#115577')
-                              .style('text-anchor', 'middle')
-                              .style('font-size', '24px')
-                              .text(data.name);
+                                .attr('x', width / 2 + 5)
+                                .attr('y', 20)
+                                .attr('fill', '#115577')
+                                .style('text-anchor', 'middle')
+                                .style('font-size', '24px')
+                                .text(data.name);
                         }
 
                         // create areas
-                        var draw_lines = function(data, duration) {
+                        var draw_lines = function (data, duration) {
+                            //var is_doubled = data.values[0];
+                            var hasScored2 = data.values && data.values[0] ? data.values[0].scores2 : false;
+
                             svg.selectAll(".line").remove();
                             svg.selectAll('line.y').remove();
                             //draw horisontal grid lines
@@ -709,7 +714,8 @@
                                 .attr('y2', yScale);
 
                             for (var i = 0; i < data.labels.length; i++) {
-                                if(data.disabled[i])continue;
+                                if (data.disabled[i])continue;
+
                                 $scope['cat' + i] = d3.svg.line()
                                     .interpolate('linear')
                                     .x(function (d) {
@@ -718,19 +724,40 @@
                                     .y(function (d) {
                                         return yScale(d.scores[i]);
                                     });
+
+                                if (hasScored2) {
+                                    $scope['cat' + i + '_2'] = d3.svg.line()
+                                        .interpolate('linear')
+                                        .x(function (d) {
+                                            return xScale(dateFormat.parse(d.date));
+                                        })
+                                        .y(function (d) {
+                                            return yScale(d.scores2[i]);
+                                        });
+                                }
                             }
 
                             for (var i = 0; i < data.labels.length; i++) {
-                                if(data.disabled[i]){
+                                if (data.disabled[i]) {
                                     c20(i);
                                     continue;
                                 }
+
                                 $scope['path' + i] = svg.append('path')
                                     .attr('d', $scope['cat' + i](data.values))
                                     .attr('class', 'line cat' + i)
                                     .attr('fill', 'none')
                                     .attr('stroke', c20(i))
                                     .attr('stroke-width', 3);
+
+                                if (hasScored2) {
+                                    $scope['path' + i + '_2'] = svg.append('path')
+                                        .attr('d', $scope['cat' + i + '_2'](data.values))
+                                        .attr('class', 'line cat' + i)
+                                        .attr('fill', 'none')
+                                        .attr('stroke', c20(i))
+                                        .attr('stroke-width', 3);
+                                }
 
                                 //animate students path
                                 var l = $scope['path' + i].node().getTotalLength();
@@ -740,37 +767,46 @@
                                     .duration(duration)
                                     .ease(ease)
                                     .attr('stroke-dashoffset', 0);
+
+                                if (hasScored2) {
+                                    var l2 = $scope['path' + i + '_2'].node().getTotalLength();
+                                    $scope['path' + i + '_2'].attr('stroke-dasharray', l2 + ' ' + l2)
+                                        .attr('stroke-dashoffset', l2)
+                                        .transition()
+                                        .duration(duration)
+                                        .ease(ease)
+                                        .attr('stroke-dashoffset', 0);
+                                }
                             }
+                        };
 
-
-                        }
                         draw_lines($scope.data, duration);
                         /*
                          *   rotate labels
                          */
                         var labelWidth = 0;
                         var labelAngle = 0;
-                        var tickSpace = (width - margin.left - margin.right)/svg.select(".x").selectAll("text")[0].length;
+                        var tickSpace = (width - margin.left - margin.right) / svg.select(".x").selectAll("text")[0].length;
 
                         svg.select(".x").selectAll("text")
-                            .each(function(d, i){
+                            .each(function (d, i) {
                                 var w = this.getBBox().width;
                                 labelWidth = labelWidth < w ? w : labelWidth;
                             });
 
 
-                        if(labelWidth > tickSpace){
-                            var r = Math.acos(tickSpace/labelWidth);
-                            labelAngle = r * (180/Math.PI);
-                            var h = Math.sqrt( Math.pow(labelWidth, 2) - Math.pow(tickSpace,2));
+                        if (labelWidth > tickSpace) {
+                            var r = Math.acos(tickSpace / labelWidth);
+                            labelAngle = r * (180 / Math.PI);
+                            var h = Math.sqrt(Math.pow(labelWidth, 2) - Math.pow(tickSpace, 2));
                             //svg.attr('height', height + h);
                             svg.select(".x").selectAll("text")
                                 .attr('fill', "#939598")
                                 .attr('font-size', "12px")
                                 .attr('font-family', 'Arial, sans-serif')
                                 .style("text-anchor", "end")
-                                .attr('transform', 'translate( -12 , 0) rotate('+ (-labelAngle)+')' );
-                        }else{
+                                .attr('transform', 'translate( -12 , 0) rotate(' + (-labelAngle) + ')');
+                        } else {
                             svg.select(".x").selectAll("text")
                                 .attr('fill', "#939598")
                                 .style("text-anchor", "middle")
@@ -791,30 +827,30 @@
 
                         var legend = svg
                             .append('g')
-                            .attr('transform', 'translate(' + margin.left  + ',' + height + ')')
+                            .attr('transform', 'translate(' + margin.left + ',' + height + ')')
                             .attr('class', 'legend-box')
                             .selectAll('g')
                             .data(labels)
                             .enter()
                             .append('g')
                             .attr('class', 'legend')
-                            .each(function(d, i){
+                            .each(function (d, i) {
                                 d3.select(this).append('circle')
                                     .attr("cx", 0)
                                     .attr("cy", -5)
                                     .attr("r", 5)
                                     .style('fill', c20(i))
-                                    .attr('cursor', 'pointer')
+                                    .attr('cursor', 'pointer');
                                 d3.select(this).append('text')
                                     .attr('class', 'legend-item')
                                     .style('font-size', 12)
                                     .style('fill', '#939598 ')
                                     .text(labels[i])
                                     .attr('transform', 'translate( 10 , 0)')
-                                    .attr('cursor', 'pointer')
+                                    .attr('cursor', 'pointer');
 
                                 d3.select(this).attr('transform', function () {
-                                    if(labelX + this.getBBox().width > labelW){
+                                    if (labelX + this.getBBox().width > labelW) {
                                         labelX = 0;
                                         labelY += 20;
                                     }
@@ -823,19 +859,19 @@
                                     labelX += this.getBBox().width + 15; // width of the text element + 15px for space
                                     return 'translate(' + x + ',' + y + ')';
                                 });
-                                if($scope.data.disabled[i]){
+                                if ($scope.data.disabled[i]) {
                                     d3.select(this).attr('opacity', 0.3);
-                                }else{
+                                } else {
                                     d3.select(this).attr('opacity', 1);
                                 }
 
                             })
-                            .on("click", function(d, i){
+                            .on("click", function (d, i) {
 
                                 $scope.data.disabled[i] = !$scope.data.disabled[i];
-                                if($scope.data.disabled[i]){
+                                if ($scope.data.disabled[i]) {
                                     d3.select(this).attr('opacity', 0.4);
-                                }else{
+                                } else {
                                     d3.select(this).attr('opacity', 1);
                                 }
                                 yScale.domain([0, maxY()]);
@@ -862,7 +898,7 @@
         }]);
 
     angular.module('Analytics.directives')
-        .directive('analyticsTable', [ function () {
+        .directive('analyticsTable', [function () {
             return {
                 restrict: 'EA',
                 scope: {
@@ -875,7 +911,7 @@
                     $scope.labels.unshift("Date");
 
                     $scope.rows = [];
-                    for(var i = 0; i < $scope.data.values.length; i++ ){
+                    for (var i = 0; i < $scope.data.values.length; i++) {
                         var row = $scope.data.values[i].scores
                         row.unshift($scope.data.values[i].date);
                         $scope.rows.push(row);
