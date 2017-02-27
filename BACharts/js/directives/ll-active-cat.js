@@ -26,6 +26,7 @@
           var svg = d3.select(iElement[0])
             .append('svg')
             .attr('class', 'analytics-active-cat')
+              .attr('id', 'analytics-active-cat')
             .attr('height', d3.select(iElement[0])[0][0].offsetWidth / 2)
             .attr('width', '100%');
 

@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/analytics.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.js"></script>
+  <script src="js/svg-to-png.js"></script>
 </head>
 <body ng-app="Analytics">
 <div class="row">
@@ -16,6 +18,7 @@
 <div class="row">
   <div class="col-md-12 text-center">
     <h2> Learning Locker</h2>
+    <a href="#" id="exportButton">Export</a>
   </div>
 </div>
 <div class="row">
@@ -102,6 +105,9 @@
   <div class="col-md-8 col-md-offset-2"><hr></div>
 </div>
 
+<canvas id="canvasTest"></canvas>
+
+
 <script src="bower_components/lodash/dist/lodash.min.js"></script>
 <script src="js/script.js"></script>
 
@@ -149,5 +155,51 @@
 <script src="js/directives/blrs-hbar.js"></script>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
+<script type="text/javascript">//<![CDATA[
+$(window).load(function(){
+
+//    var canvas = document.getElementById('canvasTest'),
+//        context = canvas.getContext('2d');
+//    var svg = $(".analytics-active-cat")[0];
+//    var svg = $(".analytics-active-cat");
+    $("#exportButton").click(function(){
+        var html = d3.select(".analytics-distributions")
+            .attr("version", 1.1)
+            .attr("xmlns", "http://www.w3.org/2000/svg")
+            .node().parentNode.innerHTML;
+
+        //console.log(html);
+        var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
+        var img = '<img src="'+imgsrc+'">';
+
+
+
+        var canvas = document.createElement('canvas');
+        canvas.width=640;
+        canvas.height=480;
+        var context = canvas.getContext('2d');
+
+        var image = new Image();
+        image.src = imgsrc;
+        image.onload = function() {
+            context.drawImage(image, 0, 0);
+
+            var canvasdata = canvas.toDataURL("image/png");
+
+            var pngimg = '<img src="'+canvasdata+'">';
+            d3.select("#pngdataurl").html(pngimg);
+
+            var a = document.createElement("a");
+            a.download = "sample.png";
+            a.href = canvasdata;
+            a.click();
+        };
+
+    });
+
+});//]]>
+
+</script>
 </body>
 </html>
