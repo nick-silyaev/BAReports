@@ -390,3 +390,137 @@ var blrsHbarData = {
 
     ]
 };
+
+var stackedBarData = {
+    "values": [
+        {
+            "label": 1487548800000,
+            "value": [
+                {
+                    "label": "completed",
+                    "value": 9
+                },
+                {
+                    "label": "enrolled",
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "label": 1487635200000,
+            "value": [
+                {
+                    "label": "completed",
+                    "value": 7
+                },
+                {
+                    "label": "enrolled",
+                    "value": 3
+                }
+            ]
+        },
+        {
+            "label": 1487721600000,
+            "value": [
+                {
+                    "label": "completed",
+                    "value": 4
+                },
+                {
+                    "label": "enrolled",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "label": 1487894400000,
+            "value": [
+                {
+                    "label": "completed",
+                    "value": 1
+                },
+                {
+                    "label": "enrolled",
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "label": 1487998600001,
+            "value": [
+                {
+                    "label": "completed",
+                    "value": 1
+                },
+                {
+                    "label": "enrolled",
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "label": 1489999900002,
+            "value": [
+                {
+                    "label": "completed",
+                    "value": 5
+                },
+                {
+                    "label": "enrolled",
+                    "value": 1
+                },
+                {
+                    "label": "done",
+                    "value": 1
+                }
+
+            ]
+        }
+        ,
+        {
+            "label": 1499999900002,
+            "value": [
+                {
+                    "label": "completed",
+                    "value": 5
+                },
+                {
+                    "label": "enrolled",
+                    "value": 3
+                },
+                {
+                    "label": "done",
+                    "value": 10
+                }
+                ,
+                {
+                    "label": "entered",
+                    "value": 2
+                }
+
+            ]
+        }
+    ],
+    "reportId": null,
+    "name": null,
+    "description": null,
+    "type": "ActivityStreamChart",
+    "total": 6,
+    "verbs": [
+        "completed",
+        "enrolled"
+    ],
+    "activities": [
+        "completed",
+        "enrolled"
+    ],
+    "useSlideVerbs": true,
+    "since": "2017-02-20 11:40:00",
+    "until": "2017-02-26 12:45:00",
+    "chartType": "StackedBar",
+    "dateGroupType": "Day",
+    "groupType": "TOTAL",
+    "statementCount": 28
+};
+
+var stackedBarSettings = {};
