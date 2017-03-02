@@ -71,15 +71,16 @@
                         // add or remove data keys to display in title
                         var showInTitle = ["name", "description", "since", "until", "dateGroupType", "groupType", "statementCount"];
                         var titleInterval = 18, // interval between title lines
-                            titleFontSize = 14
+                            titleFontSize = 14,
+                            t = 0;
 
                         // create group fpr title
                         var title = svg.append('g')
                             .attr("class", "svg-title")
                             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                        showInTitle.forEach( function(key, i){
-                            if(data[key]){
+                        showInTitle.forEach( function(key){
+                            if(data.hasOwnProperty(key) && data[key]){
                                 //split keys into words and lowercase it
                                 var keyName = key.split(/(?=[A-Z])/).join(" ").toLowerCase();
                                 // capitalize the string
@@ -92,9 +93,10 @@
                                     .attr('fill', "#115577")
                                     .style("text-anchor", "left")
                                     .attr('font-family', 'Arial, sans-serif')
-                                    .attr("transform", "translate( 0 ," + ( i *  titleInterval ) + ")")
+                                    .attr("transform", "translate( 0 ," + ( t *  titleInterval ) + ")")
                                     .text(keyName + ": " + data[key]);
                                 margin.top += titleInterval;
+                                t++
                             }
                         });
 
