@@ -485,11 +485,11 @@ var stackedBarData = {
                     "value": 5
                 },
                 {
-                    "label": "enrolled",
+                    "label": "checked",
                     "value": 3
                 },
                 {
-                    "label": "done",
+                    "label": "answered",
                     "value": 10
                 }
                 ,

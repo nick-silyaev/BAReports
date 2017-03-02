@@ -59,7 +59,7 @@
                         svg.selectAll('*').remove();
 
                         // get settings or set defaults
-                        var margin = settings.margin || { top: 20, right: 50, bottom: 80, left: 50 };
+                        var margin = settings.margin || { top: 20, right: 120, bottom: 80, left: 50 };
                         var heightRatio = settings.heightRatio || 0.6;
                         var colors = d3.scale.category20();
                         var duration = settings.duration || 500;
@@ -165,7 +165,17 @@
                             .attr('font-size', "12px")
                             .attr('font-family', 'Arial, sans-serif');
 
-                        //draw horisontal grid lines
+                        // add Y axis label
+                        svg.append('text')
+                            .attr('class', 'scale-y-label')
+                            .attr('font-size', "12px")
+                            .attr('fill', "#115577")
+                            .style("text-anchor", "middle")
+                            .attr('font-family', 'Arial, sans-serif')
+                            .attr("transform", "translate(15," + (innerHeight / 2 + margin.top) + ")rotate(-90)")
+                            .text("Number of statements");
+
+                        //draw horizontal grid lines
                         svg.selectAll('line.y')
                             .data(yScale.ticks(5))
                             .enter().append('line')
@@ -176,8 +186,9 @@
                             .attr('y1', yScale)
                             .attr('y2', yScale);
 
-                        var verbs = [];
 
+                        // get all possible verbs
+                        var verbs = [];
                         data.values.forEach(function(d){
                             d.value.forEach(function(t){
                                 if(verbs.indexOf(t.label) < 0 ){
@@ -186,8 +197,8 @@
                             })
                         });
 
+                        // organize data for stack
                         var layers = [];
-
                         verbs.forEach(function(verb, i) {
                             layers.push([]);
                             data.values.forEach(function(d, n) {
@@ -204,9 +215,9 @@
                             });
                         });
 
-                        console.log(layers);
                         var stack = d3.layout.stack();
 
+                        // draw staced bars
                         var groups = svg.selectAll(".layer")
                             .data(stack(layers))
                             .enter()
@@ -227,7 +238,6 @@
                                 tip.hide();
                             });
 
-
                         bars.append("rect")
                             .attr("x", function(d){
                                 return margin.left + 5  + d.x * columnWidth ;
@@ -245,6 +255,34 @@
                                 return d.y > 0 ? innerHeight / maxY * d.y : 0;
                             });
 
+                        // draw legend
+
+
+                        var lX = width - margin.right + 20;
+                        var lY = margin.top + 10;
+                        var lInterval = 15;
+
+                        var legend = svg.append('g')
+                            .attr("class", "svg-legend")
+                            .attr("transform", "translate(" + lX + "," + lY + ")");
+
+                        verbs.forEach(function(verb, i) {
+                            legend.append('rect')
+                                .attr('width', 15)
+                                .attr('height', 10)
+                                .style('fill', colors(i))
+                                .attr("transform", "translate(0," + ( i * lInterval - 8 ) + ")");
+
+                            legend.append('text')
+                                .attr('class', 'scale-y-label')
+                                .attr('font-size', "12px")
+                                .attr('fill', "#115577")
+                                .style("text-anchor", "left")
+                                .attr('font-family', 'Arial, sans-serif')
+                                .attr("transform", "translate(20," + ( i * lInterval ) + ")")
+                                .text(verb);
+
+                        });
 
                     };
                 }
