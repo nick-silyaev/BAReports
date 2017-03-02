@@ -65,6 +65,45 @@
                         var duration = settings.duration || 500;
                         //var ease = settings.ease || 'cubic-in-out';
 
+                        // ===============================================
+                        // chart title
+                        //
+                        // add or remove data keys to display in title
+                        var showInTitle = ["name", "description", "since", "until", "dateGroupType", "groupType", "statementCount"];
+                        var titleInterval = 18, // interval between title lines
+                            titleFontSize = 14
+
+                        // create group fpr title
+                        var title = svg.append('g')
+                            .attr("class", "svg-title")
+                            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                        showInTitle.forEach( function(key, i){
+                            if(data[key]){
+                                //split keys into words and lowercase it
+                                var keyName = key.split(/(?=[A-Z])/).join(" ").toLowerCase();
+                                // capitalize the string
+                                keyName = keyName.charAt(0).toUpperCase() + keyName.slice(1);
+
+                                // draw text
+                                title.append('text')
+                                    .attr('class', 'svg-title-text')
+                                    .attr('font-size', titleFontSize+"px")
+                                    .attr('fill', "#115577")
+                                    .style("text-anchor", "left")
+                                    .attr('font-family', 'Arial, sans-serif')
+                                    .attr("transform", "translate( 0 ," + ( i *  titleInterval ) + ")")
+                                    .text(keyName + ": " + data[key]);
+                                margin.top += titleInterval;
+                            }
+                        });
+
+                        // add another interval to avoid chart overlapping the title.
+                        margin.top += titleInterval;
+                        //
+                        // end of chart title
+                        //=================================================
+
                         //containing element width
                         var width = d3.select(iElement[0])[0][0].offsetWidth;
                         var height = width * heightRatio;
@@ -85,6 +124,8 @@
 
                         // set the height based on the calculations above
                         svg.attr('height', height);
+
+
 
                         // x axis - parse timestamp to date if label is a timestamp
                         var xData = data.values.map(function (d) {

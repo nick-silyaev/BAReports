@@ -503,7 +503,7 @@ var stackedBarData = {
     ],
     "reportId": null,
     "name": null,
-    "description": null,
+    "description": "Report description",
     "type": "ActivityStreamChart",
     "total": 6,
     "verbs": [
