@@ -696,9 +696,6 @@
 
                         // create areas
                         var draw_lines = function (data, duration) {
-                            //var is_doubled = data.values[0];
-                            var hasScored2 = data.values && data.values[0] ? data.values[0].scores2 : false;
-
                             svg.selectAll(".line").remove();
                             svg.selectAll('line.y').remove();
                             //draw horisontal grid lines
@@ -724,17 +721,6 @@
                                     .y(function (d) {
                                         return yScale(d.scores[i]);
                                     });
-
-                                if (hasScored2) {
-                                    $scope['cat' + i + '_2'] = d3.svg.line()
-                                        .interpolate('linear')
-                                        .x(function (d) {
-                                            return xScale(dateFormat.parse(d.date));
-                                        })
-                                        .y(function (d) {
-                                            return yScale(d.scores2[i]);
-                                        });
-                                }
                             }
 
                             for (var i = 0; i < data.labels.length; i++) {
@@ -750,15 +736,6 @@
                                     .attr('stroke', c20(i))
                                     .attr('stroke-width', 3);
 
-                                if (hasScored2) {
-                                    $scope['path' + i + '_2'] = svg.append('path')
-                                        .attr('d', $scope['cat' + i + '_2'](data.values))
-                                        .attr('class', 'line cat' + i)
-                                        .attr('fill', 'none')
-                                        .attr('stroke', c20(i))
-                                        .attr('stroke-width', 3);
-                                }
-
                                 //animate students path
                                 var l = $scope['path' + i].node().getTotalLength();
                                 $scope['path' + i].attr('stroke-dasharray', l + ' ' + l)
@@ -767,16 +744,6 @@
                                     .duration(duration)
                                     .ease(ease)
                                     .attr('stroke-dashoffset', 0);
-
-                                if (hasScored2) {
-                                    var l2 = $scope['path' + i + '_2'].node().getTotalLength();
-                                    $scope['path' + i + '_2'].attr('stroke-dasharray', l2 + ' ' + l2)
-                                        .attr('stroke-dashoffset', l2)
-                                        .transition()
-                                        .duration(duration)
-                                        .ease(ease)
-                                        .attr('stroke-dashoffset', 0);
-                                }
                             }
                         };
 
