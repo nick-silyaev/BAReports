@@ -81,10 +81,13 @@
 
                         showInTitle.forEach( function(key){
                             if(data.hasOwnProperty(key) && data[key]){
-                                //split keys into words and lowercase it
-                                var keyName = key.split(/(?=[A-Z])/).join(" ").toLowerCase();
-                                // capitalize the string
-                                keyName = keyName.charAt(0).toUpperCase() + keyName.slice(1);
+                                var keyName = key.split(/(?=[A-Z])/);
+                                // capitalize the string parts
+                                for (var k = 0; k < keyName.length; k++) {
+                                    keyName[k] = keyName[k].charAt(0).toUpperCase() + keyName[k].slice(1);
+                                }
+
+                                keyName = keyName.join(' ');
 
                                 // draw text
                                 title.append('text')
