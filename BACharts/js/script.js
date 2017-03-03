@@ -394,7 +394,7 @@ var blrsHbarData = {
 var stackedBarData = {
     "values": [
         {
-            "label": 1487548800000,
+            "label": 'Jan 15',
             "value": [
                 {
                     "label": "completed",
@@ -407,7 +407,7 @@ var stackedBarData = {
             ]
         },
         {
-            "label": 1487635200000,
+            "label": 'Jan 16',
             "value": [
                 {
                     "label": "completed",
@@ -420,7 +420,7 @@ var stackedBarData = {
             ]
         },
         {
-            "label": 1487721600000,
+            "label": 'Jan 17',
             "value": [
                 {
                     "label": "completed",
@@ -433,7 +433,7 @@ var stackedBarData = {
             ]
         },
         {
-            "label": 1487894400000,
+            "label": 'Jan 18',
             "value": [
                 {
                     "label": "completed",
@@ -446,7 +446,7 @@ var stackedBarData = {
             ]
         },
         {
-            "label": 1487998600001,
+            "label": 'Jan 19',
             "value": [
                 {
                     "label": "completed",
@@ -459,7 +459,7 @@ var stackedBarData = {
             ]
         },
         {
-            "label": 1489999900002,
+            "label": 'Jan 20',
             "value": [
                 {
                     "label": "completed",
@@ -478,7 +478,7 @@ var stackedBarData = {
         }
         ,
         {
-            "label": 1499999900002,
+            "label": 'Jan 21',
             "value": [
                 {
                     "label": "completed",

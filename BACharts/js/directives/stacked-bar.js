@@ -122,7 +122,7 @@
                             }));
                         }));
 
-                        var dateFormat = d3.time.format("%m-%d-%Y");
+                        //var dateFormat = d3.time.format("%m-%d-%Y");
                         var labelWidth = 0;
                         var labelAngle = 0;
 
@@ -134,10 +134,10 @@
 
                         // x axis - parse timestamp to date if label is a timestamp
                         var xData = data.values.map(function (d) {
-                            var date = new Date(d.label);
-                            if(date.getTime() > 0 ){
-                                return dateFormat(date);
-                            }
+                            //var date = new Date(d.label);
+                            //if(date.getTime() > 0 ){
+                            //    return dateFormat(date);
+                            //}
                             return d.label;
                         });
                         // add fake value to the data to extend xAxis
