@@ -391,136 +391,322 @@ var blrsHbarData = {
     ]
 };
 
+// var stackedBarData = {
+//     "values": [
+//         {
+//             "label": 'Jan 15',
+//             "value": [
+//                 {
+//                     "label": "completed",
+//                     "value": 9
+//                 },
+//                 {
+//                     "label": "enrolled",
+//                     "value": 0
+//                 }
+//             ]
+//         },
+//         {
+//             "label": 'Jan 16',
+//             "value": [
+//                 {
+//                     "label": "completed",
+//                     "value": 7
+//                 },
+//                 {
+//                     "label": "enrolled",
+//                     "value": 3
+//                 }
+//             ]
+//         },
+//         {
+//             "label": 'Jan 17',
+//             "value": [
+//                 {
+//                     "label": "completed",
+//                     "value": 4
+//                 },
+//                 {
+//                     "label": "enrolled",
+//                     "value": 10
+//                 }
+//             ]
+//         },
+//         {
+//             "label": 'Jan 18',
+//             "value": [
+//                 {
+//                     "label": "completed",
+//                     "value": 1
+//                 },
+//                 {
+//                     "label": "enrolled",
+//                     "value": 0
+//                 }
+//             ]
+//         },
+//         {
+//             "label": 'Jan 19',
+//             "value": [
+//                 {
+//                     "label": "completed",
+//                     "value": 1
+//                 },
+//                 {
+//                     "label": "enrolled",
+//                     "value": 0
+//                 }
+//             ]
+//         },
+//         {
+//             "label": 'Jan 20',
+//             "value": [
+//                 {
+//                     "label": "completed",
+//                     "value": 5
+//                 },
+//                 {
+//                     "label": "enrolled",
+//                     "value": 1
+//                 },
+//                 {
+//                     "label": "done",
+//                     "value": 1
+//                 }
+//
+//             ]
+//         }
+//         ,
+//         {
+//             "label": 'Jan 21',
+//             "value": [
+//                 {
+//                     "label": "completed",
+//                     "value": 5
+//                 },
+//                 {
+//                     "label": "checked",
+//                     "value": 3
+//                 },
+//                 {
+//                     "label": "answered",
+//                     "value": 10
+//                 }
+//                 ,
+//                 {
+//                     "label": "entered",
+//                     "value": 2
+//                 }
+//
+//             ]
+//         }
+//     ],
+//     "reportId": null,
+//     "name": null,
+//     "description": "Report description",
+//     "type": "ActivityStreamChart",
+//     "total": 6,
+//     "verbs": [
+//         "completed",
+//         "enrolled"
+//     ],
+//     "activities": [
+//         "completed",
+//         "enrolled"
+//     ],
+//     "useSlideVerbs": true,
+//     "since": "2017-02-20 11:40:00",
+//     "until": "2017-02-26 12:45:00",
+//     "chartType": "StackedBar",
+//     "dateGroupType": "Day",
+//     "groupType": "TOTAL",
+//     "statementCount": 28
+// };
+
 var stackedBarData = {
     "values": [
         {
-            "label": 'Jan 15',
+            "label": "Jan 1",
             "value": [
                 {
-                    "label": "completed",
-                    "value": 9
+                    "label": "Student",
+                    "value": [
+                        {
+                            "label": "completed",
+                            "value": 2
+                        },
+                        {
+                            "label": "initialized",
+                            "value": 6
+                        }
+                    ]
                 },
                 {
-                    "label": "enrolled",
-                    "value": 0
+                    "label": "Teacher",
+                    "value": [
+                        {
+                            "label": "completed",
+                            "value": 0
+                        },
+                        {
+                            "label": "initialized",
+                            "value": 3
+                        }
+                    ]
+                },
+                {
+                    "label": "Teacher",
+                    "value": [
+                        {
+                            "label": "completed",
+                            "value": 0
+                        },
+                        {
+                            "label": "initialized",
+                            "value": 3
+                        }
+                    ]
+                },
+                {
+                    "label": "Teacher",
+                    "value": [
+                        {
+                            "label": "completed",
+                            "value": 1
+                        },
+                        {
+                            "label": "initialized",
+                            "value": 3
+                        }
+                    ]
                 }
             ]
         },
         {
-            "label": 'Jan 16',
+            "label": "Jan 2",
             "value": [
                 {
-                    "label": "completed",
-                    "value": 7
+                    "label": "Student",
+                    "value": [
+                        {
+                            "label": "completed",
+                            "value": 0
+                        },
+                        {
+                            "label": "initialized",
+                            "value": 0
+                        }
+                    ]
                 },
                 {
-                    "label": "enrolled",
-                    "value": 3
+                    "label": "Teacher",
+                    "value": [
+                        {
+                            "label": "completed",
+                            "value": 0
+                        },
+                        {
+                            "label": "initialized",
+                            "value": 1
+                        }
+                    ]
                 }
             ]
         },
         {
-            "label": 'Jan 17',
+            "label": "Jan 3",
             "value": [
                 {
-                    "label": "completed",
-                    "value": 4
+                    "label": "Student",
+                    "value": [
+                        {
+                            "label": "completed",
+                            "value": 0
+                        },
+                        {
+                            "label": "initialized",
+                            "value": 0
+                        }
+                    ]
                 },
                 {
-                    "label": "enrolled",
-                    "value": 10
+                    "label": "Teacher",
+                    "value": [
+                        {
+                            "label": "completed",
+                            "value": 3
+                        },
+                        {
+                            "label": "initialized",
+                            "value": 0
+                        }
+                    ]
                 }
             ]
         },
         {
-            "label": 'Jan 18',
+            "label": "Jan 4",
             "value": [
                 {
-                    "label": "completed",
-                    "value": 1
+                    "label": "Student",
+                    "value": [
+                        {
+                            "label": "completed",
+                            "value": 0
+                        },
+                        {
+                            "label": "initialized",
+                            "value": 0
+                        }
+                    ]
                 },
                 {
-                    "label": "enrolled",
-                    "value": 0
+                    "label": "Teacher",
+                    "value": [
+                        {
+                            "label": "completed",
+                            "value": 0
+                        },
+                        {
+                            "label": "initialized",
+                            "value": 1
+                        },
+                        {
+                            "label": "verified",
+                            "value": 2
+                        },
+                        {
+                            "label": "rejected",
+                            "value": 3
+                        }
+                    ]
                 }
-            ]
-        },
-        {
-            "label": 'Jan 19',
-            "value": [
-                {
-                    "label": "completed",
-                    "value": 1
-                },
-                {
-                    "label": "enrolled",
-                    "value": 0
-                }
-            ]
-        },
-        {
-            "label": 'Jan 20',
-            "value": [
-                {
-                    "label": "completed",
-                    "value": 5
-                },
-                {
-                    "label": "enrolled",
-                    "value": 1
-                },
-                {
-                    "label": "done",
-                    "value": 1
-                }
-
-            ]
-        }
-        ,
-        {
-            "label": 'Jan 21',
-            "value": [
-                {
-                    "label": "completed",
-                    "value": 5
-                },
-                {
-                    "label": "checked",
-                    "value": 3
-                },
-                {
-                    "label": "answered",
-                    "value": 10
-                }
-                ,
-                {
-                    "label": "entered",
-                    "value": 2
-                }
-
             ]
         }
     ],
     "reportId": null,
-    "name": null,
-    "description": "Report description",
+    "name": "TEst",
+    "description": "TEst",
     "type": "ActivityStreamChart",
-    "total": 6,
+    "total": 8,
+    "userTags": [
+        "Student",
+        "Teacher",
+        "test",
+        "test"
+    ],
     "verbs": [
         "completed",
-        "enrolled"
+        "initialized"
     ],
     "activities": [
         "completed",
-        "enrolled"
+        "initialized"
     ],
     "useSlideVerbs": true,
-    "since": "2017-02-20 11:40:00",
-    "until": "2017-02-26 12:45:00",
     "chartType": "StackedBar",
     "dateGroupType": "Day",
-    "groupType": "TOTAL",
-    "statementCount": 28
+    "statementCount": 16
 };
 
 var stackedBarSettings = {};

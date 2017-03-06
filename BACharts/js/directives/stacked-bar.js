@@ -17,10 +17,13 @@
                         .attr('class', 'd3-tip')
                         .direction('n')
                         .offset([-20, 0])
-                        .html(function (d) {
-                            return d.value.map(function(t){
+                        .html(function (d, g) {
+                            var title = g ? '<span/>' + d.label + '</span></br>' : '';
+                            var body = d.value.map(function(t){
                                 return '<span>'+ t.label +': </span><strong>' + t.value + '</strong><br>';
                             }).join('');
+
+                            return title + body;
                         });
 
                     var svg = d3.select(iElement[0])
@@ -116,16 +119,29 @@
                         var innerHeight = height - margin.top - margin.bottom;
                         var columnWidth = innerWidth / ( data.values.length);
 
-                        var maxY = d3.max(data.values.map(function (d) {
-                            return d3.sum(d.value.map(function(t){
-                                return t.value;
-                            }));
-                        }));
-
                         //var dateFormat = d3.time.format("%m-%d-%Y");
                         var labelWidth = 0;
                         var labelAngle = 0;
 
+                        // if there is a grouped data
+                        var isGroup = Array.isArray(data.values[0].value[0].value);
+
+                        var maxY = d3.max(data.values.map(function (d) {
+                            if(isGroup) {
+                                return d3.max(d.value.map(function (t) {
+                                    return d3.sum(t.value.map(function (f) {
+                                        return f.value;
+                                    }));
+                                }));
+                            }else{
+                                return d3.sum(d.value.map(function (t) {
+                                    return t.value;
+                                }));
+                            }
+                        }));
+
+
+                        var dataGroups = isGroup ? data.userTags.length : 1;
 
                         // set the height based on the calculations above
                         svg.attr('height', height);
@@ -235,34 +251,63 @@
 
                         // get all possible verbs
                         var verbs = [];
-                        data.values.forEach(function(d){
-                            d.value.forEach(function(t){
-                                if(verbs.indexOf(t.label) < 0 ){
-                                    verbs.push(t.label);
+                        data.values.forEach(function (d) {
+                            d.value.forEach(function (t) {
+                                if(isGroup){
+                                    t.value.forEach(function(n){
+                                        if (verbs.indexOf(n.label) < 0) {
+                                            verbs.push(n.label);
+                                        }
+                                    });
+                                }else {
+                                    if (verbs.indexOf(t.label) < 0) {
+                                        verbs.push(t.label);
+                                    }
                                 }
                             })
                         });
 
                         // organize data for stack
                         var layers = [];
-                        verbs.forEach(function(verb, i) {
-                            layers.push([]);
-                            data.values.forEach(function(d, n) {
-                                var f = false;
-                                d.value.forEach(function(t){
-                                    if(t.label == verb) {
-                                        layers[i].push({x: n, y: t.value});
-                                        f = true;
+                        if(!isGroup) {
+                            verbs.forEach(function (verb, i) {
+                                layers.push([]);
+                                data.values.forEach(function (d, n) {
+                                    var f = false;
+                                    d.value.forEach(function (t) {
+                                        if (t.label == verb) {
+                                            layers[i].push({x: n, y: t.value, x0: 0});
+                                            f = true;
+                                        }
+                                    });
+                                    if (!f) {
+                                        layers[i].push({x: n, y: 0, x0: 0});
                                     }
                                 });
-                                if(!f){
-                                    layers[i].push({x: n, y: 0});
-                                }
                             });
-                        });
+                        }else{
+                            verbs.forEach(function (verb, i) {
+                                layers.push([]);
+                                data.values.forEach(function (d, n) {
+                                    d.value.forEach(function (t, ii) {
+                                        var f = false;
+                                        t.value.forEach(function(r){
+                                            if (r.label == verb) {
+                                                layers[i].push({x: n, y: r.value, x0: ii});
+                                                f = true;
+                                            }
+                                        });
+                                        if (!f) {
+                                            layers[i].push({x: n, y: 0, x0: 0});
+                                        }
+                                    });
 
+                                });
+                            });
+                        }
                         var stack = d3.layout.stack();
 
+                        // return;
                         // draw staced bars
                         var groups = svg.selectAll(".layer")
                             .data(stack(layers))
@@ -278,7 +323,11 @@
                             .enter().append("a")
                             .attr("class", "bar")
                             .on('mouseover', function (d, i) {
-                                tip.show(data.values[i]);
+                                if(isGroup){
+                                    tip.show(data.values[d.x].value[d.x0], true);
+                                }else{
+                                    tip.show(data.values[i], false);
+                                }
                             })
                             .on('mouseout', function (git ) {
                                 tip.hide();
@@ -286,11 +335,17 @@
 
                         bars.append("rect")
                             .attr("x", function(d){
-                                return margin.left + 5  + d.x * columnWidth ;
+                                var w = (columnWidth - 10) / dataGroups;
+                                var x = margin.left + d.x * columnWidth;
+                                return x + d.x0 * w + 5;
                             })
-                            .attr("width", columnWidth - 10 )
+                            .attr("width", function(d){
+                                return (columnWidth - 10) / dataGroups ;
+                            } )
                             .attr("y", yScale(0))
                             .attr("height", 0)
+                            .attr('stroke', '#fff')
+                            .attr('stroke-width', '0.2')
                             .transition()
                             .duration(duration)
                             .delay(function (d, i){return i * 30})
