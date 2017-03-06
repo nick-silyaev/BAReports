@@ -63,7 +63,7 @@
 
                         // get settings or set defaults
                         var margin = settings.margin || { top: 20, right: 120, bottom: 80, left: 50 };
-                        var heightRatio = settings.heightRatio || 0.6;
+                        var heightRatio = settings.heightRatio || 0.8;
                         var colors = d3.scale.category20();
                         var duration = settings.duration || 500;
                         //var ease = settings.ease || 'cubic-in-out';
