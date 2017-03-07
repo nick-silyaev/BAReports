@@ -1,7 +1,6 @@
-
 var loginsSettings = {
-    heightRatio:.5, // height to width ration. default is 0.5
-    margin: {top: 20, right: 20, bottom: 30, left: 45},
+    heightRatio: .5, // height to width ration. default is 0.5
+    margin: { top: 20, right: 20, bottom: 30, left: 45 },
     duration: 1500, // transition duration
     delay: 750, // transition delay between two areas
     ease: "cubic-in-out" // transition ease
@@ -22,8 +21,8 @@ var loginsData = {
 
 
 var timelineSettings = {
-    margin: {top: 10, right: 20, bottom: 10, left: 20}, // drawing margins
-    height:58, // timeline chart height
+    margin: { top: 10, right: 20, bottom: 10, left: 20 }, // drawing margins
+    height: 58, // timeline chart height
     months: 10 // last x months to display
 };
 var timelineData = {
@@ -53,8 +52,8 @@ var timelineData = {
 
 
 var cmnicationSettings = {
-    heightRatio:1 , // height to width ration. default is 1
-    margin: {top: 0, right: 20, bottom: 0, left: 20}, // drawing margins
+    heightRatio: 1, // height to width ration. default is 1
+    margin: { top: 0, right: 20, bottom: 0, left: 20 }, // drawing margins
     colors: ["#efc164", "#4cd797"],
     labels: ["Respond", "Did not respond"],
     duration: 1000, // transition duration
@@ -71,8 +70,8 @@ var cmnicationData = {
 
 
 var submissionsSettings = {
-    heightRatio:.6, // height to width ration. default is 0.5
-    margin: {top: 30, right: 20, bottom: 30, left: 30},
+    heightRatio: .6, // height to width ration. default is 0.5
+    margin: { top: 30, right: 20, bottom: 30, left: 30 },
     duration: 1000, // transition duration
     ease: "cubic-in-out", // transition ease
     months: 7,
@@ -83,21 +82,21 @@ var submissionsData = {
     key: "submission",
     values: [
         // assignment name, points earned, due date, submission date
-        {name:"assignment1", score:12, due:"2015-10-01", submit:"2015-09-25"},
-        {name:"assignment1", score:20, due:"2015-10-10", submit:"2015-11-01"},
-        {name:"assignment1", score:10, due:"2015-12-01", submit:"2015-12-10"},
-        {name: "assignment2", score:5, due:"2016-01-01", submit:"2016-02-01"},
-        {name: "assignment3", score:20, due:"2016-01-01", submit:""},
-        {name:"assignment4",  score:35, due:"2016-02-01", submit:"2016-01-20"},
-        {name: "assignment3", score:25, due:"2016-02-01", submit:""},
-        {name:"assignment4",  score:30, due:"2015-11-01", submit:"2015-09-10"}
+        { name: "assignment1", score: 12, due: "2015-10-01", submit: "2015-09-25" },
+        { name: "assignment1", score: 20, due: "2015-10-10", submit: "2015-11-01" },
+        { name: "assignment1", score: 10, due: "2015-12-01", submit: "2015-12-10" },
+        { name: "assignment2", score: 5, due: "2016-01-01", submit: "2016-02-01" },
+        { name: "assignment3", score: 20, due: "2016-01-01", submit: "" },
+        { name: "assignment4", score: 35, due: "2016-02-01", submit: "2016-01-20" },
+        { name: "assignment3", score: 25, due: "2016-02-01", submit: "" },
+        { name: "assignment4", score: 30, due: "2015-11-01", submit: "2015-09-10" }
     ]
 
 };
 
 var gradesSettings = {
-    heightRatio:.6, // height to width ration. default is 0.5
-    margin: {top: 30, right: 20, bottom: 30, left: 30},
+    heightRatio: .6, // height to width ration. default is 0.5
+    margin: { top: 30, right: 20, bottom: 30, left: 30 },
     duration: 1500, // transition duration
     ease: "cubic-out", // transition ease
     barSpan: 6 // a gap between two bars
@@ -107,9 +106,9 @@ var gradesData = {
     reportId: "223asd123asd123",
     key: "grades",
     values: {
-        name:"assignment1",  // assignment name
+        name: "assignment1",  // assignment name
         score: 25, 	//score of the current user,
-        scores:[52, 20, 25, 11, 93, 86, 43, 10, 44, 20, 75, 20, 25, 11, 93, 96, 43, 10, 44, 98, 75, 43, 10, 44, 98, 75, 65, 66, 64, 68] //other users' scores for the assignment
+        scores: [52, 20, 25, 11, 93, 86, 43, 10, 44, 20, 75, 20, 25, 11, 93, 96, 43, 10, 44, 98, 75, 43, 10, 44, 98, 75, 65, 66, 64, 68] //other users' scores for the assignment
         //scores:[2, 2, 1, 9, 8, 4, 1, 4, 2, 7, 2, 2, 11, 9, 9, 4, 10, 4, 9, 7, 4, 1, 4, 9, 7] //other users' scores for the assignment
     }
 
@@ -117,8 +116,8 @@ var gradesData = {
 
 
 var distributionsSettings = {
-    heightRatio:.6, // height to width ration. default is 0.5
-    margin: {top: 30, right: 20, bottom: 30, left: 50},
+    heightRatio: .6, // height to width ration. default is 0.5
+    margin: { top: 30, right: 20, bottom: 30, left: 50 },
     duration: 1000, // transition duration
     ease: "quad-in", // transition ease
     barSpan: 6 // a gap between two bars
@@ -130,40 +129,40 @@ var distributionsData = {
         {
             name: "assignment1",
             possible: 25,
-            scores: [23,3,3,20,5,5,15,10,10,5,10,5,25,10]
+            scores: [23, 3, 3, 20, 5, 5, 15, 10, 10, 5, 10, 5, 25, 10]
         },
         {
             name: "assignment2",
             possible: 10,
-            scores: [2,0,0,2,5,5,1,10,10,5,10,5,2,10]
+            scores: [2, 0, 0, 2, 5, 5, 1, 10, 10, 5, 10, 5, 2, 10]
         },
         {
             name: "assignment3",
             possible: 20,
-            scores: [10,15,3,2,15,15,5,4,5,5,10,5,15,10]
+            scores: [10, 15, 3, 2, 15, 15, 5, 4, 5, 5, 10, 5, 15, 10]
         },
         {
             name: "assignment1",
             possible: 30,
-            scores: [23,20,15,20,15,15,15,10,10,13,10,22,25,10]
+            scores: [23, 20, 15, 20, 15, 15, 15, 10, 10, 13, 10, 22, 25, 10]
         },
         {
             name: "assignment2",
             possible: 10,
-            scores: [8,10,10,9,8,8,10,10,10,10,10,10,9,10]
+            scores: [8, 10, 10, 9, 8, 8, 10, 10, 10, 10, 10, 10, 9, 10]
         },
         {
             name: "assignment3",
             possible: 25,
-            scores: [10,15,22,5,15,15,10,20,22,23,19,22,25,21]
+            scores: [10, 15, 22, 5, 15, 15, 10, 20, 22, 23, 19, 22, 25, 21]
         }
     ]
 };
 
 
 var connectionsSettings = {
-    heightRatio:.6, // height to width ration. default is 0.5
-    margin: {top: 30, right: 20, bottom: 45, left: 55},
+    heightRatio: .6, // height to width ration. default is 0.5
+    margin: { top: 30, right: 20, bottom: 45, left: 55 },
     duration: 1000, // transition duration
     ease: "quad-in", // transition ease
     dotSize: 8 // a gap between two bars
@@ -247,8 +246,8 @@ var connectionsData = {
 };
 
 var blrsActivitySettings = {
-    heightRatio:.6, // height to width ration. default is 0.5
-    margin: {top: 20, right: 40, bottom: 30, left: 45},
+    heightRatio: .6, // height to width ration. default is 0.5
+    margin: { top: 20, right: 40, bottom: 30, left: 45 },
     colors: ["#3598dc", "#ea5d4b"],
     duration: 1000, // transition duration
     delay: 500, // transition delay between two areas
@@ -267,8 +266,8 @@ var blrsActivityData = {
 };
 
 var blrsCourseSubmissionsSettings = {
-    heightRatio:.6, // height to width ration. default is 0.5
-    margin: {top: 20, right: 20, bottom: 30, left: 45},
+    heightRatio: .6, // height to width ration. default is 0.5
+    margin: { top: 20, right: 20, bottom: 30, left: 45 },
     colors: ["#3598dc", "#ea5d4b", "#efc064"],
     duration: 700, // transition duration
     delay: 500, // transition delay between two areas
@@ -317,8 +316,8 @@ var blrsCourseSubmissionsData = {
 };
 
 var activeCatSettings = {
-    heightRatio:.5, // height to width ration. default is 0.5
-    margin: {top: 20, right: 20, bottom: 30, left: 45},
+    heightRatio: .5, // height to width ration. default is 0.5
+    margin: { top: 20, right: 20, bottom: 30, left: 45 },
     duration: 1500, // transition duration
     delay: 750, // transition delay between two areas
     ease: "cubic-in-out" // transition ease
@@ -339,8 +338,8 @@ var activeCatData = {
 
 
 var activeCatPieSettings = {
-    heightRatio:.6 , // height to width ration. default is 1
-    margin: {top: 0, right: 20, bottom: 0, left: 20}, // drawing margins
+    heightRatio: .6, // height to width ration. default is 1
+    margin: { top: 0, right: 20, bottom: 0, left: 20 }, // drawing margins
     colors: ["#3598dc", "#ea5d4b", "#efc164", "#4cd797"],
     duration: 1000, // transition duration
     ease: "cubic-in-out", // transition ease
@@ -351,13 +350,13 @@ var activeCatPieSettings = {
 var activeCatPieData = {
     reportId: "123asd123asd123",
     labels: ["Introduction to Oceanography", "Astronomy", "Math", 'Chemistry'],
-    values: [ 48, 30, 10, 12] // random data for demo. set percentage value here
+    values: [48, 30, 10, 12] // random data for demo. set percentage value here
 };
 
 
 var blrsHbarSettings = {
-    heightRatio:.6, // height to width ration. default is 0.5
-    margin: {top: 20, right: 150, bottom: 30, left: 70},
+    heightRatio: .6, // height to width ration. default is 0.5
+    margin: { top: 20, right: 150, bottom: 30, left: 70 },
     colors: ["#3598dc", "#ea5d4b", "#efc164"], // bar colors
     duration: 1000, // transition duration
     delay: 500, // transition delay between two areas
@@ -369,11 +368,11 @@ var blrsHbarData = {
     groups: [
         {
             name: "%Passed",
-            values: [ 30, 60, 10]
+            values: [30, 60, 10]
         },
         {
             name: "% 1st Try",
-            values: [ 85, 15]
+            values: [85, 15]
         },
         //{
         //    name: "% 2nd Try",
@@ -710,3 +709,74 @@ var stackedBarData = {
 };
 
 var stackedBarSettings = {};
+
+var multiLineData = {
+    reportId: "123asd123asd123",
+    name: "Report Name",
+    description: "Report description",
+    groups: [],
+    people: [],
+    labels: ["Launched", "Waived"],
+
+    "type": "ActivityStreamChart",
+    "total": 6,
+    "verbs": [
+        "completed",
+        "enrolled"
+    ],
+    "activities": [
+        "completed",
+        "enrolled"
+    ],
+    "useSlideVerbs": true,
+    "since": "2017-02-20 11:40:00",
+    "until": "2017-02-26 12:45:00",
+    "chartType": "StackedBar",
+    "dateGroupType": "Day",
+    "groupType": "TOTAL",
+    "statementCount": 28,
+
+    values: [
+        {
+            date: "2016-09-01",
+            scores: [_.random(100), _.random(100)],
+            scores2: [_.random(100), _.random(100)],
+            scores3: [_.random(100), _.random(100)]
+        },
+        {
+            date: "2016-09-03",
+            scores: [_.random(100), _.random(100)],
+            scores2: [_.random(100), _.random(100)],
+            scores3: [_.random(100), _.random(100)]
+        },
+        {
+            date: "2016-09-04",
+            scores: [_.random(100), _.random(100)],
+            scores2: [_.random(100), _.random(100)],
+            scores3: [_.random(100), _.random(100)]
+        },
+        {
+            date: "2016-09-07",
+            scores: [_.random(100), _.random(100)],
+            scores2: [_.random(100), _.random(100)],
+            scores3: [_.random(100), _.random(100)]
+        },
+        {
+            date: "2016-09-08",
+            scores: [_.random(100), _.random(100)],
+            scores2: [_.random(100), _.random(100)],
+            scores3: [_.random(100), _.random(100)]
+        },
+        {
+            date: "2016-09-09",
+            scores: [_.random(100), _.random(100)],
+            scores2: [_.random(100), _.random(100)],
+            scores3: [_.random(100), _.random(100)]
+        }
+    ]
+};
+
+window.console.log(multiLineData);
+
+var multiLineSettings = {};
+
