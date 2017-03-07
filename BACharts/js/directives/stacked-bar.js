@@ -141,12 +141,10 @@
                         }));
 
 
-                        var dataGroups = isGroup ? data.userTags.length : 1;
+                        var dataGroups = isGroup ? (data.userTags ? data.userTags.length : 0) + (data.userNames ? data.userNames.length : 0)  : 1;
 
                         // set the height based on the calculations above
                         svg.attr('height', height);
-
-
 
                         // x axis - parse timestamp to date if label is a timestamp
                         var xData = data.values.map(function (d) {
