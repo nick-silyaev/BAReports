@@ -9,8 +9,7 @@ angular.module('Analytics.directives')
             scope: {
                 data: '=',
                 settings: '=',
-                label: '@',
-                showTitleDescr: '='
+                isActivityStream: '='
             },
             link: function ($scope, iElement) {
                 var isPercent = $scope.settings.isPercent;
@@ -69,10 +68,12 @@ angular.module('Analytics.directives')
 
                     data.values.forEach(function (val) {
                         var nValues = val.filter(function (v) {
-                            return typeof v === 'number';
+                            return typeof (v.value ? v.value : v) === 'number';
                         });
 
-                        maxInSets.push(d3.max(nValues));
+                        maxInSets.push(d3.max(nValues, function (d) {
+                            return d.value ? d.value : d;
+                        }));
                     });
 
                     var maxValue = d3.max(maxInSets);
@@ -146,16 +147,6 @@ angular.module('Analytics.directives')
                         .attr('y1', yScale)
                         .attr('y2', yScale);
 
-                    //if ($scope.showTitleDescr) {
-                    //    svg.append('text')
-                    //        .attr('x', width / 2 + 5)
-                    //        .attr('y', 20)
-                    //        .attr('fill', '#115577')
-                    //        .style('text-anchor', 'middle')
-                    //        .style('font-size', '24px')
-                    //        .text(data.name);
-                    //}
-
                     var reacts = svg.selectAll('rect').data(data.values).enter();
 
                     function appendRect(i) {
@@ -165,13 +156,18 @@ angular.module('Analytics.directives')
                             cWidth *= 0.5;
                         }
 
+                        var isMultiActors = false;
+                        var valRepeat = 0;
+
                         reacts
                             .append('rect')
                             .on('mouseover', function (d) {
-                                tip.show(d[i + 1]);
+                                var tipV = d[i + 1].value ? (d[i + 1].gr_label + ':' + d[i + 1].label + ' ' + d[i + 1].value) : d[i + 1];
+                                tip.show(tipV);
                             })
                             .on('mouseout', function (d) {
-                                tip.hide(d[i + 1]);
+                                var tipV = d[i + 1].value ? (d[i + 1].gr_label + ':' + d[i + 1].label + ' ' + d[i + 1].value) : d[i + 1];
+                                tip.hide(tipV);
                             })
                             .attr('x', function (d) {
                                 return xScale(d[0]) + (cWidth * i) + (cWidth * 2);
@@ -181,13 +177,20 @@ angular.module('Analytics.directives')
                             })
                             .attr('width', cWidth)
                             .attr('height', 0)
-                            .attr('fill', (colors && colors[i]) ? colors[i] : c20(i))
+                            .attr('fill', function (d) {
+                                isMultiActors = d[i + 1].label;
+                                valRepeat = parseInt(d.length / 2);
+                                var id = (isMultiActors && i > valRepeat - 1) ? (i - valRepeat) : i;
+
+                                return (colors && colors[i]) ? colors[id] : c20(id);
+                            })
                             .transition().ease(ease).duration(duration)
                             .attr('height', function (d) {
-                                return height - yScale(d[i + 1]) - margin.bottom;
+                                var dv = d[i + 1].value ? d[i + 1].value : d[i + 1];
+                                return height - yScale(dv) - margin.bottom;
                             })
                             .attr('y', function (d) {
-                                return yScale(d[i + 1]);
+                                return yScale(d[i + 1].value ? d[i + 1].value : d[i + 1]);
                             });
                     }
 
@@ -196,20 +199,13 @@ angular.module('Analytics.directives')
                     }
 
                     svg.append('text')
-                        .attr('x', width / 2 + 5)
-                        .attr('y', height)
-                        .attr('fill', '#115577')
-                        .style('text-anchor', 'middle')
-                        .text('Likert Response');
-
-                    svg.append('text')
                         .attr('class', 'scale-y-label')
                         .attr('font-size', '12px')
                         .attr('fill', '#115577')
                         .style('text-anchor', 'middle')
                         .attr('font-family', 'Arial, sans-serif')
                         .attr('transform', 'translate(15,' + (height / 2) + ')rotate(-90)')
-                        .text('Number of Responses');
+                        .text(!$scope.isActivityStream ? 'Number of Responses' : 'Number of Statements');
                 };
             }
         };

@@ -804,7 +804,56 @@ var multiBarData = {
     "groupType": "TOTAL",
     "statementCount": 28,
 
-    "values": [["Sometimes", 2, 18], ["Never", 3, 5], ["Always", 2, 4], ["Often", 10, 52]]
+    "values": [["Jan 12", 2, 18], ["Jan 13", 3, 5], ["Jan 14", 2, 4], ["Jan 15", 10, 52]]
+};
+
+multiBarData = {
+    reportId: "123asd123asd123",
+    name: "Report Name",
+    description: "Report description",
+    groups: [],
+    people: [],
+    labels: ["Launched", "Waived"],
+
+    "type": "ActivityStreamChart",
+    "total": 6,
+    "verbs": [
+        "completed",
+        "enrolled"
+    ],
+    "activities": [
+        "completed",
+        "enrolled"
+    ],
+    "useSlideVerbs": true,
+    "since": "2017-02-20 11:40:00",
+    "until": "2017-02-26 12:45:00",
+    "chartType": "StackedBar",
+    "dateGroupType": "Day",
+    "groupType": "TOTAL",
+    "statementCount": 28,
+
+    "values": [
+        ["Jan 12",
+            { gr_label: "Student1", label: "initialized", value: 1 },
+            { gr_label: "Student1", label: "qqq", value: 2 },
+            { gr_label: "Student2", label: "initialized", value: 16 },
+            { gr_label: "Student2", label: "qqq", value: 1 }
+        ],
+        ["Jan 13",
+            { gr_label: "Student1", label: "initialized", value: 12 },
+            { gr_label: "Student1", label: "qqq", value: 30 },
+            { gr_label: "Student2", label: "initialized", value: 26 },
+            { gr_label: "Student2", label: "qqq", value: 31 }
+        ],
+        ["Jan 14",
+            { gr_label: "Student1", label: "initialized", value: 11 },
+            { gr_label: "Student1", label: "qqq", value: 20 },
+            { gr_label: "Student2", label: "initialized", value: 26 },
+            { gr_label: "Student2", label: "qqq", value: 12 }
+        ]
+    ]
+
 };
 
 var multiBarSettings = {
