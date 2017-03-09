@@ -776,7 +776,42 @@ var multiLineData = {
     ]
 };
 
-window.console.log(multiLineData);
-
 var multiLineSettings = {};
 
+var multiBarData = {
+    reportId: "123asd123asd123",
+    name: "Report Name",
+    description: "Report description",
+    groups: [],
+    people: [],
+    labels: ["Launched", "Waived"],
+
+    "type": "ActivityStreamChart",
+    "total": 6,
+    "verbs": [
+        "completed",
+        "enrolled"
+    ],
+    "activities": [
+        "completed",
+        "enrolled"
+    ],
+    "useSlideVerbs": true,
+    "since": "2017-02-20 11:40:00",
+    "until": "2017-02-26 12:45:00",
+    "chartType": "StackedBar",
+    "dateGroupType": "Day",
+    "groupType": "TOTAL",
+    "statementCount": 28,
+
+    "values": [["Sometimes", 2, 18], ["Never", 3, 5], ["Always", 2, 4], ["Often", 10, 52]]
+};
+
+var multiBarSettings = {
+    heightRatio: 0.7, // height to width ration. default is 0.5
+    margin: { top: 20, right: 40, bottom: 30, left: 45 },
+    colors: ['#3598dc', '#ea5d4b', '#efc164', '#4cd797'],
+    duration: 1000, // transition duration
+    delay: 500, // transition delay between two areas
+    ease: 'quad-out' // transition ease
+};
