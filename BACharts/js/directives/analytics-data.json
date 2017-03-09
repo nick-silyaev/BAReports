@@ -1,0 +1,149 @@
+{
+  "values": [
+    {
+      "label": "Jan 1",
+      "value": [
+        {
+          "label": "Student",
+          "value": [
+            {
+              "label": "completed",
+              "value": 2
+            },
+            {
+              "label": "initialized",
+              "value": 6
+            }
+          ]
+        },
+        {
+          "label": "Teacher",
+          "value": [
+            {
+              "label": "completed",
+              "value": 0
+            },
+            {
+              "label": "initialized",
+              "value": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Jan 2",
+      "value": [
+        {
+          "label": "Student",
+          "value": [
+            {
+              "label": "completed",
+              "value": 0
+            },
+            {
+              "label": "initialized",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "label": "Teacher",
+          "value": [
+            {
+              "label": "completed",
+              "value": 0
+            },
+            {
+              "label": "initialized",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Jan 3",
+      "value": [
+        {
+          "label": "Student",
+          "value": [
+            {
+              "label": "completed",
+              "value": 0
+            },
+            {
+              "label": "initialized",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "label": "Teacher",
+          "value": [
+            {
+              "label": "completed",
+              "value": 3
+            },
+            {
+              "label": "initialized",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Jan 4",
+      "value": [
+        {
+          "label": "Student",
+          "value": [
+            {
+              "label": "completed",
+              "value": 0
+            },
+            {
+              "label": "initialized",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "label": "Teacher",
+          "value": [
+            {
+              "label": "completed",
+              "value": 0
+            },
+            {
+              "label": "initialized",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reportId": null,
+  "name": "TEst",
+  "description": "TEst",
+  "type": "ActivityStreamChart",
+  "total": 8,
+  "userTags": [
+    "Student",
+    "Teacher"
+  ],
+  "verbs": [
+    "completed",
+    "initialized"
+  ],
+  "activities": [
+    "completed",
+    "initialized"
+  ],
+  "useSlideVerbs": true,
+  "chartType": "StackedBar",
+  "dateGroupType": "Day",
+  "statementCount": 16
+}
