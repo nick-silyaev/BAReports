@@ -187,7 +187,8 @@ angular.module('Analytics.directives')
                             .transition().ease(ease).duration(duration)
                             .attr('height', function (d) {
                                 var dv = d[i + 1].value ? d[i + 1].value : d[i + 1];
-                                return height - yScale(dv) - margin.bottom;
+                                var h = height - yScale(dv) - margin.bottom;
+                                return h < 0 ? 0 : h;
                             })
                             .attr('y', function (d) {
                                 return yScale(d[i + 1].value ? d[i + 1].value : d[i + 1]);
