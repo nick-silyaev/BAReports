@@ -9,6 +9,7 @@
                     data: "=",
                     settings: "=",
                     showTitleDescr: '=',
+                    groupType: '=',
                     label: "@"
                 },
                 link: function ($scope, iElement) {
@@ -61,7 +62,7 @@
                         var duration = settings.duration || 1500;
                         var ease = settings.ease || 'cubic-in-out';
                         var labels = data.values.map(function (d) {
-                            return d.label
+                            return d.label;
                         });
                         var hRatio = settings.heightRatio || 1;
 
@@ -78,7 +79,7 @@
 
                         // prepare data
                         var pieData = data.values.map(function (d) {
-                            return d.value
+                            return $scope.groupType && $scope.groupType === 'Avg' ? d.percent : d.value;
                         });
 
                         // prepare chart attributes
@@ -96,13 +97,9 @@
                             svg.append('svg:text')
                                 .attr('class', 'text-no-data')
                                 .append('svg:tspan')
-                                .attr('x', 0)
+                                .attr('x', (width / 2) - (width / 11))
                                 .attr('y', height / 2)
-                                .text('No data')
-                                .append('svg:tspan')
-                                .attr('x', 0)
-                                .attr('dy', "1.4em")
-                                .text('available');
+                                .text('No data available');
                         }
 
                         if ($scope.showTitleDescr) {
@@ -129,7 +126,8 @@
 
                         //draw chart
                         path.append('path').attr('class', function (d, i) {
-                            return "slice" + " " + labels[i].toLowerCase().replace(/\s+/g, ''); //Remove spaces from label name string to make one valid class name
+                            return "slice" + " " + labels[i].toLowerCase().replace(/\s+/g, '');
+                            //Remove spaces from label name string to make one valid class name
                         })
                             .attr('fill', function (d, i) {
                                 return c20(i);
@@ -182,10 +180,10 @@
 
                                 svg.select('.pie-label' + i)
                                     .transition().duration(300)
-                                    .attr('fill-opacity', 1)
+                                    .attr('fill-opacity', 1);
 
                             })
-                            .on("mouseout", function (d, i) {
+                            .on("mouseout", function () {
                                 svg.selectAll('.slice')
                                     .transition().duration(200)
                                     .attr('fill-opacity', 1);
@@ -225,7 +223,6 @@
                             return degree;
                         };
 
-                        var total = 0;
                         var slice_labels = path.append('text')
                             .attr('class', function (d, i) {
                                 return 'pie-label pie-label' + i;
@@ -237,7 +234,7 @@
                                 'fill': '#333',
                                 'font-weight': 'bold'
                             })
-                            .attr('transform', function (d, i) {
+                            .attr('transform', function (d) {
                                 if (getAngle(d) < visibleAngle) {
                                     var centroid = arc.centroid(d);
                                     var midAngle = Math.atan2(centroid[1], centroid[0]);
@@ -254,7 +251,7 @@
 
                             })
                             .text(function (d, i) {
-                                return pieData[i];
+                                return pieData[i] + ($scope.groupType && $scope.groupType === 'Avg' ? '%' : '');
                             });
 
                         slice_labels.attr('fill-opacity', 0)
@@ -263,8 +260,6 @@
                             .attr('fill-opacity', function (d) {
                                 return getAngle(d) < visibleAngle ? 0 : 1;
                             });
-
-                        console.log(total);
                     };
                 }
             };
