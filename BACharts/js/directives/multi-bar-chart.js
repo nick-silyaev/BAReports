@@ -212,6 +212,34 @@ angular.module('Analytics.directives')
                         .attr('font-family', 'Arial, sans-serif')
                         .attr('transform', 'translate(15,' + (height / 2) + ')rotate(-90)')
                         .text(!$scope.isActivityStream ? 'Number of Responses' : 'Number of Statements');
+
+                    // draw legend
+                    var verbs = data.verbs;
+
+                    var lX = width - margin.right + 40;
+                    var lY = margin.top + 10;
+                    var lInterval = 20;
+
+                    var legend = svg.append('g')
+                        .attr("class", "svg-legend")
+                        .attr("transform", "translate(" + lX + "," + lY + ")");
+
+                    verbs.forEach(function (verb, i) {
+                        legend.append('rect')
+                            .attr('width', 15)
+                            .attr('height', 10)
+                            .style('fill', c20(i))
+                            .attr("transform", "translate(0," + ( i * lInterval - 8 ) + ")");
+
+                        legend.append('text')
+                            .attr('class', 'scale-y-label')
+                            .attr('font-size', "12px")
+                            .attr('fill', "#115577")
+                            .style("text-anchor", "left")
+                            .attr('font-family', 'Arial, sans-serif')
+                            .attr("transform", "translate(20," + ( i * lInterval ) + ")")
+                            .text(verb);
+                    });
                 };
             }
         };
