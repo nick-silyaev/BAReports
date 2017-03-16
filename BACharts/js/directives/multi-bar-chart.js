@@ -52,7 +52,8 @@ angular.module('Analytics.directives')
                     if (!data.values.length) {
                         svg.append('text')
                             .attr('x', d3.select(iElement[0])[0][0].offsetWidth / 2)
-                            .attr('y', d3.select(iElement[0])[0][0].offsetWidth / 4)
+                            //.attr('y', d3.select(iElement[0])[0][0].offsetWidth / 4)
+                            .attr('y', 20)
                             .attr('class', 'text-no-data text-no-data--text-center')
                             .text('No data available.');
                         return;
@@ -99,7 +100,7 @@ angular.module('Analytics.directives')
                         .domain(data.values.map(function (d) {
                             return d[0];
                         }))
-                        .rangePoints([margin.left, width - margin.right - columnWidth]);
+                        .rangePoints([margin.left, width - margin.right - columnWidth * 2]);
 
                     var dMax = (((maxValue + 100) / 100 ^ 0) * 100);
 
@@ -116,7 +117,7 @@ angular.module('Analytics.directives')
                         .scale(xScale);
 
                     //prepare y axis
-                    var ticksN = 10;
+                    var ticksN = 5;
                     var yAxis = d3.svg.axis()
                         .scale(yScale)
                         .orient('left')
@@ -162,15 +163,15 @@ angular.module('Analytics.directives')
                         reacts
                             .append('rect')
                             .on('mouseover', function (d) {
-                                var tipV = d[i + 1].value ? (d[i + 1].gr_label + ':' + d[i + 1].label + ' ' + d[i + 1].value) : d[i + 1];
+                                var tipV = (d[i + 1].value || d[i + 1].value === 0) ? (d[i + 1].gr_label + ':' + d[i + 1].label + ' ' + d[i + 1].value) : d[i + 1];
                                 tip.show(tipV);
                             })
                             .on('mouseout', function (d) {
-                                var tipV = d[i + 1].value ? (d[i + 1].gr_label + ':' + d[i + 1].label + ' ' + d[i + 1].value) : d[i + 1];
+                                var tipV = (d[i + 1].value || d[i + 1].value === 0) ? (d[i + 1].gr_label + ':' + d[i + 1].label + ' ' + d[i + 1].value) : d[i + 1];
                                 tip.hide(tipV);
                             })
                             .attr('x', function (d) {
-                                return xScale(d[0]) + (cWidth * i) + (cWidth * 2);
+                                return xScale(d[0]) + (cWidth * i) + cWidth / 2;
                             })
                             .attr('y', function () {
                                 return yScale(0);
@@ -186,12 +187,16 @@ angular.module('Analytics.directives')
                             })
                             .transition().ease(ease).duration(duration)
                             .attr('height', function (d) {
-                                var dv = d[i + 1].value ? d[i + 1].value : d[i + 1];
+                                var dv = (d[i + 1].value || d[i + 1].value === 0) ? d[i + 1].value : d[i + 1];
                                 var h = height - yScale(dv) - margin.bottom;
-                                return h < 0 ? 0 : h;
+
+                                return h <= 0 ? 3 : h;
                             })
                             .attr('y', function (d) {
-                                return yScale(d[i + 1].value ? d[i + 1].value : d[i + 1]);
+                                var newVar = (d[i + 1].value || d[i + 1].value === 0) ? d[i + 1].value : d[i + 1];
+                                var yScale2 = yScale(newVar);
+
+                                return yScale2 <= 0 ? 3 : yScale2;
                             });
                     }
 

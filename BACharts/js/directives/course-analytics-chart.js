@@ -9,7 +9,7 @@
                     data: "=",
                     settings: "=",
                     showTitleDescr: '=',
-                    groupType: '=',
+                    isPercent: '=',
                     label: "@"
                 },
                 link: function ($scope, iElement) {
@@ -79,7 +79,7 @@
 
                         // prepare data
                         var pieData = data.values.map(function (d) {
-                            return $scope.groupType && $scope.groupType === 'Avg' ? d.percent : d.value;
+                            return $scope.isPercent ? d.percent : d.value;
                         });
 
                         // prepare chart attributes
@@ -251,7 +251,7 @@
 
                             })
                             .text(function (d, i) {
-                                return pieData[i] + ($scope.groupType && $scope.groupType === 'Avg' ? '%' : '');
+                                return pieData[i] + ($scope.isPercent ? '%' : '');
                             });
 
                         slice_labels.attr('fill-opacity', 0)

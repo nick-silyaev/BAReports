@@ -12,19 +12,31 @@ angular.module('Analytics.directives')
                 data: "=",
                 settings: "=",
                 label: "@",
-                showTitleDescr: '='
+                dateGroupType: "="
             },
             link: function ($scope, iElement) {
+                if (!$scope.data.labels) {
+                    $scope.data.labels = $scope.data.verbs;
+                }
 
                 $scope.data.disabled = $scope.data.labels.map(function (d) {
                     return false;
                 });
 
+                var tip = d3_tip()
+                    .attr('class', 'd3-tip distributions-tip')
+                    .direction('n')
+                    .offset([-20, 0])
+                    .html(function (val) {
+                        return '<strong>' + val + '</strong>';
+                    });
+
                 var svg = d3.select(iElement[0])
                     .append('svg')
                     .attr('class', 'analytics-line')
                     //.attr('height', d3.select(iElement[0])[0][0].offsetWidth / 2)
-                    .attr('width', '100%');
+                    .attr('width', '100%')
+                    .call(tip);
 
                 // on window resize, re-render d3 canvas
                 window.onresize = function () {
@@ -40,26 +52,24 @@ angular.module('Analytics.directives')
 
                 // define render function
                 $scope.render = function (data, settings) {
-
                     if (!data || !data.values || !settings || !data.values.length) {
                         svg.append("text")
                             .attr("x", d3.select(iElement[0])[0][0].offsetWidth / 2)
-                            .attr("y", d3.select(iElement[0])[0][0].offsetWidth / 4)
+                            //.attr("y", d3.select(iElement[0])[0][0].offsetWidth / 4)
+                            .attr('y', 20)
                             .attr('class', 'text-no-data text-no-data--text-center')
                             .text("No data available.");
                         return false;
                     }
 
-
                     // remove all previous items before render
                     svg.selectAll('*').remove();
-
 
                     // get settings or set defaults
                     var margin = settings.margin || { top: 20, right: 30, bottom: 30, left: 50 };
                     var heightRatio = settings.heightRatio || 0.5;
                     var duration = settings.duration || 1000;
-                    var delay = settings.delay || 1000;
+                    //var delay = settings.delay || 1000;
                     var ease = settings.ease || 'cubic-in';
                     var labels = data.labels;
 
@@ -67,6 +77,7 @@ angular.module('Analytics.directives')
                     var c20 = d3.scale.category20();
 
                     var dateFormat = d3.time.format('%Y-%m-%d');
+                    var dFormat;
 
                     // get time frame
                     var startDate = d3.min(data.values.map(function (d) {
@@ -101,26 +112,62 @@ angular.module('Analytics.directives')
                         return d3.max(maxTotal) * 1.2; // addin 20% to Y axis
                     };
 
-
                     //containing element width
                     var width = d3.select(iElement[0])[0][0].offsetWidth;
                     var height = width * heightRatio;
                     //svg height to 1/2 of width
 
-
                     var xScale = d3.time.scale()
                         .domain([startDate, endDate])
                         .range([margin.left, width - margin.right]);
-
 
                     var yScale = d3.scale.linear()
                         .domain([0, maxY()])
                         .range([height - margin.bottom, margin.top]);
 
-
                     // prepare x axis
-                    var xAxis = d3.svg.axis()
-                        .scale(xScale);
+                    var xAxis;
+
+                    switch ($scope.dateGroupType) {
+                        default:
+                        case 'Day':
+                            dFormat = d3.time.format('%b %d');
+
+                            xAxis = d3.svg.axis()
+                                .orient('bottom')
+
+                                .ticks(d3.time.day, 1)
+                                .tickSize(5)
+                                .tickFormat(dFormat)
+
+                                .scale(xScale);
+                            break;
+                        case 'Month':
+                            dFormat = d3.time.format('%Y %b');
+
+                            xAxis = d3.svg.axis()
+                                .orient('bottom')
+
+                                .ticks(d3.time.month, 1)
+                                .tickSize(5)
+                                .tickFormat(dFormat)
+
+                                .scale(xScale);
+                            break;
+                        case 'Year':
+                            dFormat = d3.time.format('%Y');
+
+                            xAxis = d3.svg.axis()
+                                .orient('bottom')
+
+                                .ticks(d3.time.year, 1)
+                                .tickSize(5)
+                                .tickFormat(dFormat)
+
+                                .scale(xScale);
+                            break;
+
+                    }
 
                     //prepare y axis
                     var yAxis = d3.svg.axis()
@@ -152,16 +199,6 @@ angular.module('Analytics.directives')
                         .attr('transform', 'translate(' + margin.left + ', 0)')
                         .call(yAxis);
 
-                    if ($scope.showTitleDescr) {
-                        svg.append('text')
-                            .attr('x', width / 2 + 5)
-                            .attr('y', 20)
-                            .attr('fill', '#115577')
-                            .style('text-anchor', 'middle')
-                            .style('font-size', '24px')
-                            .text(data.name);
-                    }
-
                     // create areas
                     var draw_lines = function (data, duration) {
                         svg.selectAll(".line").remove();
@@ -180,7 +217,9 @@ angular.module('Analytics.directives')
 
                         function drawLine(scN) {
                             for (var i = 0; i < data.labels.length; i++) {
-                                if (data.disabled[i])continue;
+                                if (data.disabled[i]) {
+                                    continue;
+                                }
 
                                 $scope['cat' + scN + i] = d3.svg.line()
                                     .interpolate('linear')
@@ -213,6 +252,31 @@ angular.module('Analytics.directives')
                                     .duration(duration)
                                     .ease(ease)
                                     .attr('stroke-dashoffset', 0);
+
+                                svg.selectAll('dot')
+                                    .data(data.values)
+                                    .enter()
+                                    .append('circle')
+                                    .attr('r', 5)
+                                    .attr('epos', i)
+                                    .attr('cx', function (d) {
+                                        return xScale(dateFormat.parse(d.date));
+                                    })
+                                    .attr('cy', function (d) {
+                                        return yScale(d['scores' + scN][i]);
+                                    })
+                                    .on('mouseover', function (d) {
+                                        var ePos = parseInt(this.getAttribute('epos'));
+                                        var tVar = dFormat(new Date(d.date)) + ' : ' + data.labels[ePos] + ' : ' + d['scores' + scN][ePos];
+
+                                        tip.show(tVar);
+                                    })
+                                    .on('mouseout', function (d) {
+                                        var ePos = parseInt(this.getAttribute('epos'));
+                                        var tVar = dFormat(new Date(d.date)) + ' : ' + data.labels[ePos] + ' : ' + d['scores' + scN][ePos];
+
+                                        tip.hide(tVar);
+                                    })
                             }
                         }
 
@@ -270,7 +334,7 @@ angular.module('Analytics.directives')
 
                     var legend = svg
                         .append('g')
-                        .attr('transform', 'translate(' + margin.left + ',' + height + ')')
+                        .attr('transform', 'translate(' + margin.left + 2 + ',' + height - 3 + ')')
                         .attr('class', 'legend-box')
                         .selectAll('g')
                         .data(labels)
@@ -279,17 +343,18 @@ angular.module('Analytics.directives')
                         .attr('class', 'legend')
                         .each(function (d, i) {
                             d3.select(this).append('circle')
-                                .attr("cx", 0)
-                                .attr("cy", -7)
+                                .attr("cx", 5)
+                                .attr("cy", -5)
                                 .attr("r", 5)
                                 .style('fill', c20(i))
                                 .attr('cursor', 'pointer');
+
                             d3.select(this).append('text')
                                 .attr('class', 'legend-item')
                                 .style('font-size', 12)
                                 .style('fill', '#939598 ')
                                 .text(labels[i])
-                                .attr('transform', 'translate( 10 , 0)')
+                                .attr('transform', 'translate( 12 , 0)')
                                 .attr('cursor', 'pointer');
 
                             d3.select(this).attr('transform', function () {
@@ -308,22 +373,22 @@ angular.module('Analytics.directives')
                                 d3.select(this).attr('opacity', 1);
                             }
 
-                        })
-                        .on("click", function (d, i) {
-
-                            $scope.data.disabled[i] = !$scope.data.disabled[i];
-                            if ($scope.data.disabled[i]) {
-                                d3.select(this).attr('opacity', 0.4);
-                            } else {
-                                d3.select(this).attr('opacity', 1);
-                            }
-                            yScale.domain([0, maxY()]);
-                            var axis = svg.select('.y.axis');
-
-                            svg.select('.y.axis')
-                                .call(yAxis);
-                            draw_lines($scope.data, 400);
                         });
+                    //.on("click", function (d, i) {
+                    //
+                    //    $scope.data.disabled[i] = !$scope.data.disabled[i];
+                    //    if ($scope.data.disabled[i]) {
+                    //        d3.select(this).attr('opacity', 0.4);
+                    //    } else {
+                    //        d3.select(this).attr('opacity', 1);
+                    //    }
+                    //    yScale.domain([0, maxY()]);
+                    //    //var axis = svg.select('.y.axis');
+                    //
+                    //    svg.select('.y.axis')
+                    //        .call(yAxis);
+                    //    draw_lines($scope.data, 400);
+                    //});
 
 
                     height = svg.node().getBBox().height + svg.select('.legend-box').node().getBBox().height;

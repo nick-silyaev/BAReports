@@ -19,8 +19,8 @@
                         .offset([-20, 0])
                         .html(function (d, g) {
                             var title = g ? '<span/>' + d.label + '</span></br>' : '';
-                            var body = d.value.map(function(t){
-                                return '<span>'+ t.label +': </span><strong>' + t.value + '</strong><br>';
+                            var body = d.value.map(function (t) {
+                                return '<span>' + t.label + ': </span><strong>' + t.value + '</strong><br>';
                             }).join('');
 
                             return title + body;
@@ -82,8 +82,8 @@
                             .attr("class", "svg-title")
                             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                        showInTitle.forEach( function(key){
-                            if(data.hasOwnProperty(key) && data[key]){
+                        showInTitle.forEach(function (key) {
+                            if (data.hasOwnProperty(key) && data[key]) {
                                 var keyName = key.split(/(?=[A-Z])/);
                                 // capitalize the string parts
                                 for (var k = 0; k < keyName.length; k++) {
@@ -95,14 +95,14 @@
                                 // draw text
                                 title.append('text')
                                     .attr('class', 'svg-title-text')
-                                    .attr('font-size', titleFontSize+"px")
+                                    .attr('font-size', titleFontSize + "px")
                                     .attr('fill', "#115577")
                                     .style("text-anchor", "left")
                                     .attr('font-family', 'Arial, sans-serif')
-                                    .attr("transform", "translate( 0 ," + ( t *  titleInterval ) + ")")
+                                    .attr("transform", "translate( 0 ," + ( t * titleInterval ) + ")")
                                     .text(keyName + ": " + data[key]);
                                 margin.top += titleInterval;
-                                t++
+                                t++;
                             }
                         });
 
@@ -127,21 +127,20 @@
                         var isGroup = Array.isArray(data.values[0].value[0].value);
 
                         var maxY = d3.max(data.values.map(function (d) {
-                            if(isGroup) {
+                            if (isGroup) {
                                 return d3.max(d.value.map(function (t) {
                                     return d3.sum(t.value.map(function (f) {
                                         return f.value;
                                     }));
                                 }));
-                            }else{
+                            } else {
                                 return d3.sum(d.value.map(function (t) {
                                     return t.value;
                                 }));
                             }
                         }));
 
-
-                        var dataGroups = isGroup ? (data.userTags ? data.userTags.length : 0) + (data.userNames ? data.userNames.length : 0)  : 1;
+                        var dataGroups = isGroup ? (data.includeAllUsers ? 1 : 0) + (data.userTags ? data.userTags.length : 0) + (data.userNames ? data.userNames.length : 0) : 1;
 
                         // set the height based on the calculations above
                         svg.attr('height', height);
@@ -251,52 +250,52 @@
                         var verbs = [];
                         data.values.forEach(function (d) {
                             d.value.forEach(function (t) {
-                                if(isGroup){
-                                    t.value.forEach(function(n){
+                                if (isGroup) {
+                                    t.value.forEach(function (n) {
                                         if (verbs.indexOf(n.label) < 0) {
                                             verbs.push(n.label);
                                         }
                                     });
-                                }else {
+                                } else {
                                     if (verbs.indexOf(t.label) < 0) {
                                         verbs.push(t.label);
                                     }
                                 }
-                            })
+                            });
                         });
 
                         // organize data for stack
                         var layers = [];
-                        if(!isGroup) {
+                        if (!isGroup) {
                             verbs.forEach(function (verb, i) {
                                 layers.push([]);
                                 data.values.forEach(function (d, n) {
                                     var f = false;
                                     d.value.forEach(function (t) {
-                                        if (t.label == verb) {
-                                            layers[i].push({x: n, y: t.value, x0: 0});
+                                        if (t.label === verb) {
+                                            layers[i].push({ x: n, y: t.value, x0: 0 });
                                             f = true;
                                         }
                                     });
                                     if (!f) {
-                                        layers[i].push({x: n, y: 0, x0: 0});
+                                        layers[i].push({ x: n, y: 0, x0: 0 });
                                     }
                                 });
                             });
-                        }else{
+                        } else {
                             verbs.forEach(function (verb, i) {
                                 layers.push([]);
                                 data.values.forEach(function (d, n) {
                                     d.value.forEach(function (t, ii) {
                                         var f = false;
-                                        t.value.forEach(function(r){
-                                            if (r.label == verb) {
-                                                layers[i].push({x: n, y: r.value, x0: ii});
+                                        t.value.forEach(function (r) {
+                                            if (r.label === verb) {
+                                                layers[i].push({ x: n, y: r.value, x0: ii });
                                                 f = true;
                                             }
                                         });
                                         if (!f) {
-                                            layers[i].push({x: n, y: 0, x0: 0});
+                                            layers[i].push({ x: n, y: 0, x0: 0 });
                                         }
                                     });
 
@@ -312,50 +311,53 @@
                             .enter()
                             .append("g")
                             .attr("class", "layer")
-                            .style("fill", function(d, i) {
+                            .style("fill", function (d, i) {
                                 return colors(i);
                             });
 
                         var bars = groups.selectAll(".bar")
-                            .data(function(d) { return d; })
+                            .data(function (d) {
+                                return d;
+                            })
                             .enter().append("a")
                             .attr("class", "bar")
                             .on('mouseover', function (d, i) {
-                                if(isGroup){
+                                if (isGroup) {
                                     tip.show(data.values[d.x].value[d.x0], true);
-                                }else{
+                                } else {
                                     tip.show(data.values[i], false);
                                 }
                             })
-                            .on('mouseout', function (git ) {
+                            .on('mouseout', function () {
                                 tip.hide();
                             });
 
                         bars.append("rect")
-                            .attr("x", function(d){
+                            .attr("x", function (d) {
                                 var w = (columnWidth - 10) / dataGroups;
                                 var x = margin.left + d.x * columnWidth;
                                 return x + d.x0 * w + 5;
                             })
-                            .attr("width", function(d){
-                                return (columnWidth - 10) / dataGroups ;
-                            } )
+                            .attr("width", function () {
+                                return (columnWidth - 10) / dataGroups;
+                            })
                             .attr("y", yScale(0))
                             .attr("height", 0)
                             .attr('stroke', '#fff')
                             .attr('stroke-width', '0.2')
                             .transition()
                             .duration(duration)
-                            .delay(function (d, i){return i * 30})
-                            .attr("y", function(d){
+                            .delay(function (d, i) {
+                                return i * 30;
+                            })
+                            .attr("y", function (d) {
                                 return yScale(d.y0 + d.y);
-                            } )
-                            .attr("height", function(d){
+                            })
+                            .attr("height", function (d) {
                                 return d.y > 0 ? innerHeight / maxY * d.y : 0;
                             });
 
                         // draw legend
-
 
                         var lX = width - margin.right + 20;
                         var lY = margin.top + 10;
@@ -365,7 +367,7 @@
                             .attr("class", "svg-legend")
                             .attr("transform", "translate(" + lX + "," + lY + ")");
 
-                        verbs.forEach(function(verb, i) {
+                        verbs.forEach(function (verb, i) {
                             legend.append('rect')
                                 .attr('width', 15)
                                 .attr('height', 10)
